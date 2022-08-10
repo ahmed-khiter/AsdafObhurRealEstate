@@ -1,0 +1,25 @@
+﻿@model Department
+
+@{
+    ViewData["Title"] = "إضافة قسم";
+}
+
+
+<div class="p-4">
+  <form asp-area="" asp-action="Create" asp-controller="Department" method="post">
+    <div class="input-group input-group-outline mb-4">
+      <label class="form-label" asp-for="Name">الاسم</label>
+      <input asp-for="Name" type="text" class="form-control">
+    </div>
+  
+    <div class="row">
+        <div class="col-md-2">
+             <button type="submit" class="btn btn-primary">إضافة القسم</button>
+        </div>
+         <div class="col-md-2">
+            <a class="btn btn-secondary" asp-area="" asp-action="Index" asp-controller="DEpartment">إرجاع إلى القائمة</a>
+        </div>
+    </div>
+   
+  </form>
+</div>

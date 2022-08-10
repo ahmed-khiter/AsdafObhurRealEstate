@@ -1,0 +1,65 @@
+﻿@model Department
+
+@{
+    ViewData["Title"] = "التفاصيل";
+}
+
+<h3 class="mb-5"> تفاصيل قسم @Model.Name</h3>
+<div class="row mt-2">
+    <div class="col-md-3">
+         <label class="form-label" asp-for="Name">الاسم: </label>
+         <label class="font-weight-bold">@Model.Name</label>
+    </div>
+     <div class="col-md-3">
+          <label class="form-label" asp-for="Name">تاريخ الإنشاء: </label>
+         <label class="font-weight-bold">@Model.CreatedAt.ToString("dd/MM/yyyy hh:mm")</label>
+    </div>
+     <div class="col-md-3">
+         <label class="form-label" asp-for="Name">تم الإنشاء بواسطه: </label>
+         <label class="font-weight-bold">@Model.CreatedBy</label>
+    </div>
+    @if (!string.IsNullOrEmpty(Model.ModifiedBy))
+    {
+        <div class="col-md-3">
+              <label class="form-label" asp-for="Name">تم التعديل بواسطة: </label>
+             <label class="font-weight-bold">@Model.ModifiedBy</label>
+        </div>
+    }
+</div>
+
+<div class="row">
+    <h3 class="m-3">الموظفين بداخل قسم @Model.Name</h3>
+
+    
+<div class="card">
+  <div class="table-responsive">
+    <table class="table align-items-center mb-0">
+      <thead>
+        <tr>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">اسم الموظف</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">رقم تلفون</th>
+        </tr>
+      </thead>
+      <tbody>
+                @foreach(var record in Model.Users)
+                {
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2">
+                          <div class="my-auto">
+                            <h6 class="mb-0 text-xs">@record.FirstName @record.LastName</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-normal mb-0">@record.PhoneNumber</p>
+                      </td>
+                </tr>
+
+                }
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+</div>
