@@ -10,27 +10,30 @@ namespace AsdafObhurRealEstate.DTO.Account
     public class RegisterDTO
     {
         [Required]
-        [Display(Name ="First name")]
+        [Display(Name ="الأسم الأول")]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name ="Last name")]
+        [Display(Name ="الأسم الثاني")]
         public string LastName { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
+        [Display(Name ="البريد الألكترونى")]
         public string Email { get; set;}
 
         [Required]
         [DataType(DataType.PhoneNumber)]
+        [Display(Name ="رقم التلفون")]
         public string Phonenumber { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
+        [Display(Name = "الرقم السري")]
         public string Password { get; set; }
 
         [Required]
-        [DataType(DataType.Password),Display(Name ="Confirm password"),Compare(nameof(Password))]
+        [DataType(DataType.Password),Display(Name ="تأكيد الرقم السرى"),Compare(nameof(Password))]
         public string ConfirmPassword { get; set; }
 
         public AccountType AccountType { get; set; }

@@ -9,13 +9,15 @@ namespace AsdafObhurRealEstate.DTO.Account
     public class LoginDTO
     {
         [Required]
+        [Display(Name = "البريد الالكتروني")]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
+        [Display(Name = "الرقم السرى")]
         public string Password { get; set; }
 
-        [Display(Name ="Remember me")]
+        [Display(Name = "ابقى على تسجيل الدخول")]
         public bool RememberMe { get; set; }
 
     }

@@ -1,9 +1,18 @@
-﻿namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
 {
     public class CreateClientDTO
     {
+        [Required(ErrorMessage ="اسم العميل إجباري")]
+        [Display(Name ="اسم العميل")]
         public string ClientName { get; set; }
+
         public string ClientId { get; set; }
+
+
+        [Display(Name ="رقم التلفون")]
+        [Required(ErrorMessage = "رقم التلفون إجبارى")]
         public string PhoneNumber { get; set; }
 
         public string DepartmentId { get; set; }
