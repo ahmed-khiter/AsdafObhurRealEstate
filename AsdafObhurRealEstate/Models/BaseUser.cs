@@ -13,6 +13,8 @@ namespace AsdafObhurRealEstate.Models
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
 
+        public int Code { get; set; }
+
         public string DepartmentId { get; set; }
         public Department Department { get; set; }
     }

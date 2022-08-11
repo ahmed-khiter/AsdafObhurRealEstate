@@ -30,6 +30,7 @@ builder.Services.AddIdentity<BaseUser, IdentityRole>(
               .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<BaseUser>, ApplicationClaimsIdentityFactory>();
+builder.Services.AddSingleton(typeof(FileManager));
 
 
 

@@ -159,5 +159,44 @@ namespace AsdafObhurRealEstate.Controllers
             return View(users);
         }
 
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    return BadRequest();
+                }
+
+                var user = await userManager.FindByIdAsync(id);
+                var rolesForUser = await userManager.GetRolesAsync(user);
+
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                   
+
+                    if (rolesForUser.Count() > 0)
+                    {
+                        foreach (var item in rolesForUser.ToList())
+                        {
+                            // item should be the name of the role
+                            var result = await userManager.RemoveFromRoleAsync(user, item);
+                        }
+                    }
+
+                    await userManager.DeleteAsync(user);
+                    transaction.Commit();
+                }
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
     }
 }

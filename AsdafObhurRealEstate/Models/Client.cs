@@ -2,7 +2,7 @@
 {
     public class Client : Entity
     {
-        public string Code { get; set; }
+        public int Code { get; set; }
 
         public string ClientName { get; set; }
 
@@ -15,6 +15,9 @@
 
         public string DepartmentId { get; set; }
         public Department Department { get; set; }
+
+        public ICollection<Multimedia> Multimedias { get; set; }
+
 
     }
 }
