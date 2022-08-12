@@ -56,9 +56,14 @@ namespace AsdafObhurRealEstate.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterDTO model)
         {
+            var currentUserIsValidOrNot = await userManager.FindByIdAsync(userManager.GetUserId(User));
+
             if (signInManager.IsSignedIn(User))
             {
-                return Redirect("/");
+                if(!await userManager.IsInRoleAsync(currentUserIsValidOrNot, Role.GeneralManager))
+                {
+                    return Redirect("/");
+                }
             }
 
             if((int)model.AccountType <= 0 || (int)model.AccountType > 8)
