@@ -186,10 +186,91 @@ namespace AsdafObhurRealEstate.Controllers
 
             }
 
+            var record = new DetailsClientDTO()
+            {
+                ClientId = client.Id,
+                PhoneNumber = client.PhoneNumber,
+                BillsFileOld = client.BillsFile,
+                ClientName = client.ClientName,
+                Notes   = client.Notes,
+                OldOtherFiles = new List<OldOtherFile>(),
+                OtherFileNews = new List<OtherFileNew>()
+            };
 
-            return View(client);
+            foreach (var item in client.Multimedias)
+            {
+                record.OldOtherFiles.Add(new OldOtherFile
+                {
+                    Description = item.Description,
+                    FileOld = item.Path,
+                    OtherFileId = item.Id,
+                });
+            }
+
+
+            return View(record);
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AddNewBill(IFormFile billFile, string clientId)
+        {
+            var client = await _context.Clients.FirstOrDefaultAsync(m => m.Id == clientId);
+
+            if (billFile != null)
+            {
+                client.BillsFile = _fileManager.Upload(billFile);
+
+                _context.Update(client);
+                await _context.SaveChangesAsync();
+            }
+            else
+                return BadRequest();
+
+            return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteOtherFile(string fileId)
+        {
+            var file = await _context.Multimedias.FirstOrDefaultAsync(m => m.Id == fileId);
+
+            if (file != null)
+            {
+                _context.Remove(file);
+                await _context.SaveChangesAsync();
+            }
+            else
+                return BadRequest();
+            
+            return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddedOtherFile(List<OtherFileNew> model, string clientId)
+        {
+            var client = await _context.Clients.FirstOrDefaultAsync(m => m.Id == clientId);
+
+            if (model == null)
+                return BadRequest();
+
+            var userId = _userManager.GetUserId(User);
+
+            foreach (var otherFileNew in model)
+            {
+                _context.Multimedias.Add(new Multimedia
+                {
+                    ClientId = clientId,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = userId,
+                    Description = otherFileNew.Description,
+                    Path = _fileManager.Upload(otherFileNew.FileNew),
+                });
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }

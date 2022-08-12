@@ -1,10 +1,13 @@
 ﻿using AsdafObhurRealEstate.Constants;
 using AsdafObhurRealEstate.DTO.Home;
+using AsdafObhurRealEstate.Enums;
+using AsdafObhurRealEstate.Helpers;
 using AsdafObhurRealEstate.Infrastructure;
 using AsdafObhurRealEstate.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
 namespace AsdafObhurRealEstate.Controllers
@@ -30,6 +33,7 @@ namespace AsdafObhurRealEstate.Controllers
 
         public async Task<ActionResult> Tables()
         {
+            
             var user = await _userManager.GetUserAsync(User);
 
             var userIsGeneralManager = await _userManager.IsInRoleAsync(user, Role.GeneralManager);
@@ -83,6 +87,7 @@ namespace AsdafObhurRealEstate.Controllers
                     Status = item.ClientStatus
 
                 });
+                
             }
 
             return View(allTables);

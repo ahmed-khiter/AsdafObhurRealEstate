@@ -12,6 +12,9 @@ namespace AsdafObhurRealEstate.Models
 
         public string BillsFile { get; set; }
 
+        public string Notes { get; set; }
+
+
         public StatusOfClient ClientStatus { get; set; }
 
         public string BaseUserId { get; set; }
