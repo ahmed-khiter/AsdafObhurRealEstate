@@ -7,15 +7,6 @@
         <hr class="horizontal light mt-0 mb-2">
         <div class="collapse navbar-collapse px-0 w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link " href="">
-                <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
-                    <i class="material-icons-round opacity-10">dashboard</i>
-                </div>
-
-                <span class="nav-link-text me-1">لوحة القيادة</span>
-                </a>
-            </li>
                 <li class="nav-item">
                 <a class="nav-link " asp-area="" asp-action="Index" asp-controller="Department">
                 <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
@@ -33,7 +24,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"  >
+                <a class="nav-link" asp-area="" asp-action="Create" asp-controller="Client"  >
                 <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons-round opacity-10">person</i>
                 </div>
@@ -41,19 +32,11 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link" asp-area="" asp-action="Tables" asp-controller="Home" >
                 <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons-round opacity-10">table_view</i>
                 </div>
                 <span class="nav-link-text me-1">الجداول</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="">
-                <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
-                    <i class="material-icons-round opacity-10">receipt_long</i>
-                </div>
-                <span class="nav-link-text me-1">الفواتير</span>
                 </a>
             </li>
             <li class="nav-item">

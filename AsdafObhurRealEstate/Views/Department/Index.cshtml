@@ -11,6 +11,7 @@
         </a>
     </div>
 </div>
+
 <div class="card">
   <div class="table-responsive">
     <table class="table align-items-center mb-0">
@@ -41,7 +42,12 @@
                             <span class="material-symbols-outlined">
                               <i title="تفاصيل" class="material-icons-round opacity-10">info</i>
                             </span>
+                          </a>
 
+                             <a class="text-secondary font-weight-bold text-xs" href="">
+                            <span class="material-symbols-outlined">
+                              <i title="تفاصيل" style="background:red!important" class="material-icons-round opacity-10" onclick="del(event,@record.Id)">delete</i>
+                            </span>
                           </a>
                       </td>
                 </tr>
@@ -51,3 +57,46 @@
     </table>
   </div>
   </div>
+
+
+  @section Scripts{
+      <script>
+          function del(e, id) {
+
+              Swal.fire({
+                  title: 'هل أنت متأكد من المسح؟',
+                  showCancelButton: true,
+                  confirmButtonText: 'حفظ',
+                  cancelButtonText: `إلغاء`,
+                }).then((result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isConfirmed) {
+                        e.currentTarget.parentElement.parentElement.remove()
+                        $.ajax({
+                            url: '/department/delete',
+                            data: {
+                                id:id
+                            },
+                            contentType: 'application/json',
+                            success: function (data) {
+                                console.log(data)
+                            },
+                            error: function (e) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'نعتذر بالرجاء حاول مره اخرى',
+                                    text: 'حدث خطأ أثناء المسح',
+                                })
+                            }
+                        })
+                    }
+                    Swal.fire('تتم العمليه!', '', 'success')
+
+                  } else if (result.isCancel) {
+                    Swal.fire('لم تكتمل المهمه', '', 'info')
+                  }
+                })
+
+              
+      </script>
+  }

@@ -161,13 +161,7 @@ namespace AsdafObhurRealEstate.Controllers
             return Redirect("/");
         }
 
-        [Authorize(Roles = Role.GeneralManager)]
-        public IActionResult Consumers()
-        {
-            var test = userManager.Users.Where(m => m.AccountType.Equals(AccountType.GeneralManager));
-            return View(test);
-        }
-
+       
         [Authorize(Roles = Role.GeneralManager)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -264,6 +258,56 @@ namespace AsdafObhurRealEstate.Controllers
             var pdfStream = new MemoryStream(pdf);
 
             return File(pdfStream, "APPLICATION/octet-stream", reportName);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DetailsOfEmployee(string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+
+
+            var employeeCreatedClient = await _context.Clients
+                .Where(m => m.CreatedBy == user.Id ).ToListAsync();
+
+
+            var employeeHandledClient = await _context.Clients
+                .Where(m => m.BaseUserId == user.Id ).ToListAsync();
+
+            var wholeDetails = new EmployeeAndHisClients()
+            {
+                Email = user.Email,
+                Name = $"{user.FirstName} {user.LastName}",
+                PhoneNumber = user.PhoneNumber,
+                UserId = user.Id,
+                ClientsWhoCreated = new List<ClientDetailsDto>(),
+                ClientsWhoHandled = new List<ClientDetailsDto>()
+            };
+
+            foreach (var item in employeeCreatedClient)
+            {
+                wholeDetails.ClientsWhoCreated.Add(new ClientDetailsDto
+                {
+                    PhoneNumber = item.PhoneNumber,
+                    ClientId = item.Id,
+                    Name = item.ClientName,
+                    Status = item.ClientStatus
+                });
+            }
+
+
+            foreach (var item in employeeHandledClient)
+            {
+                wholeDetails.ClientsWhoHandled.Add(new ClientDetailsDto
+                {
+                    PhoneNumber = item.PhoneNumber,
+                    ClientId = item.Id,
+                    Name = item.ClientName,
+                    Status = item.ClientStatus
+                });
+            }
+
+
+            return View(wholeDetails);
         }
 
 
