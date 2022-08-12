@@ -61,27 +61,31 @@
 
   @section Scripts{
 
+
       <script>
       
-          function del(e:Event,id:string){
+          function del(e:Event,id:string)
+          {
               e.target.
               e.currentTarget.parentElement.parentElement.remove();
-              $.ajax({
-
-                   url: '/department/delete',
-                            data: {
-                                id:id
-                            },
-                            contentType: 'application/json',
-                            success: function (data) {
-                                console.log(data)
-                            },
-                            error: function (e) {
-                                Swal.fire({
-                                icon: 'error',
-                                title: 'نعتذر بالرجاء حاول مره اخرى',
-                                text: 'حدث خطأ أثناء المسح',
-                            })
+              $.ajax(
+              {
+                url: '/department/delete',
+                        data: {
+                            id:id
+                        },
+                        contentType: 'application/json',
+                        success: function (data) {
+                            console.log(data)
+                        },
+                        error: function (e) 
+                        {
+                            Swal.fire(
+                                {
+                                    icon: 'error',
+                                    title: 'نعتذر بالرجاء حاول مره اخرى',
+                                    text: 'حدث خطأ أثناء المسح',
+                                })
                         }
               });
           }
