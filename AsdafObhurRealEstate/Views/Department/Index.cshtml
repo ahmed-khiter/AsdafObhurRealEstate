@@ -44,7 +44,7 @@
                             </span>
                           </a>
 
-                             <a style="background:red!important" class="text-secondary font-weight-bold text-xs" href="">
+                             <a class="text-secondary font-weight-bold text-xs" href="#">
                             <span   class="material-symbols-outlined">
                               <i title="تفاصيل" class="material-icons-round opacity-10" onclick="del(event,@record.Id)">delete</i>
                             </span>
@@ -63,42 +63,29 @@
 
       <script>
       
-              funcstion del(e,id)
-                {
-                  Swal.fire({
-                       title: 'هل أنت متأكد من المسح؟',
-                          showCancelButton: true,
-                          confirmButtonText: 'حفظ',
-                          cancelButtonText: `إلغاء`,
-                  }).then((result) => {
-                   if (result.isConfirmed) {
-                        e.currentTarget.parentElement.parentElement.remove();
-                         $.ajax({
-                 
-                               url: '/department/delete',
-                                    data: {
-                                        id:id
-                                    },
-                                    contentType: 'application/json',
-                                    success: function (data) {
-                                        console.log(data)
-                                    },
-                                    error: function (e) {
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'نعتذر بالرجاء حاول مره اخرى',
-                                            text: 'حدث خطأ أثناء المسح',
-                                        })
-                                }
+          function del(e:Event,id:string){
+              e.target.
+              e.currentTarget.parentElement.parentElement.remove();
+              $.ajax({
 
-                        });
-                   }
-                   else {
-                            Swal.fire('لم تكتمل المهمه', '', 'info')
-                    }
-                });
-     
-            }
+                   url: '/department/delete',
+                            data: {
+                                id:id
+                            },
+                            contentType: 'application/json',
+                            success: function (data) {
+                                console.log(data)
+                            },
+                            error: function (e) {
+                                Swal.fire({
+                                icon: 'error',
+                                title: 'نعتذر بالرجاء حاول مره اخرى',
+                                text: 'حدث خطأ أثناء المسح',
+                            })
+                        }
+              });
+          }
+
       </script>
-    
+
     }
