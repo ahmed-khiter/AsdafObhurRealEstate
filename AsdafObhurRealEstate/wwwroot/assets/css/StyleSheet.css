@@ -1,0 +1,49 @@
+﻿.custom-form {
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-two-col {
+    display: flex;
+    width: max-content;
+}
+
+.form-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px;
+}
+
+.custom-form-input {
+    font-size: 18px;
+    padding: 8px 10px;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    width: 300px;
+}
+
+.form-col label {
+    font-size: 28px;
+    padding-right: 10px;
+}
+
+.custom-form-btn-container {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.custom-form-btn {
+    font-size: 18px;
+    padding: 8px 10px;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.custom-select
+{
+    padding: 11px !important;
+}
