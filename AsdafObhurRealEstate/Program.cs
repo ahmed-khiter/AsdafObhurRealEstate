@@ -4,6 +4,7 @@ using AsdafObhurRealEstate.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Wkhtmltopdf.NetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<AsdafObhurContext>(options =>
 builder.Services.Configure<IdentityOptions>(options =>
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 
+builder.Services.AddWkhtmltopdf();
 
 builder.Services.AddIdentity<BaseUser, IdentityRole>(
               options =>

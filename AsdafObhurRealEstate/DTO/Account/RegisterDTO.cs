@@ -36,6 +36,10 @@ namespace AsdafObhurRealEstate.DTO.Account
         [DataType(DataType.Password),Display(Name ="تأكيد الرقم السرى"),Compare(nameof(Password))]
         public string ConfirmPassword { get; set; }
 
+        [Required]
+        [Display(Name = "اختار القسم")]
+        public string DepartmentId { get; set; }
+
         public AccountType AccountType { get; set; }
     }
 }

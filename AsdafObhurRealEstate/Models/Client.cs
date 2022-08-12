@@ -1,4 +1,6 @@
-﻿namespace AsdafObhurRealEstate.Models
+﻿using AsdafObhurRealEstate.Enums;
+
+namespace AsdafObhurRealEstate.Models
 {
     public class Client : Entity
     {
@@ -9,6 +11,8 @@
         public string PhoneNumber { get; set; }
 
         public string BillsFile { get; set; }
+
+        public StatusOfClient ClientStatus { get; set; }
 
         public string BaseUserId { get; set; }
         public BaseUser BaseUser { get; set; }

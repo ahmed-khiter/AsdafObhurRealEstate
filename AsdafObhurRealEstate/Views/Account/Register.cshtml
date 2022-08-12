@@ -3,33 +3,56 @@
 
 @{
     ViewData["Title"] = "تسجيل الدخول";
-    var accountType = (AccountType)ViewData["accountType"];
 }
 
-<form asp-area="" asp-action="Register" asp-controller="Account" method="post">
+<form class="form-control" asp-area="" asp-action="Register" asp-controller="Account" method="post">
+    <input asp-for="AccountType" type="hidden" />
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="input-group input-group-outline my-3">
-                <label class="" asp-for="FirstName"></label>
-                <input class="" asp-for="FirstName" />
-            </div>
-              <div class="input-group input-group-outline my-3">
-                <label class="" asp-for="LastName"></label>
-                <input class="" asp-for="LastName" />
-            </div>
-              <div class="input-group input-group-outline my-3">
-                <label class="" asp-for="Email"></label>
-                <input class="" asp-for="Email" />
-            </div>
-              <div class="input-group input-group-outline my-3">
-                <label class="" asp-for="Password"></label>
-                <input class="" asp-for="Password" />
-            </div>
-        </div>
+  <div class="form-group">
+    <label asp-for="FirstName" ></label>
+    <input type="text" class="form-control" id="firstName" asp-for="FirstName" aria-describedby="firstName" placeholder="Enter Firdt Name">
+     <span asp-validation-for="FirstName" class="text-danger"></span>  
+  </div>
+   <div class="form-group">
+        <label for="exampleInputEmail1" asp-for="LastName" ></label>
+        <input type="text" class="form-control" id="exampleInputEmail1" asp-for="LastName" aria-describedby="lastName" placeholder="Enter Last Name">
+        <span asp-validation-for="LastName" class="text-danger"></span>  
+  </div>
 
+    <div class="form-group">
+        <label asp-for="Email" ></label>
+        <input type="email" class="form-control" id="exampleInputEmail1" asp-for="Email" aria-describedby="emailHelp" placeholder="Enter email">
+        <span asp-validation-for="Email" class="text-danger"></span>  
     </div>
 
+     <div class="form-group">
+        <label asp-for="Phonenumber" ></label>
+        <input type="number" class="form-control" id="phonenumber" asp-for="Phonenumber" aria-describedby="phoneNumber" placeholder="Enter phoneNumber">
+        <span asp-validation-for="Phonenumber" class="text-danger"></span>  
+    </div>
+
+    <div class="form-group">
+        <label  asp-for="Password" ></label>
+        <input type="password" class="form-control" id="password" asp-for="Password" aria-describedby="password" placeholder="Enter password">
+        <span asp-validation-for="Password" class="text-danger"></span>  
+  </div>
+
+    <div class="form-group">
+        <label  asp-for="ConfirmPassword" ></label>
+        <input type="password" class="form-control" id="confirmPassword" asp-for="ConfirmPassword" aria-describedby="confirmPassword" placeholder="Enter Confirm Password">
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>  
+  </div>
+
+  <div class="form-group">
+      <label asp-for="DepartmentId"></label>
+     <select class="form-select" asp-for="DepartmentId" asp-items="ViewBag.departments">
+          <option value="-1" disabled >اختار القسم المناسب</option>
+     </select>
+  </div>
+
+<div class="pt-3">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</div>
 </form>
 
 

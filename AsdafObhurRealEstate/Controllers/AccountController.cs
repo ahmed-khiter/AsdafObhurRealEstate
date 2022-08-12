@@ -10,7 +10,9 @@ using AsdafObhurRealEstate.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Wkhtmltopdf.NetCore;
 
 namespace AsdafObhurRealEstate.Controllers
 {
@@ -20,24 +22,35 @@ namespace AsdafObhurRealEstate.Controllers
         private readonly UserManager<BaseUser> userManager;
         private readonly SignInManager<BaseUser> signInManager;
         private readonly AsdafObhurContext _context;
+        private IGeneratePdf _generatePdf;
 
         public AccountController
         (
             UserManager<BaseUser> userManager,
             SignInManager<BaseUser> signInManager,
-            AsdafObhurContext context
+            AsdafObhurContext context,
+            IGeneratePdf generatePdf
         )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             _context = context;
+            _generatePdf = generatePdf;
         }
        
         [HttpGet]
-        public IActionResult Register(AccountType accountType)
+        public async Task<IActionResult> Register(AccountType accountType)
         {
-            ViewData["accountType"] = accountType;
-            return View();
+            var departments = await _context.Departments.ToListAsync();
+
+            ViewData["departments"] = new SelectList(departments, "Id", "Name");
+
+            var registerModel = new RegisterDTO()
+            {
+                AccountType = accountType,
+            };
+
+            return View(registerModel);
         }
        
         [HttpPost]
@@ -50,7 +63,7 @@ namespace AsdafObhurRealEstate.Controllers
 
             if((int)model.AccountType <= 0 || (int)model.AccountType > 8)
             {
-                    return BadRequest();
+                 return BadRequest();
             }
 
             if (!ModelState.IsValid)
@@ -78,27 +91,32 @@ namespace AsdafObhurRealEstate.Controllers
                 PhoneNumber = model.Phonenumber,
                 NormalizedEmail = model.Email.ToUpper(),
                 NormalizedUserName = model.Email.ToUpper(),
-                CreatedBy = "Admin",
+                CreatedBy = userManager.GetUserId(User),
                 CreatedAt = DateTime.Now,
             };
-
-            var result = await userManager.CreateAsync(user, model.Password);
-
-            if (result.Succeeded)
+            using (var transaction = _context.Database.BeginTransaction())
             {
-                await signInManager.SignInAsync(user, true);
-                await userManager.AddToRoleAsync(user, Role.GeneralManager);
+                var result = await userManager.CreateAsync(user, model.Password);
 
-                ViewData["Success"] = "تم التسجيل مرحبا بك في أصداف أبحر العقارية";
+                if (result.Succeeded)
+                {
+                    await signInManager.SignInAsync(user, true);
 
-                return Redirect("/");
+                    await AddRolesToUse(model.AccountType, user);
+
+                    transaction.Commit();
+
+                    ViewData["Success"] = "تم التسجيل مرحبا بك في أصداف أبحر العقارية";
+
+                    return Redirect("/");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
             }
-
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-
             return View(model);
         }
 
@@ -198,5 +216,80 @@ namespace AsdafObhurRealEstate.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Report(FilterReportByUserDTO model)
+        {
+            var reportName = $"Report.pdf";
+
+            var user = await userManager.FindByIdAsync(model.UserId);
+
+            var employeeCreatedClient = await _context.Clients
+                .Where(m => m.CreatedBy == model.UserId && m.CreatedAt >= model.From && m.CreatedAt <= model.To).ToListAsync();
+
+
+            var employeeHandledClient = await _context.Clients
+                .Where(m => m.BaseUserId == model.UserId && m.CreatedAt >= model.From && m.CreatedAt <= model.To).ToListAsync();
+
+
+            var reportModel = new GenerateReportDTO()
+            {
+                EmployeeName = $"{user.FirstName} {user.LastName}",
+                PhoneNumber = user.PhoneNumber,
+                ClientsCreatedBy = new List<ReportData>(),
+                ClientsHandledBy = new List<ReportData>()
+            };
+
+            foreach (var item in employeeCreatedClient)
+            {
+                reportModel.ClientsCreatedBy.Add(new ReportData(item));
+            }
+
+            foreach (var item in employeeHandledClient)
+            {
+                reportModel.ClientsHandledBy.Add(new ReportData(item));
+            }
+
+            var options = new ConvertOptions
+             {
+                 PageSize = Wkhtmltopdf.NetCore.Options.Size.A4,
+                 PageMargins = new Wkhtmltopdf.NetCore.Options.Margins() { Bottom = 20, Left = 1, Right = 1, Top = 1 },
+                 PageOrientation = Wkhtmltopdf.NetCore.Options.Orientation.Portrait,
+             };
+
+
+            _generatePdf.SetConvertOptions(options);
+
+            var pdf = await _generatePdf.GetByteArray("Views/Account/generateReport.cshtml", reportModel);
+            
+            var pdfStream = new MemoryStream(pdf);
+
+            return File(pdfStream, "APPLICATION/octet-stream", reportName);
+        }
+
+
+        private async Task<bool> AddRolesToUse(AccountType accountType, BaseUser user)
+        {
+            if (accountType == AccountType.GeneralManager)
+                await userManager.AddToRoleAsync(user, Role.GeneralManager);
+            else if (accountType == AccountType.ProjectSupervisor)
+                await userManager.AddToRoleAsync(user, Role.ProjectSupervisor);
+            else if (accountType == AccountType.ExecutiveSecretary)
+                await userManager.AddToRoleAsync(user, Role.ExecutiveSecretary);
+            else if (accountType == AccountType.Personnel)
+                await userManager.AddToRoleAsync(user, Role.Personnel);
+            else if (accountType == AccountType.marketing)
+                await userManager.AddToRoleAsync(user, Role.Marketing);
+            else if (accountType == AccountType.ProjectMonitor)
+                await userManager.AddToRoleAsync(user, Role.ProjectMonitor);
+            else if (accountType == AccountType.projectsEngineer)
+                await userManager.AddToRoleAsync(user, Role.ProjectsEngineer);
+            else if (accountType == AccountType.Financial)
+                await userManager.AddToRoleAsync(user, Role.Financial);
+            else
+                return false;
+
+            return true;
+        
+        }
     }
 }
