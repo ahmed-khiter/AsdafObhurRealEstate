@@ -5,6 +5,7 @@ using AsdafObhurRealEstate.Infrastructure;
 using AsdafObhurRealEstate.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace AsdafObhurRealEstate.Controllers
@@ -36,8 +37,12 @@ namespace AsdafObhurRealEstate.Controllers
             return View(clients);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var departments = await _context.Departments.ToListAsync();
+
+            ViewData["departments"] = new SelectList( departments, "Id", "Name" );
+
             return View();
         }
 
@@ -83,7 +88,7 @@ namespace AsdafObhurRealEstate.Controllers
 
             var users = await _userManager.Users.Where(m => m.DepartmentId == departmentId).ToListAsync();
 
-            return View(users);
+            return Ok(users);
         }
 
         [HttpPost]

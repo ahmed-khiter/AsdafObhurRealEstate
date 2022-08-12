@@ -7,54 +7,46 @@
 
 }
 
+<!--
 
 
 
+
+
+DepartmentId
+
+
+-->
 <div class="row">
     
     
 <form class="form-control" asp-area="" asp-action="Register" asp-controller="Account" method="post">
-    <input asp-for="AccountType" type="hidden" />
+    <input asp-for="ClientId" type="hidden" />
 
   <div class="form-group">
-    <label asp-for="FirstName" ></label>
-    <input type="text" class="form-control" id="firstName" asp-for="FirstName" aria-describedby="firstName" placeholder="Enter Firdt Name">
-     <span asp-validation-for="FirstName" class="text-danger"></span>  
+    <label asp-for="ClientName" ></label>
+    <input type="text" class="form-control" id="firstName" asp-for="ClientName" aria-describedby="firstName" placeholder="Enter Firdt Name">
+     <span asp-validation-for="ClientName" class="text-danger"></span>  
   </div>
    <div class="form-group">
-        <label for="exampleInputEmail1" asp-for="LastName" ></label>
-        <input type="text" class="form-control" id="exampleInputEmail1" asp-for="LastName" aria-describedby="lastName" placeholder="Enter Last Name">
-        <span asp-validation-for="LastName" class="text-danger"></span>  
+        <label for="exampleInputEmail1" asp-for="PhoneNumber" ></label>
+        <input type="number" class="form-control" id="phonenumber" asp-for="PhoneNumber" aria-describedby="phoneNumber" placeholder="ادخل رقم الجوال">
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>  
   </div>
 
-    <div class="form-group">
-        <label asp-for="Email" ></label>
-        <input type="email" class="form-control" id="exampleInputEmail1" asp-for="Email" aria-describedby="emailHelp" placeholder="Enter email">
-        <span asp-validation-for="Email" class="text-danger"></span>  
-    </div>
 
-     <div class="form-group">
-        <label asp-for="Phonenumber" ></label>
-        <input type="number" class="form-control" id="phonenumber" asp-for="Phonenumber" aria-describedby="phoneNumber" placeholder="Enter phoneNumber">
-        <span asp-validation-for="Phonenumber" class="text-danger"></span>  
-    </div>
-
-    <div class="form-group">
-        <label  asp-for="Password" ></label>
-        <input type="password" class="form-control" id="password" asp-for="Password" aria-describedby="password" placeholder="Enter password">
-        <span asp-validation-for="Password" class="text-danger"></span>  
-  </div>
-
-    <div class="form-group">
-        <label  asp-for="ConfirmPassword" ></label>
-        <input type="password" class="form-control" id="confirmPassword" asp-for="ConfirmPassword" aria-describedby="confirmPassword" placeholder="Enter Confirm Password">
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>  
-  </div>
 
   <div class="form-group">
       <label asp-for="DepartmentId"></label>
-     <select class="form-select" asp-for="DepartmentId" asp-items="ViewBag.departments">
-          <option value="-1" disabled >اختار القسم المناسب</option>
+     <select class="form-select" id="selectDepartment" asp-for="DepartmentId" asp-items="ViewBag.departments">
+          <option value="-1" selected disabled >اختار القسم المناسب</option>
+     </select>
+  </div>
+
+<div class="form-group">
+      <label asp-for="BaseUserId"></label>
+     <select id="selectUsers" class="form-select" asp-for="BaseUserId" >
+          <option value="-1" disabled >اختار الموظف</option>
      </select>
   </div>
 
@@ -63,8 +55,35 @@
 </div>
 </form>
 
-
-
-
-
 </div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $(document).on("change", "#selectDepartment", function () {
+                var subCat = this;
+                $.ajax({
+                    url: "GetUsersByDepartmentId?departmentId=" + $(subCat).val(),
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    datatype: JSON,
+                    success: function (result) {
+                        debugger;
+                        var users = "";
+                        $(result).each(function () {
+                            users = users + '<option value="' + this.userId + '">' + this.name + '</option>'
+                        });
+                        var subCateList = $("#selectUsers");
+                        subCateList.empty();
+                        subCateList.append(users);
+                    },
+                    error: function (data) {
+                        return "Error";
+                    }
+                });
+            });
+        });
+</script>
+
+}

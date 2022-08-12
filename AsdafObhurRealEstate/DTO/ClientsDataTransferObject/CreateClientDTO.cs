@@ -15,8 +15,10 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
         [Required(ErrorMessage = "رقم التلفون إجبارى")]
         public string PhoneNumber { get; set; }
 
+        [Display(Name ="اختار القسم")]
         public string DepartmentId { get; set; }
 
+        [Display(Name = "الموظفين")]
         public string BaseUserId { get; set; }
 
     }
