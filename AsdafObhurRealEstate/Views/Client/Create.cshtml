@@ -7,54 +7,54 @@
 
 }
 
-<!--
 
-
-
-
-
-DepartmentId
-
-
--->
 <div class="row">
+
+    <div class="col-md-12">
+        <a asp-area="" asp-action="Index" asp-controller="Client" class="btn btn-primary" >قائمة العملاء لدى</a>
+    </div>
     
+
     
-<form class="form-control" asp-area="" asp-action="Register" asp-controller="Account" method="post">
-    <input asp-for="ClientId" type="hidden" />
+<div class="row py-2">
+    <div class="col-md-12">
+        <form class="form-control" asp-area="" asp-action="Create" asp-controller="Client" method="post">
+            <input asp-for="ClientId" type="hidden" />
 
-  <div class="form-group">
-    <label asp-for="ClientName" ></label>
-    <input type="text" class="form-control" id="firstName" asp-for="ClientName" aria-describedby="firstName" placeholder="Enter Firdt Name">
-     <span asp-validation-for="ClientName" class="text-danger"></span>  
-  </div>
-   <div class="form-group">
-        <label for="exampleInputEmail1" asp-for="PhoneNumber" ></label>
-        <input type="number" class="form-control" id="phonenumber" asp-for="PhoneNumber" aria-describedby="phoneNumber" placeholder="ادخل رقم الجوال">
-        <span asp-validation-for="PhoneNumber" class="text-danger"></span>  
-  </div>
+          <div class="form-group">
+            <label asp-for="ClientName" ></label>
+            <input type="text" class="form-control" id="firstName" asp-for="ClientName" aria-describedby="firstName" placeholder="الأسم العميل">
+             <span asp-validation-for="ClientName" class="text-danger"></span>  
+          </div>
+           <div class="form-group">
+                <label for="exampleInputEmail1" asp-for="PhoneNumber" ></label>
+                <input type="number" class="form-control" id="phonenumber" asp-for="PhoneNumber" aria-describedby="phoneNumber" placeholder="ادخل رقم الجوال">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>  
+          </div>
 
 
 
-  <div class="form-group">
-      <label asp-for="DepartmentId"></label>
-     <select class="form-select" id="selectDepartment" asp-for="DepartmentId" asp-items="ViewBag.departments">
-          <option value="-1" selected disabled >اختار القسم المناسب</option>
-     </select>
-  </div>
+          <div class="form-group">
+              <label asp-for="DepartmentId"></label>
+             <select class="form-select" id="selectDepartment" asp-for="DepartmentId" asp-items="ViewBag.departments">
+                  <option value="-1" selected disabled >اختار القسم المناسب</option>
+             </select>
+          </div>
 
-<div class="form-group">
-      <label asp-for="BaseUserId"></label>
-     <select id="selectUsers" class="form-select" asp-for="BaseUserId" >
-          <option value="-1" disabled >اختار الموظف</option>
-     </select>
-  </div>
+        <div class="form-group">
+              <label asp-for="BaseUserId"></label>
+             <select id="selectUsers" class="form-select" asp-for="BaseUserId" >
+                  <option selected value="0" disabled >اختار الموظف</option>
+             </select>
+          </div>
 
-<div class="pt-3">
-  <button type="submit" class="btn btn-primary">Submit</button>
-</div>
-</form>
+        <div class="pt-3">
+          <button type="submit" class="btn btn-primary">إنشاء موظف</button>
+        </div>
+        </form>
 
+        </div>
+    </div>
 </div>
 
 @section Scripts{
@@ -70,12 +70,13 @@ DepartmentId
                     datatype: JSON,
                     success: function (result) {
                         debugger;
-                        var users = "";
+                        var users = '<option selected disabled value="0">اختار الموظف</option>';
                         $(result).each(function () {
-                            users = users + '<option value="' + this.userId + '">' + this.name + '</option>'
+                            users = users + '<option value="' + this.id + '">' + this.value + '</option>'
                         });
                         var subCateList = $("#selectUsers");
                         subCateList.empty();
+                        subCateList.append()
                         subCateList.append(users);
                     },
                     error: function (data) {

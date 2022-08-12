@@ -71,6 +71,7 @@ namespace AsdafObhurRealEstate.Controllers
                 CreatedAt = DateTime.Now,
                 CreatedBy = _userManager.GetUserId(User),
                 UpdatedAt = DateTime.Now,
+                ClientStatus = Enums.StatusOfClient.NewRequest,
             };
 
             _context.Clients.Add(client);
@@ -86,9 +87,23 @@ namespace AsdafObhurRealEstate.Controllers
             if (departmentId == null)
                 return BadRequest();
 
-            var users = await _userManager.Users.Where(m => m.DepartmentId == departmentId).ToListAsync();
+            var users = ( await _userManager.Users
+                                .Where(m => m.DepartmentId == departmentId)
+                                .ToListAsync());
 
-            return Ok(users);
+            List<object> result = new List<object>();
+
+            foreach (var user in users)
+            {
+                result.Add( 
+                    new
+                    {
+                        id=user.Id,
+                        value = $"{user.FirstName} {user.LastName}"
+                    });
+            }
+
+            return Ok(result);
         }
 
         [HttpPost]
@@ -148,12 +163,28 @@ namespace AsdafObhurRealEstate.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(string clientId)
         {
-
+            
             var client = await _context.Clients
                                        .Include(m => m.Multimedias)
                                        .Include(m => m.Department)
                                        .Include(m => m.BaseUser)
                                        .SingleOrDefaultAsync(m => m.Id == clientId);
+
+            if(client.ClientStatus == Enums.StatusOfClient.NewRequest)
+            {
+                var user = await _userManager.GetUserAsync(User);
+
+                var isUserGeneralManager = await _userManager.IsInRoleAsync(user, Role.GeneralManager);
+
+                if (!isUserGeneralManager)
+                {
+                    client.ClientStatus = Enums.StatusOfClient.UnderProgress;
+
+                    _context.Update(client);
+                    await _context.SaveChangesAsync();
+                }
+
+            }
 
 
             return View(client);
