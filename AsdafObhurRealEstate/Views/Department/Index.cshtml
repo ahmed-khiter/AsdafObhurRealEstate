@@ -45,11 +45,11 @@
                           </a>
                           
 
-                    <button onclick="del(event, @record.Id)" class="btn btn-primary" >
-                        <span   class="material-symbols-outlined">
+                    <a class="del-record text-secondary font-weight-bold text-xs" data-id="@record.Id" >
+                        <span class="material-symbols-outlined">
                             <i title="مسح" class="material-icons-round opacity-10" >delete</i>
                         </span>
-                    </button>
+                    </a>
                       </td>
                 </tr>
 
@@ -65,8 +65,10 @@
 
 
     <script>
-         function del(e, id) {
-             var data = { departmentId: id };
+
+        $(document).on('click','.del-record',function(){
+            var departmentId = $(this).data("id");
+            var data = { departmentId };
             Swal.fire({
               title: 'هل أنت متأكد من أنك تريد المسح؟',
               text: "أنت لا تستطيع ارجاع عن هذا الاجراء بعد ذلك",
@@ -77,19 +79,18 @@
               confirmButtonText: 'نعم!'
             }).then((result) => {
               if (result.isConfirmed) {
-                   $(.del-${id}).remove();
-                        $.ajax({
-                            url: '@Url.Action("delete", "department")',
-                            type:"POST",
-                            contentType: 'application/x-www-form-urlencoded',
-                            data: data,
-                            success: function (data) {
-                                console.log(data)
-                            },
-                            error: function (eventFromParam) {
-                                console.log(eventFromParam)
-                            }
-                        })
+                    $.ajax({
+                        url: '@Url.Action("delete", "department")',
+                        type:"POST",
+                        contentType: 'application/x-www-form-urlencoded',
+                        data: data,
+                        success: (data) =>{
+                            $(this).parent().parent().remove();
+                        },
+                        error: function (eventFromParam) {
+                            console.log(eventFromParam)
+                        }
+                    })
                 Swal.fire(
                   'مسح!',
                   'تم المسح بنجاح.',
@@ -97,7 +98,7 @@
                 )
               }
             })
-            
-        }
+        });
+
     </script>
 }
