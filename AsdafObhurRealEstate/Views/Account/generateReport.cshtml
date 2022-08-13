@@ -1,2 +1,118 @@
 ﻿@model GenerateReportDTO
 
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env
+
+
+@{
+    var path = env.WebRootFileProvider.GetFileInfo("images/amana-logo.png")?.PhysicalPath;
+    var rooya = env.WebRootFileProvider.GetFileInfo("images/vision2030.png")?.PhysicalPath;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="@String.Format("{0}css/generate-report.css", Model.BaseUrl)" rel="stylesheet">
+</head>
+
+<body>
+
+    <section class="wrapper border">
+        <div class="header">
+
+            <div class="part deff">
+                 <div class="text-center">
+                <img src="@path"  width="200" style="padding-top: 10px;" alt="">
+            </div>
+            </div>
+
+            <div class="part text-center">
+                   <div class="text-center">
+                <img src="@rooya" width="100" alt="">
+                  </div>
+               
+            </div>
+
+        </div>
+
+        
+      <div class="" style="min-height:10px;" >
+          <table border="0" class="w-100" >
+               <tr>
+                   <td >
+                       <span class="dark-green-box">رقم الطلب</span>&nbsp;&nbsp; <span>sssss</span>
+                   </td>
+                   <td ><span class="dark-green-box">تاريخ الطلب</span>&nbsp;&nbsp; <span>sss</span></td>
+               </tr>
+               <tr>
+                <td colspan="2"><span class="dark-green-box">الموضوع </span>&nbsp;&nbsp; <span>طلب تعديل على الاستعمال</span></td>
+            </tr>
+            
+          </table>
+      </div>
+
+        <div class="content">
+
+          <table border="0" width="100%"  style="table-layout:fixed;" cellspacing="0" cellpadding="0">
+
+                <tr >
+                    <th class="colored-th"  colspan="7" style="text-align:center">طلب التحقق من سريان التنظيم</th>
+                </tr>
+
+
+
+                <tr>
+                    <td  class="colored-td">بيانات الطلب</td>
+                    <td colspan="2">رقم الطلب : asdasd</td>
+                    <td colspan="2">تاريخ الطلب : asdasdasd</td>
+                    <td colspan="2"> </td>
+                </tr>
+                <!--اسم المالك / الموكل : الطرف الاول-->
+                <tr>
+                    <td  class="colored-td">بيانات المالك</td>
+                    <td colspan="2"> اسم المالك : asdasd</td>
+                    <td colspan="2"> رقم هوية المالك : asdasdsad</td>
+                    <td colspan="2"> رقم الصك : asdasdasd</td>
+                </tr>
+
+
+                <tr>
+                    <td  class="colored-td" rowspan="2">بيانات المستند التنظيمى</td>
+
+                    <td colspan="2">رقم المستند التنظيمى : asdasdasd</td>
+                    <td colspan="2"> تاريخ المستند التنظيمى :  asdasdasd</td>
+                    <td colspan="2">حالة السريان : التنظيم ساري </td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td colspan="2">رقم الطلب السابق : asdasdasd </td>
+                    <td colspan="2">تاريخ الطلب السابق : asdasdasdasdasd </td>
+                    <td colspan="2">تاريخ اعتماد السريان : asdasdasd</td>
+                    
+                </tr>
+                <tr>
+                        <td  class="colored-td" colspan="7">الملاحظات :  لا يوجد ملاحظات </td>
+                        <td  class="colored-td" colspan="7"> asdasdasdsda</td>
+                </tr>
+            </table>
+
+          
+        </div>
+        <hr>
+        <footer>
+            <p>ھذه الوثیقة صادرة إلكترونیاً عن طریق الخدمات الإلكترونیة من نظام أصداف أبحر العقارية*</p>
+        </footer>
+
+    </section>
+
+</body>
+
+</html>
+
+

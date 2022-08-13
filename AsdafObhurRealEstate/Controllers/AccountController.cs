@@ -229,9 +229,11 @@ namespace AsdafObhurRealEstate.Controllers
             var employeeHandledClient = await _context.Clients
                 .Where(m => m.BaseUserId == model.UserId && m.CreatedAt >= model.From && m.CreatedAt <= model.To).ToListAsync();
 
+            var baseUrl = $"{Request.Scheme}://{Request.Host.Value}/";
 
             var reportModel = new GenerateReportDTO()
             {
+                BaseUrl = baseUrl,
                 EmployeeName = $"{user.FirstName} {user.LastName}",
                 PhoneNumber = user.PhoneNumber,
                 ClientsCreatedBy = new List<ReportData>(),

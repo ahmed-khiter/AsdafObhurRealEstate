@@ -5,6 +5,8 @@ namespace AsdafObhurRealEstate.DTO.Account
 {
     public class GenerateReportDTO
     {
+        public string BaseUrl { get; set; }
+
         public string EmployeeName { get; set; }
 
         public string PhoneNumber { get; set; }

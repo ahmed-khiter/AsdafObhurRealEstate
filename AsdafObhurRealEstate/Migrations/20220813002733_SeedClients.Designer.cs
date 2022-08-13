@@ -4,6 +4,7 @@ using AsdafObhurRealEstate.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AsdafObhurRealEstate.Migrations
 {
     [DbContext(typeof(AsdafObhurContext))]
-    partial class AsdafObhurContextModelSnapshot : ModelSnapshot
+    [Migration("20220813002733_SeedClients")]
+    partial class SeedClients
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -353,7 +355,7 @@ namespace AsdafObhurRealEstate.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Clients", (string)null);
+                    b.ToTable("Clients");
 
                     b.HasData(
                         new
@@ -424,7 +426,7 @@ namespace AsdafObhurRealEstate.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
 
                     b.HasData(
                         new
@@ -505,7 +507,7 @@ namespace AsdafObhurRealEstate.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("Multimedias", (string)null);
+                    b.ToTable("Multimedias");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
