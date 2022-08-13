@@ -25,12 +25,15 @@ namespace AsdafObhurRealEstate.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            if (User.IsInRole(Role.GeneralManager))
+            var userId = _userManager.GetUserId(User);
+
+            var user = await _userManager.FindByIdAsync(userId);
+            
+            if (await _userManager.IsInRoleAsync(user,Role.GeneralManager))
             {
                 return View(await _context.Clients.ToListAsync());
             }
             
-            var userId = _userManager.GetUserId(User);
 
             var clients = await _context.Clients.Where(m => m.BaseUserId == userId).ToListAsync();
             
@@ -52,6 +55,10 @@ namespace AsdafObhurRealEstate.Controllers
 
             if (!ModelState.IsValid)
             {
+                var departments = await _context.Departments.ToListAsync();
+
+                ViewData["departments"] = new SelectList(departments, "Id", "Name");
+
                 foreach (var modelState in ViewData.ModelState.Values)
                 {
                     foreach (var error in modelState.Errors)

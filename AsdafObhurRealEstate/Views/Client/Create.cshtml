@@ -10,27 +10,19 @@
 
 <div class="row">
 
-    <div class="col-md-12">
-        <a asp-area="" asp-action="Index" asp-controller="Client" class="btn btn-primary" >قائمة العملاء لدى</a>
+    <div class="form-two-col">
+        <div class="form-col custom-form-btn-container">
+            <a asp-area="" asp-action="Index" asp-controller="Client"  class="custom-form-btn custom-form-input btn btn-primary m-0" type="button">قائمة العملاء لدى</a>
+        </div>
     </div>
+</div>
     
-
+@*
     
 <div class="row py-2">
     <div class="col-md-12">
         <form class="form-control" asp-area="" asp-action="Create" asp-controller="Client" method="post">
-            <input asp-for="ClientId" type="hidden" />
-
-          <div class="form-group">
-            <label asp-for="ClientName" ></label>
-            <input type="text" class="form-control" id="firstName" asp-for="ClientName" aria-describedby="firstName" placeholder="الأسم العميل">
-             <span asp-validation-for="ClientName" class="text-danger"></span>  
-          </div>
-           <div class="form-group">
-                <label for="exampleInputEmail1" asp-for="PhoneNumber" ></label>
-                <input type="number" class="form-control" id="phonenumber" asp-for="PhoneNumber" aria-describedby="phoneNumber" placeholder="ادخل رقم الجوال">
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>  
-          </div>
+  
 
 
 
@@ -56,6 +48,51 @@
         </div>
     </div>
 </div>
+*@
+
+<div class="container" >
+
+    <form class="custom-form" asp-area="" asp-action="Create" asp-controller="Client" method="post">
+        <input asp-for="ClientId" type="hidden" />
+
+    <div class="form-two-col">
+        <div class="form-col">
+            <label asp-for="ClientName">اسم العميل</label>
+            <input class="custom-form-input" type="text" placeholder="ادخل الاسم" id="clientName" asp-for="ClientName" aria-describedby="clientName">
+            <span asp-validation-for="ClientName" class="text-danger"></span>
+        </div>
+       <div class="form-col">
+                <label class="form-label" asp-for="PhoneNumber">رقم الهاتف</label>
+                <input class="custom-form-input" type="number" id="phonenumber" asp-for="PhoneNumber" aria-describedby="phoneNumber" placeholder="رقم الهاتف">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-two-col">
+         <div class="form-col">
+            <label asp-for="DepartmentId">أختار القسم</label>
+                <select id="selectDepartment" class="custom-form-input custom-select" asp-for="DepartmentId" asp-items="ViewBag.departments">
+                    <option value="-1" selected disabled>اختار القسم المناسب</option>
+            </select>
+        </div>
+
+        <div class="form-col">
+            <label asp-for="BaseUserId">أختار الموظف</label>
+                <select id="selectUsers" class="custom-form-input custom-select" asp-for="BaseUserId" >
+                    <option value="-1" selected disabled>اختار الموظف</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-two-col">
+       
+        <div class="form-col custom-form-btn-container">
+            <button class="custom-form-btn custom-form-input btn btn-primary m-0" type="submit">أدخل</button>
+        </div>
+    </div>
+</form>
+</div>
+
 
 @section Scripts{
 

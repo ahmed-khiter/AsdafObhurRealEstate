@@ -298,18 +298,19 @@ namespace AsdafObhurRealEstate.Controllers
                 wholeDetails.ClientsWhoCreated.Add(new ClientDetailsDto
                 {
                     PhoneNumber = item.PhoneNumber,
+                    ClientCode = item.Code,
                     ClientId = item.Id,
                     Name = item.ClientName,
                     Status = item.ClientStatus
                 });
             }
 
-
             foreach (var item in employeeHandledClient)
             {
                 wholeDetails.ClientsWhoHandled.Add(new ClientDetailsDto
                 {
                     PhoneNumber = item.PhoneNumber,
+                    ClientCode = item.Code,
                     ClientId = item.Id,
                     Name = item.ClientName,
                     Status = item.ClientStatus
