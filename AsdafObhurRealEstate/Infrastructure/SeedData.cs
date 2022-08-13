@@ -115,6 +115,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                         new BaseUser()
                         {
                             Id = ConstantIDs.users[0],
+                            Code = 1,
                             FirstName = "المدير",
                             LastName = "العام",
                             Email = "gm@gmail.com",
@@ -136,6 +137,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                         new BaseUser()
                         {
                             Id = ConstantIDs.users[1],
+                            Code = 2,
                             FirstName = "مشرف",
                             LastName = "مشاريع",
                             Email = "ps@gmail.com",
@@ -158,6 +160,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                         new BaseUser()
                         {
                             Id = ConstantIDs.users[2],
+                            Code = 3,
                             FirstName = "سكرتير",
                             LastName = "التنفيذي",
                             Email = "es@gmail.com",
@@ -179,6 +182,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                         new BaseUser()
                         {
                             Id = ConstantIDs.users[3],
+                            Code = 4,
                             FirstName = "شؤون",
                             LastName = "موظفين",
                             Email = "p@gmail.com",
@@ -202,6 +206,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                         new BaseUser()
                         {
                             Id = ConstantIDs.users[4],
+                            Code = 5,
                             FirstName = "تسويق",
                             LastName = "تسويق",
                             Email = "m@gmail.com",
@@ -224,6 +229,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                         new BaseUser()
                         {
                             Id = ConstantIDs.users[5],
+                            Code = 6,
                             FirstName = "مراقب",
                             LastName = "مشاريع",
                             Email = "pMonitor@gmail.com",
@@ -246,6 +252,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                         new BaseUser()
                         {
                             Id = ConstantIDs.users[6],
+                            Code = 7,
                             FirstName = "مهندس",
                             LastName = "مشاريع",
                             Email = "pe@gmail.com",
@@ -268,6 +275,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                         new BaseUser()
                         {
                             Id = ConstantIDs.users[7],
+                            Code = 8,
                             FirstName = "المالية",
                             LastName = "مالية",
                             Email = "f@gmail.com",
@@ -428,6 +436,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                         new Client()
                         {
                             Id = ConstantIDs.users[0],
+                            
                             BaseUserId = ConstantIDs.users[0],
                             ClientName = "Client Ahmed",
                             ClientStatus = Enums.StatusOfClient.UnderProgress,
@@ -460,7 +469,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                                  BaseUserId = ConstantIDs.users[0],
                                  ClientName = "Client Ahmed 3 ",
                                  ClientStatus = Enums.StatusOfClient.UnderProgress,
-                                 Code = 2,
+                                 Code = 3,
                                  CreatedAt = DateTime.Now,
                                  CreatedBy = ConstantIDs.users[0],
                                  DepartmentId = ConstantIDs.department[0],

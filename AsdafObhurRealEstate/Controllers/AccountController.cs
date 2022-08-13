@@ -85,9 +85,12 @@ namespace AsdafObhurRealEstate.Controllers
                 return View(model);
             }
 
+            var code = await userManager.Users.CountAsync() + 1;
+
             var user = new BaseUser
             {
                 AccountType = model.AccountType,
+                Code = code,
                 Email = model.Email,
                 UserName = model.Email,
                 FirstName = model.FirstName, 

@@ -71,6 +71,7 @@ namespace AsdafObhurRealEstate.Controllers
                     {
                         Id = item.Id,
                         Name = $"{item.FirstName} {item.LastName}",
+                        Code = item.Code,
                         PhoneNumber = item.PhoneNumber,
                     
                     });
@@ -83,6 +84,7 @@ namespace AsdafObhurRealEstate.Controllers
                 {
                     Id = item.Id,
                     Name = $"{item.ClientName}",
+                    Code= item.Code,
                     PhoneNumber = item.PhoneNumber,
                     Status = item.ClientStatus
 

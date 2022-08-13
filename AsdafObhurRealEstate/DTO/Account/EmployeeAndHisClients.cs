@@ -7,6 +7,8 @@ namespace AsdafObhurRealEstate.DTO.Account
 
         public string UserId { get; set; }
 
+        public int EmployeeCode { get; set; }
+
         public string Name { get; set; }
 
         public string PhoneNumber { get; set; }
@@ -20,6 +22,8 @@ namespace AsdafObhurRealEstate.DTO.Account
     public class ClientDetailsDto
     {
         public string ClientId { get; set; }
+
+        public string ClientCode { get; set; }
 
         public string Name { get; set; }
 

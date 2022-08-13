@@ -4,8 +4,7 @@
 
 
 @{
-    var path = env.WebRootFileProvider.GetFileInfo("images/amana-logo.png")?.PhysicalPath;
-    var rooya = env.WebRootFileProvider.GetFileInfo("images/vision2030.png")?.PhysicalPath;
+    var logo = env.WebRootFileProvider.GetFileInfo("assets/img/dark.png")?.PhysicalPath;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -24,13 +23,13 @@
 
             <div class="part deff">
                  <div class="text-center">
-                <img src="@path"  width="200" style="padding-top: 10px;" alt="">
+                <img src="@logo"  width="200" style="padding-top: 10px;" alt="">
             </div>
             </div>
 
             <div class="part text-center">
                    <div class="text-center">
-                <img src="@rooya" width="100" alt="">
+                <img src="" width="100" alt="">
                   </div>
                
             </div>

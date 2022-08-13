@@ -21,6 +21,8 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
         [Display(Name = "تحميل فاتورة جديده")]
         public IFormFile BillsFileNew { get; set; }
 
+        public int ClientCode { get; set; }
+
         public List<OldOtherFile> OldOtherFiles { get; set; }
 
         public List<OtherFileNew> OtherFileNews { get; set; }

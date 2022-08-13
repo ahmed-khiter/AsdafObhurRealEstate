@@ -13,6 +13,9 @@ namespace AsdafObhurRealEstate.DTO.Home
     {
         public string Id { get; set; }
 
+        public int Code { get; set; }
+
+
         public string Name { get; set; }
 
         public string PhoneNumber { get; set; }

@@ -19,6 +19,7 @@
     <table class="table align-items-center mb-0">
       <thead>
         <tr>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">كود العميل</th>
           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">اسم العميل</th>
           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">رقم تلفون العميل</th>
           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"></th>
@@ -29,6 +30,13 @@
                 @foreach(var record in Model)
                 {
                     <tr>
+                        <td>
+                        <div class="d-flex px-2">
+                          <div class="my-auto">
+                            <h6 class="mb-0 text-xs">@record.Code</h6>
+                          </div>
+                        </div>
+                      </td>
                       <td>
                         <div class="d-flex px-2">
                           <div class="my-auto">

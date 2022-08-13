@@ -62,9 +62,12 @@ namespace AsdafObhurRealEstate.Controllers
                 return View(ModelState);
             }
 
+            var code = await _context.Clients.CountAsync() + 1;
+
             var client = new Client()
             {
                 BaseUserId = model.BaseUserId,
+                Code = code,
                 ClientName = model.ClientName,
                 DepartmentId = model.DepartmentId,
                 PhoneNumber = model.PhoneNumber,

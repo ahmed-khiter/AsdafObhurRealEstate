@@ -9,6 +9,8 @@ namespace AsdafObhurRealEstate.DTO.Account
 
         public string EmployeeName { get; set; }
 
+        public int EmployeeCode { get; set; }
+
         public string PhoneNumber { get; set; }
 
         public List<ReportData> ClientsCreatedBy { get; set; }
@@ -22,10 +24,12 @@ namespace AsdafObhurRealEstate.DTO.Account
         {
             ClientId = clients.Id;
             ClientName = clients.ClientName;
+            ClientCode = clients.Code;
             ClientPhone = clients.PhoneNumber;
             ClientStatus = clients.ClientStatus;
         }
         public string ClientId { get; set; }
+        public int ClientCode { get; set; }
         public string ClientName { get; set; }
         public string ClientPhone { get; set; }
         public StatusOfClient ClientStatus { get; set; }
