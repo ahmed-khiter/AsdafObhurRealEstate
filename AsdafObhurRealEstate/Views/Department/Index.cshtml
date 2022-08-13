@@ -43,12 +43,13 @@
                               <i title="تفاصيل" class="material-icons-round opacity-10">info</i>
                             </span>
                           </a>
+                          
 
-                             <a onclick="del(event,@record.Id)" class="del-@record.Id  text-secondary font-weight-bold text-xs" href="#">
-                            <span   class="material-symbols-outlined">
-                              <i title="مسح" class="material-icons-round opacity-10" >delete</i>
-                            </span>
-                          </a>
+                    <button onclick="del(event, @record.Id)" class="btn btn-primary" >
+                        <span   class="material-symbols-outlined">
+                            <i title="مسح" class="material-icons-round opacity-10" >delete</i>
+                        </span>
+                    </button>
                       </td>
                 </tr>
 
@@ -73,7 +74,7 @@
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes, delete it!'
+              confirmButtonText: 'نعم!'
             }).then((result) => {
               if (result.isConfirmed) {
                    $(.del-${id}).remove();

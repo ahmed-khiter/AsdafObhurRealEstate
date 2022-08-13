@@ -192,6 +192,7 @@ namespace AsdafObhurRealEstate.Migrations
                     ClientName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BillsFile = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClientStatus = table.Column<int>(type: "int", nullable: false),
                     BaseUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     DepartmentId = table.Column<string>(type: "nvarchar(450)", nullable: true),
@@ -243,14 +244,14 @@ namespace AsdafObhurRealEstate.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "42fe29f0-c227-4a03-b2f6-c97279b2bc23", "273e60af-c143-491f-8b4c-67aca602b261", "Marketing", "MARKETING" },
-                    { "6ecb5d3d-a7f3-4751-8ae5-524e07889bd6", "0f32509f-150b-40a2-b2cc-e341142f4a6e", "Financial", "FINANCIAL" },
-                    { "7bf40edf-af65-4d9e-8e6d-8f40d683cc3e", "9cc4db53-31ab-4054-a370-2cc868c02b51", "GeneralManager", "GENERALMANAGER" },
-                    { "a0157647-7016-41cc-9a56-8695acaa13e6", "67913d4a-be08-48c2-a0ed-8a15449ca4d8", "ProjectSupervisor", "PROJECTSUPERVISOR" },
-                    { "b71282ed-85cf-4f7c-9e05-9b28051d04e4", "2ae6c2df-05be-4824-8d86-971a6c6b5369", "ProjectMonitor", "PROJECTMONITOR" },
-                    { "cf8ac5ac-ee3f-4cac-988d-f45ef0eed54c", "d76050ba-9431-471b-83e8-a6e585304502", "Personnel", "PERSONNEL" },
-                    { "d3d0584e-fcd7-439c-8ae1-f5734664d6f4", "093394be-cdec-46e2-b144-0c44a34e7f5b", "ExecutiveSecretary", "EXECUTIVESECRETARY" },
-                    { "e313a786-637d-40c5-8715-443bba115487", "c7e3f0fd-7a7c-4c70-8cd4-184eebc6d7eb", "ProjectsEngineer", "PROJECTSENGINEER" }
+                    { "42fe29f0-c227-4a03-b2f6-c97279b2bc23", "83ae465e-6777-48ff-8983-fb1a3e62f6ad", "Marketing", "MARKETING" },
+                    { "6ecb5d3d-a7f3-4751-8ae5-524e07889bd6", "b13f5b3c-6bcd-4ede-93d8-476c205d6931", "Financial", "FINANCIAL" },
+                    { "7bf40edf-af65-4d9e-8e6d-8f40d683cc3e", "b7d91ea6-4a30-4d87-9898-2282be2a8ee2", "GeneralManager", "GENERALMANAGER" },
+                    { "a0157647-7016-41cc-9a56-8695acaa13e6", "7f5e6f34-e751-46a3-b868-64bc02590aa0", "ProjectSupervisor", "PROJECTSUPERVISOR" },
+                    { "b71282ed-85cf-4f7c-9e05-9b28051d04e4", "d42ac547-afde-4f89-af16-086831b20ef1", "ProjectMonitor", "PROJECTMONITOR" },
+                    { "cf8ac5ac-ee3f-4cac-988d-f45ef0eed54c", "846b5fa5-fe75-4bc5-869c-c686468e816b", "Personnel", "PERSONNEL" },
+                    { "d3d0584e-fcd7-439c-8ae1-f5734664d6f4", "d541d348-1ed6-4ea4-bf83-0def38b04870", "ExecutiveSecretary", "EXECUTIVESECRETARY" },
+                    { "e313a786-637d-40c5-8715-443bba115487", "695bc937-9392-4065-b77b-7e6ed9376244", "ProjectsEngineer", "PROJECTSENGINEER" }
                 });
 
             migrationBuilder.InsertData(
@@ -258,8 +259,8 @@ namespace AsdafObhurRealEstate.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "AccountType", "Code", "ConcurrencyStamp", "CreatedAt", "CreatedBy", "DepartmentId", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePic", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e", 0, 1, 0, "f250516d-bf8d-4de7-8bd2-c10517ab71ff", new DateTime(2022, 8, 12, 1, 41, 37, 607, DateTimeKind.Local).AddTicks(7364), "Developer", null, "gm@gmail.com", true, "المدير", "العام", false, null, "GM@GMAIL.COM", "GM@GMAIL.COM", "APA1GTBMecexo9ISAMt0CM+1qRikaJfUbG91vE7gU9bfm5GsNL5bFwcb2I/q2uPtPA==", "01100811024", true, null, "4847121d-2c6b-485a-9943-05bd5b00d3bd", false, "gm@gmail.com" },
-                    { "c3d0584e-fcd7-439c-8ae1-g5734664d6f4", 0, 1, 0, "d673c9e3-066f-43cc-a698-9f26001d9653", new DateTime(2022, 8, 12, 1, 41, 37, 609, DateTimeKind.Local).AddTicks(1807), "Developer", null, "es@gmail.com", true, "سكرتير", "التنفيذي", false, null, "ES@GMAIL.COM", "ES@GMAIL.COM", "AGkZUMbArPqSjrkztxi4n2/RQwaR617eaD/Ausl9sXS8sbm4qkhm0YclKoncj4OZZg==", "01100811024", true, null, "1bfb4d67-45ec-4766-b7ba-4acaa8cc74de", false, "es@gmail.com" }
+                    { "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e", 0, 1, 1, "68fd3b95-c2ec-44f2-a5b8-fd8f8f06e988", new DateTime(2022, 8, 13, 13, 59, 58, 8, DateTimeKind.Local).AddTicks(6944), "Developer", null, "gm@gmail.com", true, "المدير", "العام", false, null, "GM@GMAIL.COM", "GM@GMAIL.COM", "ABJ8PqwywNV0QrXQoi/OiBytOh0xe1y2jNlvWyvKuNpvMXT7cRtXLPu88Yj9+BLp6g==", "01100811024", true, null, "ced66b13-1ed3-4c1a-a8ad-25f031d00e7b", false, "gm@gmail.com" },
+                    { "c3d0584e-fcd7-439c-8ae1-g5734664d6f4", 0, 1, 3, "27cc1a1b-6575-4434-9d95-8393361f1a75", new DateTime(2022, 8, 13, 13, 59, 58, 10, DateTimeKind.Local).AddTicks(646), "Developer", null, "es@gmail.com", true, "سكرتير", "التنفيذي", false, null, "ES@GMAIL.COM", "ES@GMAIL.COM", "AByb01yEeBCZoyqAzn1+NfJksgUgWixGkrUf58DMseAf+RJ0wkAoQQ+ZqqIEqVVuug==", "01100811024", true, null, "da9cf1e6-75f9-40ca-8c90-984243ed55b3", false, "es@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -267,11 +268,11 @@ namespace AsdafObhurRealEstate.Migrations
                 columns: new[] { "Id", "CreatedAt", "CreatedBy", "ModifiedBy", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { "2bf40edf-af65-4d9e-8e6d-5f40d683cc3e", new DateTime(2022, 8, 12, 1, 41, 37, 607, DateTimeKind.Local).AddTicks(7325), "Developer", "Developer", "الديكور", new DateTime(2022, 8, 12, 1, 41, 37, 607, DateTimeKind.Local).AddTicks(7326) },
-                    { "62fe29f0-c227-4a03-b2f6-z97279b2bc23", new DateTime(2022, 8, 12, 1, 41, 37, 607, DateTimeKind.Local).AddTicks(7334), "Developer", "Developer", "المالية", new DateTime(2022, 8, 12, 1, 41, 37, 607, DateTimeKind.Local).AddTicks(7334) },
-                    { "cf8ac5ac-ee3f-4cac-988d-v45ef0eed54c", new DateTime(2022, 8, 12, 1, 41, 37, 607, DateTimeKind.Local).AddTicks(7332), "Developer", "Developer", "الأعلام و التسويق", new DateTime(2022, 8, 12, 1, 41, 37, 607, DateTimeKind.Local).AddTicks(7332) },
-                    { "f0157647-7016-41cc-9a56-3695acaa13e6", new DateTime(2022, 8, 12, 1, 41, 37, 607, DateTimeKind.Local).AddTicks(7328), "Developer", "Developer", "العقار", new DateTime(2022, 8, 12, 1, 41, 37, 607, DateTimeKind.Local).AddTicks(7329) },
-                    { "h3d0584e-fcd7-439c-8ae1-g5734664d6f4", new DateTime(2022, 8, 12, 1, 41, 37, 607, DateTimeKind.Local).AddTicks(7330), "Developer", "Developer", "المقاولات", new DateTime(2022, 8, 12, 1, 41, 37, 607, DateTimeKind.Local).AddTicks(7331) }
+                    { "2bf40edf-af65-4d9e-8e6d-5f40d683cc3e", new DateTime(2022, 8, 13, 13, 59, 58, 8, DateTimeKind.Local).AddTicks(6905), "Developer", "Developer", "الديكور", new DateTime(2022, 8, 13, 13, 59, 58, 8, DateTimeKind.Local).AddTicks(6907) },
+                    { "62fe29f0-c227-4a03-b2f6-z97279b2bc23", new DateTime(2022, 8, 13, 13, 59, 58, 8, DateTimeKind.Local).AddTicks(6915), "Developer", "Developer", "المالية", new DateTime(2022, 8, 13, 13, 59, 58, 8, DateTimeKind.Local).AddTicks(6915) },
+                    { "cf8ac5ac-ee3f-4cac-988d-v45ef0eed54c", new DateTime(2022, 8, 13, 13, 59, 58, 8, DateTimeKind.Local).AddTicks(6913), "Developer", "Developer", "الأعلام و التسويق", new DateTime(2022, 8, 13, 13, 59, 58, 8, DateTimeKind.Local).AddTicks(6913) },
+                    { "f0157647-7016-41cc-9a56-3695acaa13e6", new DateTime(2022, 8, 13, 13, 59, 58, 8, DateTimeKind.Local).AddTicks(6909), "Developer", "Developer", "العقار", new DateTime(2022, 8, 13, 13, 59, 58, 8, DateTimeKind.Local).AddTicks(6909) },
+                    { "h3d0584e-fcd7-439c-8ae1-g5734664d6f4", new DateTime(2022, 8, 13, 13, 59, 58, 8, DateTimeKind.Local).AddTicks(6911), "Developer", "Developer", "المقاولات", new DateTime(2022, 8, 13, 13, 59, 58, 8, DateTimeKind.Local).AddTicks(6911) }
                 });
 
             migrationBuilder.InsertData(
@@ -288,12 +289,22 @@ namespace AsdafObhurRealEstate.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "AccountType", "Code", "ConcurrencyStamp", "CreatedAt", "CreatedBy", "DepartmentId", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePic", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "82fe29f0-c227-4a03-b2f6-z97279b2bc23", 0, 1, 0, "548db51c-ac4a-4c57-a9ba-db29fa495861", new DateTime(2022, 8, 12, 1, 41, 37, 610, DateTimeKind.Local).AddTicks(5514), "Developer", "cf8ac5ac-ee3f-4cac-988d-v45ef0eed54c", "m@gmail.com", true, "تسويق", "تسويق", false, null, "M@GMAIL.COM", "M@GMAIL.COM", "AE2c+qFXCGcZIMfnUaK4qrQlnSJb2wOuEZ89AYR5kpq120It2tUBllbPXh80P3BPTw==", "01100811024", true, null, "a8f83ed8-a4a3-4b97-8335-2aa05dda419d", false, "m@gmail.com" },
-                    { "b0157647-7016-41cc-9a56-3695acaa13e6", 0, 1, 0, "46347ec9-dbd1-4cdd-8475-4319b3d8a0dc", new DateTime(2022, 8, 12, 1, 41, 37, 608, DateTimeKind.Local).AddTicks(4959), "Developer", "f0157647-7016-41cc-9a56-3695acaa13e6", "ps@gmail.com", true, "مشرف", "مشاريع", false, null, "PS@GMAIL.COM", "PS@GMAIL.COM", "AL+cphKEA/qwevTqsSBr8V92F/s9BCFcqbIfR7TuSlPsYHdtYYNlhGzlO47uQOAa5A==", "01100811024", true, null, "6ccbaf9e-80e0-4146-ac79-1b902416cdf0", false, "ps@gmail.com" },
-                    { "k71282ed-85cf-4f7c-9e05-4b28051d04e4", 0, 1, 0, "5106698d-ffbd-4916-be6a-26edecc656f0", new DateTime(2022, 8, 12, 1, 41, 37, 611, DateTimeKind.Local).AddTicks(2310), "Developer", "h3d0584e-fcd7-439c-8ae1-g5734664d6f4", "pMonitor@gmail.com", true, "مراقب", "مشاريع", false, null, "PMONITOR@GMAIL.COM", "PMONITOR@GMAIL.COM", "AMc2L7evYhCAL7WOY1g2K2WMkxojxS/5DG8crPFFME0oat3DW/icLpmDHekgmSHREA==", "01100811024", true, null, "95394045-788b-4311-89c3-fe454d2fcc89", false, "pMonitor@gmail.com" },
-                    { "sf8ac5ac-ee3f-4cac-988d-v45ef0eed54c", 0, 1, 0, "1bf44382-2471-405b-816e-b06aa2b9902f", new DateTime(2022, 8, 12, 1, 41, 37, 609, DateTimeKind.Local).AddTicks(8706), "Developer", "62fe29f0-c227-4a03-b2f6-z97279b2bc23", "p@gmail.com", true, "شؤون", "موظفين", false, null, "P@GMAIL.COM", "P@GMAIL.COM", "AHilXuFXFdi8aOJiKLYIcjlQCwfEsc16CPuSSHvOlt/xLeBqenYcBeYJEvDULHl+ow==", "01100811024", true, null, "9fea7da8-ee98-41fd-bcfc-d6e4751c5a64", false, "p@gmail.com" },
-                    { "x313a786-637d-40c5-8715-543bba115487", 0, 1, 0, "29941622-1ea9-4f29-84cb-dcf2de847353", new DateTime(2022, 8, 12, 1, 41, 37, 611, DateTimeKind.Local).AddTicks(9137), "Developer", "h3d0584e-fcd7-439c-8ae1-g5734664d6f4", "pe@gmail.com", true, "مهندس", "مشاريع", false, null, "PE@GMAIL.COM", "PE@GMAIL.COM", "AI5Y8P3jSAYP2k6BVd/bpkqaXrwpv3qzh6sHiKLceden59W3IaFbsX36VKFeBxtw5Q==", "01100811024", true, null, "e2535a42-6074-4cbf-ae0b-1016ee9c2a1e", false, "pe@gmail.com" },
-                    { "zecb5d3d-a7f3-4751-8ae5-724e07889bd6", 0, 1, 0, "865a6577-1164-4ebe-824c-2f31f25b5dc8", new DateTime(2022, 8, 12, 1, 41, 37, 612, DateTimeKind.Local).AddTicks(5900), "Developer", "62fe29f0-c227-4a03-b2f6-z97279b2bc23", "f@gmail.com", true, "المالية", "مالية", false, null, "F@GMAIL.COM", "F@GMAIL.COM", "APGgalOTt8I8mPFwih3sI3BHSTbhQbV3NUtvgfy4XZ4uGgfivgW2neTcmMD97k+EAg==", "01100811024", true, null, "77f766af-608d-405c-8db4-246f836853a5", false, "f@gmail.com" }
+                    { "82fe29f0-c227-4a03-b2f6-z97279b2bc23", 0, 1, 5, "e567255b-1c2b-490e-bd04-2da72493e5a7", new DateTime(2022, 8, 13, 13, 59, 58, 11, DateTimeKind.Local).AddTicks(8802), "Developer", "cf8ac5ac-ee3f-4cac-988d-v45ef0eed54c", "m@gmail.com", true, "تسويق", "تسويق", false, null, "M@GMAIL.COM", "M@GMAIL.COM", "AIZZzSqW/GzRhdOvEqKcLdiH74mATxfQ9i6QKuLCOAS0+g+sImkDdohCpOp6mSZGvg==", "01100811024", true, null, "af83a596-6687-4e83-83af-38067661a29b", false, "m@gmail.com" },
+                    { "b0157647-7016-41cc-9a56-3695acaa13e6", 0, 1, 2, "6aac7bba-2ca5-4fdd-b25f-1a570b7e37d8", new DateTime(2022, 8, 13, 13, 59, 58, 9, DateTimeKind.Local).AddTicks(3876), "Developer", "f0157647-7016-41cc-9a56-3695acaa13e6", "ps@gmail.com", true, "مشرف", "مشاريع", false, null, "PS@GMAIL.COM", "PS@GMAIL.COM", "AEtnaSryqSsDHy1Kb8ATy/cTh7hixeZ7iP6KvYGUWpWs5iKZXmq2ncV/HGSpsScyhA==", "01100811024", true, null, "7b71cc15-10b3-4ea8-b49d-43859d5b763d", false, "ps@gmail.com" },
+                    { "k71282ed-85cf-4f7c-9e05-4b28051d04e4", 0, 1, 6, "d0553469-869e-40f2-bb07-dcfda6c604e0", new DateTime(2022, 8, 13, 13, 59, 58, 12, DateTimeKind.Local).AddTicks(7177), "Developer", "h3d0584e-fcd7-439c-8ae1-g5734664d6f4", "pMonitor@gmail.com", true, "مراقب", "مشاريع", false, null, "PMONITOR@GMAIL.COM", "PMONITOR@GMAIL.COM", "AGOwtNjBFZLZO7053LflAG66DX0gs/RwRSF55S6u4JFDEiTxpV4hXPfETImsiLX1Kg==", "01100811024", true, null, "0985ea2e-94ca-4c30-94fa-80ce1b37c9de", false, "pMonitor@gmail.com" },
+                    { "sf8ac5ac-ee3f-4cac-988d-v45ef0eed54c", 0, 1, 4, "1453db57-193e-4e1c-80b8-59a4278755d3", new DateTime(2022, 8, 13, 13, 59, 58, 10, DateTimeKind.Local).AddTicks(9149), "Developer", "62fe29f0-c227-4a03-b2f6-z97279b2bc23", "p@gmail.com", true, "شؤون", "موظفين", false, null, "P@GMAIL.COM", "P@GMAIL.COM", "AJeq7TjIStEXC1pFjnEYCucWj/oorUDmPWV3flKfHwzuln5BmmAxIWEC90nwFzsGyg==", "01100811024", true, null, "3a059219-e840-4c0f-bf06-2ae1da096bec", false, "p@gmail.com" },
+                    { "x313a786-637d-40c5-8715-543bba115487", 0, 1, 7, "b3ce9523-3099-4659-b7d4-8dffe859ac8d", new DateTime(2022, 8, 13, 13, 59, 58, 13, DateTimeKind.Local).AddTicks(3989), "Developer", "h3d0584e-fcd7-439c-8ae1-g5734664d6f4", "pe@gmail.com", true, "مهندس", "مشاريع", false, null, "PE@GMAIL.COM", "PE@GMAIL.COM", "AL0wMzyMUmfHolHtCMVzFZG/Ywl5cX26EKe44TAS72gBZHaG9w+NS62D3n+yV47WrQ==", "01100811024", true, null, "b763f3d9-7dfa-4044-9224-c69bb37ebb19", false, "pe@gmail.com" },
+                    { "zecb5d3d-a7f3-4751-8ae5-724e07889bd6", 0, 1, 8, "f85f02a8-1e26-49cd-bed3-9649c0309765", new DateTime(2022, 8, 13, 13, 59, 58, 14, DateTimeKind.Local).AddTicks(762), "Developer", "62fe29f0-c227-4a03-b2f6-z97279b2bc23", "f@gmail.com", true, "المالية", "مالية", false, null, "F@GMAIL.COM", "F@GMAIL.COM", "APWvK9Bcwh28CoAPCDNWTuI91/jpNQzj6WWNWhLpW/189c1aJ3/dDikHDxTAdlJHFQ==", "01100811024", true, null, "78ba5c57-6f8e-43ed-ba52-e07c7e553406", false, "f@gmail.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Clients",
+                columns: new[] { "Id", "BaseUserId", "BillsFile", "ClientName", "ClientStatus", "Code", "CreatedAt", "CreatedBy", "DepartmentId", "ModifiedBy", "Notes", "PhoneNumber", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e", "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e", null, "Client Ahmed", 2, 1, new DateTime(2022, 8, 13, 13, 59, 58, 14, DateTimeKind.Local).AddTicks(7645), "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e", "2bf40edf-af65-4d9e-8e6d-5f40d683cc3e", null, "ملاحظات من المبرمج ", "035453650", new DateTime(2022, 8, 13, 13, 59, 58, 14, DateTimeKind.Local).AddTicks(7643) },
+                    { "b0157647-7016-41cc-9a56-3695acaa13e6", "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e", null, "Client Ahmed2", 2, 2, new DateTime(2022, 8, 13, 13, 59, 58, 14, DateTimeKind.Local).AddTicks(7650), "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e", "2bf40edf-af65-4d9e-8e6d-5f40d683cc3e", null, "2ملاحظات من المبرمج ", "01122332150", new DateTime(2022, 8, 13, 13, 59, 58, 14, DateTimeKind.Local).AddTicks(7649) },
+                    { "c3d0584e-fcd7-439c-8ae1-g5734664d6f4", "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e", null, "Client Ahmed 3 ", 2, 3, new DateTime(2022, 8, 13, 13, 59, 58, 14, DateTimeKind.Local).AddTicks(7652), "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e", "2bf40edf-af65-4d9e-8e6d-5f40d683cc3e", null, "2ملاحظات من المبرمج ", "24400", new DateTime(2022, 8, 13, 13, 59, 58, 14, DateTimeKind.Local).AddTicks(7651) }
                 });
 
             migrationBuilder.InsertData(
