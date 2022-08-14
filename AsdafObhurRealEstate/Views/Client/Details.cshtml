@@ -7,157 +7,100 @@
 
 <!-- bootstrab table -->
 
+<form asp-area="" asp-controller="Client" asp-action="SavedFileAboutClient" enctype="multipart/form-data">
+    <div class="client-info">
+        <h3 class="mb-3">المعلومات الرئيسية</h3>
+        <div class="client-info-container row">
+            <div class="client-info-box col bg-primary text-light m-2">
+                <h4 class="text-light m-0">اسم العميل</h4>
+               <h3 class="m-0 text-light"> <strong class="info-label fs-4">@Model.ClientName</strong> </h3>
+            </div>
+            <div class="client-info-box col bg-secondary text-light m-2">
+                <h4 class="text-light m-0">رقم الهاتف</h4>
+                <h3 class="m-0 text-light"> <strong class="info-label fs-4">@Model.PhoneNumber</strong> </h3>
+            </div>
+            <div class="client-info-box col bg-secondary text-light m-2">
+                <h4 class="text-light m-0">العنوان</h4>
+                <h3 class="m-0 text-light"> <strong class="info-label fs-4">الشرقية مصر</strong> </h3>
+            </div>
+        </div>
 
-<div class="client-info">
-    <h3 class="mb-3">المعلومات الرئيسية</h3>
-    <div class="client-info-container row">
-        <div class="client-info-box col bg-primary text-light m-2">
-            <h4 class="text-light m-0">اسم العميل</h4>
-           <h3 class="m-0 text-light"> <strong class="info-label fs-4">العميل البتنجاني</strong> </h3>
-        </div>
-        <div class="client-info-box col bg-secondary text-light m-2">
-            <h4 class="text-light m-0">رقم الهاتف</h4>
-            <h3 class="m-0 text-light"> <strong class="info-label fs-4">+201120169782</strong> </h3>
-        </div>
-        <div class="client-info-box col bg-secondary text-light m-2">
-            <h4 class="text-light m-0">العنوان</h4>
-            <h3 class="m-0 text-light"> <strong class="info-label fs-4">قنا مصر</strong> </h3>
-        </div>
-    </div>
-
-    <div class="client-info-container row ">
-        <div class="client-info-box client-notes col-lg-8 bg-secondary text-light m-2">
-            <strong class="info-label">ملاحظات</strong>
-            <input class="client-notes-input text-end text-light fs-5 pe-2" value="اكبر عميل بتنجاني في الشركة" />
+        <div class="client-info-container row ">
+            <div class="client-info-box client-notes col-lg-8 bg-secondary text-light m-2">
+                <strong class="info-label">ملاحظات</strong>
+                <input class="client-notes-input text-end text-light fs-5 pe-2" value="اكبر عميل في الشركة الخ الخ الخ الخ" />
                
-        </div>
-        <div class=" d-flex  justify-content-around client-control col-lg-3 m-2">
-            <div class="d-flex flex-column justify-content-center align-items-center">
-                <button class="btn btn-primary fs-4">
-                        <i class="fas fa-file-invoice-dollar"></i>
-                </button>
-                <label class="fs-6 fw-bold">عرض الفاتورة الحالية</label>
             </div>
-            <div class="d-flex flex-column justify-content-center align-items-center">
-                <button class="btn btn-primary fs-4">
-                    <i class="fas fa-upload"></i>
-                </button>
-                <label class="fs-6 fw-bold">رفع فاتورة</label>
-            </div>
-        </div>
-    </div>
-
-</div>
-<form class="mt-4">
-    <h3 class="mb-3"> الملفات</h3>
-
-    <table class="table table-secondary">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">الملف</th>
-                <th scope="col">وصف الملف</th>
-                <th scope="col">اضافة</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td> <a href="#">الملف البتنجاني</a></td>
-                <td>اكبر ملف بتنجاني في الشركة</td>
-                <td></td>
-            </tr>
-
-            <tr class="table-primary">
-                <th scope="row">2</th>
-                <td>
-                    <input type="file">
-                </td>
-                <td>
-                    <input type="text">
-                </td>
-                <td>
-                    <button class="btn btn-primary table-add-btn">
-                        <i class="fas fa-plus-circle fs-6"></i>
+            <div class=" d-flex  justify-content-around client-control col-lg-3 m-2">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <button class="btn btn-primary fs-4">
+                            <i class="fas fa-file-invoice-dollar"></i>
                     </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</form>
-
-<div class="row justify-content-center">
-    <div class="d-flex col justify-content-center">
-        <button class="btn btn-primary">حفظ التعديلات</button>
-    </div>
-    <div class="d-flex col justify-content-center">
-        <button class="btn btn-secondary">انهاء الملف</button>
-    </div>
-    <div class="d-flex col justify-content-center">
-        <button class="btn btn-secondary">تحويل الي المالية</button>
-    </div>
-    <div class="d-flex col justify-content-center">
-        <button class="btn btn-secondary">ارجاع الي القائمة</button>
-    </div>
-</div>
-
-
-
-<!--
-
-<input asp-for="ClientId" type="hidden" />
-<div class="row mt-2">
-    <div class="col-md-3">
-         <label class="form-label" asp-for="ClientName"></label>
-         <label class="font-weight-bold">@Model.ClientName</label>
-    </div>
-     <div class="col-md-3">
-          <label class="form-label" asp-for="PhoneNumber"></label>
-         <label class="font-weight-bold">@Model.PhoneNumber</label>
-    </div>
-
-    @if (!string.IsNullOrEmpty(Model.BillsFileOld))
-    {
-        <div class="col-md-3">
-             <label class="form-label">الفاتورة</label>
-             <a asp-area="" asp-controller="Client" asp-action="DownloadBills" asp-route-clientId="@Model.ClientId">حمل الفاتورة</a>
-        </div>
-    }
-
-      <div class="col-md-3">
-             <label class="form-label" asp-for="BillsFileNew">تحميل فاتورة جديده</label>
-             <input asp-for="BillsFileNew" id="uploadNewBill" class="swal2-file" />
-        </div>
-
-  
-    <div class="col-md-3">
-        <label class="form-label" asp-for="Notes"></label>
-        <textarea class="swal2-textarea">@Model.Notes</textarea>
-    </div>
-
-
-    @if (Model.OldOtherFiles.Count() > 0)
-    {
-        var i = 0 ;
-        @foreach(var item in Model.OldOtherFiles)
-        {
-            
-            <div class="col-md-3">
-                 <label class="form-label" asp-for="@item.Description">@item.Description</label>
-                 <input asp-for="@item.Description" type="file" id="uploadNewBill" class="swal2-file" />
+                    <label class="fs-6 fw-bold">عرض الفاتورة الحالية</label>
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <button class="btn btn-primary fs-4">
+                        <i class="fas fa-upload"></i>
+                    </button>
+                    <label class="fs-6 fw-bold">رفع فاتورة</label>
+                </div>
             </div>
+        </div>
 
-        }
-    }
-
-
-
-     <div class="col-md-3">
-        <label class="form-label" id="">تحميل ملفات اخري جديده</label>
-        <input  type="file" id="uploadNewBill" class="swal2-file" />
     </div>
-</div>
--->
+    <form class="mt-4">
+        <h3 class="mb-3"> الملفات</h3>
+
+        <table class="table table-secondary">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">الملف</th>
+                    <th scope="col">وصف الملف</th>
+                    <th scope="col">اضافة</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td> <a href="#">صورة عقد الملكية</a></td>
+                    <td>هذا الملف يوجد به صورة عقد الملكية</td>
+                    <td></td>
+                </tr>
+
+                <tr class="table-primary">
+                    <th scope="row">2</th>
+                    <td>
+                        <input type="file">
+                    </td>
+                    <td>
+                        <input type="text">
+                    </td>
+                    <td>
+                        <button class="btn btn-primary table-add-btn">
+                            <i class="fas fa-plus-circle fs-6"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <div class="row justify-content-center">
+        <div class="d-flex col justify-content-center">
+            <button class="btn btn-primary">حفظ التعديلات</button>
+        </div>
+        <div class="d-flex col justify-content-center">
+            <button class="btn btn-secondary">انهاء الملف</button>
+        </div>
+        <div class="d-flex col justify-content-center">
+            <button class="btn btn-secondary">تحويل الي المالية</button>
+        </div>
+        <div class="d-flex col justify-content-center">
+            <button class="btn btn-secondary">ارجاع الي القائمة</button>
+        </div>
+    </div>
+</form>
 
 @section Scripts{
 

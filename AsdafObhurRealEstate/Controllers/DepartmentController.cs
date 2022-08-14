@@ -88,13 +88,20 @@ namespace AsdafObhurRealEstate.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(string departmentId)
         {
-            var model = await _context.Departments.FirstOrDefaultAsync(m => m.Id == departmentId);
+            try
+            {
+                var model = await _context.Departments.FirstOrDefaultAsync(m => m.Id == departmentId);
             
-            if (model == null)
-                return BadRequest();
+                if (model == null)
+                    return BadRequest();
 
-            _context.Remove(model);
-            await _context.SaveChangesAsync();
+                _context.Remove(model);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw new Exception("يجب مسح الموظفين المرتبطين بهذا القسم أولا");
+            }
 
             return Ok();
         }

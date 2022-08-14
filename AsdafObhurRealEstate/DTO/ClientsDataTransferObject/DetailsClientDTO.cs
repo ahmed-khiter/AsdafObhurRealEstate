@@ -9,6 +9,9 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
         [Display(Name = "اسم العمييل")]
         public string ClientName { get; set; }
 
+        [Display(Name = "العنوان")]
+        public string Address { get; set; }
+
         [Display(Name = "رقم التلفون")]
         public string PhoneNumber { get; set; }
 
@@ -24,8 +27,7 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
         public int ClientCode { get; set; }
 
         public List<OldOtherFile> OldOtherFiles { get; set; }
-
-        public List<OtherFileNew> OtherFileNews { get; set; }
+        public List<NewOtherFile> NewOtherFiles { get; set; }
 
     }
 
@@ -36,12 +38,14 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
         public string FileOld { get; set; }
     }
 
-
-
-    public class OtherFileNew
+    public class NewOtherFile
     {
+        [Display(Name = "وصف الفايل")]
         public string Description { get; set; }
 
-        public IFormFile FileNew { get; set; }
+        [Display(Name = "اسم الفايل")]
+        public IFormFile NewFile { get; set; }
+
     }
+ 
 }

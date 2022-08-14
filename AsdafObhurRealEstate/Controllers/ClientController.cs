@@ -116,59 +116,6 @@ namespace AsdafObhurRealEstate.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> UploadInvoice(UploadInvoiceDTO model)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest();
-
-            var client = await _context.Clients.SingleOrDefaultAsync(m => m.Id == model.ClientId);
-            
-            if (client == null)
-                return BadRequest();
-
-            client.BillsFile = _fileManager.Upload(model.File);
-
-
-            _context.Update(client);
-            await _context.SaveChangesAsync();
-
-            return Ok();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> uploadMultipleFile(MultipleUploadFile model)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest();
-
-            var client = await _context.Clients.Include(m => m.Multimedias).SingleOrDefaultAsync(m => m.Id == model.ClientId);
-
-            if (client == null)
-                return BadRequest();
-
-            foreach (var item in model.Medias)
-            {
-                var description = item.Description;
-                var file = _fileManager.Upload(item.File);
-
-                client.Multimedias.Add(new Multimedia
-                {
-                    ClientId = client.Id,
-                    CreatedAt = DateTime.Now,
-                    Description = description,
-                    CreatedBy = _userManager.GetUserId(User),
-                    UpdatedAt = DateTime.Now,
-                    Path = file
-                });
-            }
-
-            _context.Update(client);
-
-            await _context.SaveChangesAsync();
-
-            return Ok();
-        }
 
         [HttpGet]
         public async Task<IActionResult> Details(string clientId)
@@ -199,12 +146,12 @@ namespace AsdafObhurRealEstate.Controllers
             var record = new DetailsClientDTO()
             {
                 ClientId = client.Id,
+                Address = client.Address,
                 PhoneNumber = client.PhoneNumber,
                 BillsFileOld = client.BillsFile,
                 ClientName = client.ClientName,
                 Notes   = client.Notes,
                 OldOtherFiles = new List<OldOtherFile>(),
-                OtherFileNews = new List<OtherFileNew>()
             };
 
             foreach (var item in client.Multimedias)
@@ -222,22 +169,51 @@ namespace AsdafObhurRealEstate.Controllers
 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> AddNewBill(IFormFile billFile, string clientId)
+        [HttpPost]
+        public async Task<IActionResult> SavedFileAboutClient(DetailsClientDTO model, string clientId)
         {
-            var client = await _context.Clients.FirstOrDefaultAsync(m => m.Id == clientId);
+            if (!ModelState.IsValid)
+                return BadRequest();
 
-            if (billFile != null)
+            var client = await _context.Clients.Include(m => m.Multimedias).SingleOrDefaultAsync(m => m.Id == model.ClientId);
+
+            if (client == null)
+                return BadRequest();
+
+            if(model.BillsFileNew != null)
             {
-                client.BillsFile = _fileManager.Upload(billFile);
+                _fileManager.Delete(client.BillsFile);
+
+                client.BillsFile = _fileManager.Upload(model.BillsFileNew);
 
                 _context.Update(client);
                 await _context.SaveChangesAsync();
             }
-            else
-                return BadRequest();
 
-            return Ok();
+            if(model.NewOtherFiles != null)
+            {
+                foreach (var item in model.NewOtherFiles)
+                {
+                    var description = item.Description;
+                    var file = _fileManager.Upload(item.NewFile);
+
+                    client.Multimedias.Add(new Multimedia
+                    {
+                        ClientId = client.Id,
+                        CreatedAt = DateTime.Now,
+                        Description = description,
+                        CreatedBy = _userManager.GetUserId(User),
+                        UpdatedAt = DateTime.Now,
+                        Path = file
+                    });
+                }
+
+                _context.Update(client);
+
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Details) , new { clientId = model.ClientId});
         }
 
         [HttpGet]
@@ -256,31 +232,6 @@ namespace AsdafObhurRealEstate.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> AddedOtherFile(List<OtherFileNew> model, string clientId)
-        {
-            var client = await _context.Clients.FirstOrDefaultAsync(m => m.Id == clientId);
-
-            if (model == null)
-                return BadRequest();
-
-            var userId = _userManager.GetUserId(User);
-
-            foreach (var otherFileNew in model)
-            {
-                _context.Multimedias.Add(new Multimedia
-                {
-                    ClientId = clientId,
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = userId,
-                    Description = otherFileNew.Description,
-                    Path = _fileManager.Upload(otherFileNew.FileNew),
-                });
-            }
-
-            await _context.SaveChangesAsync();
-
-            return Ok();
-        }
+      
     }
 }

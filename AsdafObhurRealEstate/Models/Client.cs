@@ -10,6 +10,9 @@ namespace AsdafObhurRealEstate.Models
 
         public string PhoneNumber { get; set; }
 
+        public string Address { get; set; }
+
+
         public string BillsFile { get; set; }
 
         public string Notes { get; set; }
