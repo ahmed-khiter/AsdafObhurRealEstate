@@ -27,17 +27,58 @@
   <link href="~/assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="~/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <!-- Material Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="~/assets/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
-  <link href="~/assets/css/stylesheet.css" rel="stylesheet" />
     
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css" integrity="sha512-cyIcYOviYhF0bHIhzXWJQ/7xnaBuIIOecYoPZBgJHQKFPo+TOBA+BY1EnTpmM8yKDU4ZdI3UGccNGCEUdfbBqw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="~/assets/css/stylesheet.css" rel="stylesheet" />
+  <style>
+      /*
 
+     
+        .client-info {
+            
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+          
+        }
+
+        .client-info-container {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .client-info-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 10px;
+            width: 400px;
+            margin: 10px;
+            font-size: 28px;
+            
+            min-height: 100px;
+            background-color: #d1d1d1;
+            border-radius:10px;
+        }
+
+        */
+
+        /*
+        .client-control {
+            width: 400px;
+        }
+        */
+</style>
 
 
 
@@ -61,7 +102,7 @@
             @if (isLogged)
             {
                             
-                <li class="breadcrumb-item text-sm ps-2"><a class="opacity-5 text-dark" href="javascript:;">لوحة القيادة</a></li>
+                <li class="breadcrumb-item fs-4 ps-2"><a class="opacity-5 text-dark" href="javascript:;">لوحة القيادة</a></li>
             }
           </ol>
         </nav>
@@ -70,16 +111,16 @@
             @if (!isLogged)
             {
                 <li class="nav-item d-flex align-items-center">
-                  <a asp-area="" asp-action="Login" asp-controller="Account" class="nav-link text-body font-weight-bold px-0">
-                    <i class="fa fa-user me-sm-1"></i>
-                    <span class="d-sm-inline d-none">يسجل دخول</span>
+                  <a asp-area="" asp-action="Login" asp-controller="Account" class="nav-link text-body font-weight-bold px-0 fs-4">
+                    <i class="fa fa-user m-2 me-sm-1"></i>
+                    <span class="d-sm-inline d-none">تسجيل الدخول</span>
                   </a>
                 </li>
             }else{
                 <li class="nav-item d-flex align-items-center">
                   <a href="/" class="nav-link text-body font-weight-bold px-0">
                     <i class="fa fa-user me-sm-1"></i>
-                    <span class="d-sm-inline d-none">مرحبا @User.FindFirst("fullName").Value</span>
+                    <span class="d-sm-inline fs-4 d-none">مرحبا @User.FindFirst("fullName").Value</span>
                   </a>
                 </li>
             }
@@ -98,7 +139,7 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-            <div class="row">
+            <div class="container">
                 @RenderBody()
             </div>
     
@@ -121,7 +162,7 @@
     <script src="~/assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="~/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="~/limonte-sweetalert2/sweetalert2.all.js" asp-append-version="true"></script>
-   
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/js/all.min.js" integrity = "sha512-YUwFoN1yaVzHxZ1cLsNYJzVt1opqtVLKgBQ+wDj+JyfvOkH66ck1fleCm8eyJG9O1HpKIf86HrgTXkWDyHy9HA==" crossorigin = "anonymous" referrerpolicy = "no-referrer" ></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {

@@ -1,4 +1,14 @@
-﻿.custom-form {
+﻿/*
+    icons
+*/
+
+.fa-user
+{
+    font-size:18px;
+    margin-left:5px;
+}
+
+.custom-form {
     direction: rtl;
     display: flex;
     flex-direction: column;
@@ -46,4 +56,78 @@
 .custom-select
 {
     padding: 11px !important;
+}
+
+
+.client-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.client-info-container {
+    display: flex;
+    width: 100%;
+}
+
+.client-info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    min-height: 100px;
+    background-color: #d1d1d1;
+    border-radius: 10px;
+    font-size: 28px;
+}
+
+
+
+.client-notes-input {
+    width: 100%;
+    background: none;
+    border: 1px solid #dad9d9;
+    border-radius: 10px;
+    outline: none;
+}
+
+.table
+{
+    border-radius:10px;
+}
+
+.table-add-btn {
+    height: 40px;
+    width: 40px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:0;
+    margin:0;
+}
+
+
+/*
+    employess details
+    */
+.tabel-search-box
+{
+    border: 1px solid #292929;
+    border-radius:15px;
+    padding:0;
+    height: 38px;
+    width:255px;
+    padding: 2px;
+}
+
+.table-search {
+    font-size: 15px;
+    padding: 5px 10px;
+    height: 35px;
+    background: none;
+    border:none;
+    outline:none;
 }
