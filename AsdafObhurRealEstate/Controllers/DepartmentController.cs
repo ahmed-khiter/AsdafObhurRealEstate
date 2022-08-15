@@ -18,9 +18,19 @@ namespace AsdafObhurRealEstate.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index() =>
-            View(await _context.Departments.ToListAsync());
+        public async Task<IActionResult> Index(string departmentName)
+        {
+            if (!string.IsNullOrEmpty(departmentName))
+            {
+                var result = await _context.Departments.Where(m => m.Name.Contains(departmentName)).ToListAsync();
+                return Ok( result);
+            }
+            else
+            {
 
+                return View(await _context.Departments.ToListAsync());
+            }
+        }
         public IActionResult Create() => View();
 
 
@@ -100,7 +110,7 @@ namespace AsdafObhurRealEstate.Controllers
             }
             catch (Exception)
             {
-                throw new Exception("يجب مسح الموظفين المرتبطين بهذا القسم أولا");
+                throw new Exception("يجب مسح الموظفين المرتبطين بهذا القسم أو مسح العملاء المرتبطين بهذا القسم");
             }
 
             return Ok();

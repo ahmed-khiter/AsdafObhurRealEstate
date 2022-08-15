@@ -10,6 +10,10 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
 
         public string ClientId { get; set; }
 
+        [Display(Name ="عنوان")]
+        [Required(ErrorMessage ="عنوان اجباري")]
+        public string Address { get; set; }
+
 
         [Display(Name ="رقم التلفون")]
         [Required(ErrorMessage = "رقم التلفون إجبارى")]

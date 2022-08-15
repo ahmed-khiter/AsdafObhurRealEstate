@@ -172,15 +172,49 @@ namespace AsdafObhurRealEstate.Controllers
        
         [Authorize(Roles = Role.GeneralManager)]
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string userNameOrCode,bool refresh )
         {
-            var users = await userManager.Users.Include(m => m.Department).ToListAsync();
+            if(!string.IsNullOrEmpty(userNameOrCode))
+            {
+                int code = 0; 
+                var ifIsCode = int.TryParse(userNameOrCode, out code);
 
-            return View(users);
+                var users = await userManager.Users
+                    .Include(m => m.Department)
+                    .Where(m => m.Code == code || 
+                    m.FirstName.Contains(userNameOrCode) || m.LastName.Contains(userNameOrCode))
+                    .Select(m => new
+                    {
+                        id = m.Id,
+                        code = m.Code,
+                        fullName = $"{m.FirstName} {m.LastName}",
+                        phoneNumber = m.PhoneNumber,
+                    })
+                    .ToListAsync();
+
+                return Ok(users);
+            }
+            else
+            {
+
+                var users = await userManager.Users.Include(m => m.Department).ToListAsync();
+
+                if (refresh)
+                {
+                    return Ok(users.Select(m => new
+                    {
+                        id = m.Id,
+                        code = m.Code,
+                        fullName = $"{m.FirstName} {m.LastName}",
+                        phoneNumber = m.PhoneNumber,
+                    }));
+                }
+
+                return View(users);
+            }
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             if (ModelState.IsValid)
@@ -286,6 +320,7 @@ namespace AsdafObhurRealEstate.Controllers
             var wholeDetails = new EmployeeAndHisClients()
             {
                 Email = user.Email,
+                EmployeeCode = user.Code,
                 Name = $"{user.FirstName} {user.LastName}",
                 PhoneNumber = user.PhoneNumber,
                 UserId = user.Id,

@@ -23,7 +23,7 @@ namespace AsdafObhurRealEstate.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(bool refreshPage)
         {
             var userId = _userManager.GetUserId(User);
 
@@ -31,13 +31,105 @@ namespace AsdafObhurRealEstate.Controllers
             
             if (await _userManager.IsInRoleAsync(user,Role.GeneralManager))
             {
+                if (refreshPage)
+                {
+                    var rslt = await _context.Clients.Select(m => new
+                    {
+                        id = m.Id,
+                        name = m.ClientName,
+                        phoneNumber = m.PhoneNumber,
+                        code = m.Code,
+                    }).ToListAsync();
+
+                    return Ok(rslt);
+
+                }
+
                 return View(await _context.Clients.ToListAsync());
             }
             
-
             var clients = await _context.Clients.Where(m => m.BaseUserId == userId).ToListAsync();
+
+            if (refreshPage)
+            {
+
+                var rslt = clients.Select(m => new
+                {
+                    id = m.Id,
+                    name = m.ClientName,
+                    phoneNumber = m.PhoneNumber,
+                    code = m.Code,
+                });
+
+                return Ok(rslt);
+            }
             
             return View(clients);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> SearchClient(string userNameOrCode, bool heCreated)
+        {
+            if (!string.IsNullOrEmpty(userNameOrCode))
+            {
+                int code = 0;
+                var isNumber = int.TryParse(userNameOrCode, out code);
+
+                var userId = _userManager.GetUserId(User);
+
+                var user = await _userManager.FindByIdAsync(userId);
+
+                if (await _userManager.IsInRoleAsync(user, Role.GeneralManager))
+                {
+                    return Ok(
+                        await _context.Clients
+                        .Where(m => m.Code == code || m.ClientName.Contains(userNameOrCode))
+                        .Select(m => new
+                        {
+                            id = m.Id,
+                            name = m.ClientName,
+                            phoneNumber = m.PhoneNumber,
+                            code = m.Code,
+                        })
+                        .ToListAsync());
+                }
+                List<object> clients = new List<object>();
+                
+                if (heCreated)
+                {
+                     clients.AddRange( await _context.Clients.Where(m => (m.Code == code || m.ClientName
+                        .Contains(userNameOrCode)) && m.CreatedBy == userId)
+                              .Select(m => new
+                              {
+                                  id = m.Id,
+                                  name = m.ClientName,
+                                  phoneNumber = m.PhoneNumber,
+                                  code = m.Code,
+                              })
+                              .ToListAsync());
+                }
+                else
+                {
+                    clients.AddRange(await _context.Clients.Where(m => (m.Code == code || m.ClientName
+                      .Contains(userNameOrCode)) && m.BaseUserId == userId)
+                             .Select(m => new
+                             {
+                                 id = m.Id,
+                                 name = m.ClientName,
+                                 phoneNumber = m.PhoneNumber,
+                                 code = m.Code,
+                             })
+                             .ToListAsync());
+                }
+
+                return Ok(clients);
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index), new { refreshPage = true});
+
+            }
         }
 
         public async Task<IActionResult> Create()
@@ -76,6 +168,7 @@ namespace AsdafObhurRealEstate.Controllers
                 BaseUserId = model.BaseUserId,
                 Code = code,
                 ClientName = model.ClientName,
+                Address = model.Address,
                 DepartmentId = model.DepartmentId,
                 PhoneNumber = model.PhoneNumber,
                 CreatedAt = DateTime.Now,
@@ -167,6 +260,30 @@ namespace AsdafObhurRealEstate.Controllers
 
             return View(record);
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (string.IsNullOrEmpty(id)) 
+                 return BadRequest("حدث خطأ اثناء المسح");
+
+            var client = await _context.Clients.FirstOrDefaultAsync(m => m.Id == id);
+
+            if(client == null)
+                return BadRequest("حدث خطأ اثناء المسح");
+
+            try
+            {
+                _context.Remove(client);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("حدث خطأ اثناء المسح");
+            }
+
+            return Ok();
         }
 
         [HttpPost]
