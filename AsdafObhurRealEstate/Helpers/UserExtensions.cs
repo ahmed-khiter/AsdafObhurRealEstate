@@ -28,7 +28,6 @@ namespace AsdafObhurRealEstate.Helpers
 
     public class ApplicationClaimsIdentityFactory : UserClaimsPrincipalFactory<BaseUser>
     {
-        UserManager<BaseUser> _userManager;
         public ApplicationClaimsIdentityFactory(UserManager<BaseUser> userManager,
             IOptions<IdentityOptions> optionsAccessor) : base(userManager, optionsAccessor)
         { }

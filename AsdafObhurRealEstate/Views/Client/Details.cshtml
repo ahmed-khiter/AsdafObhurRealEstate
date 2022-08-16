@@ -10,7 +10,8 @@
 
 <!-- bootstrab table -->
 <form asp-area="" asp-controller="client" asp-action="SavedFileAboutClient" enctype="multipart/form-data" >
-    <div asp-area="" asp-controller="Client" asp-action="SavedFileAboutClient" enctype="multipart/form-data">
+    <input type="hidden" asp-for="ClientId" />
+    <div>
         <div class="client-info">
             <h3 class="mb-3">المعلومات الرئيسية</h3>
             <div class="client-info-container row">
@@ -47,7 +48,8 @@
                     }
                 
                     <div class="d-flex flex-column justify-content-center align-items-center">
-                        <button  class="btn btn-primary fs-4">
+                        <button type="button" asp-for="BillsFileNew" class="btn btn-primary fs-4">
+                            @*<input type="file" asp-for="BillsFileNew" />*@
                             <i class="fas fa-upload"></i>
                         </button>
                         <label class="fs-6 fw-bold">رفع فاتورة</label>

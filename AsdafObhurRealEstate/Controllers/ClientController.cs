@@ -278,7 +278,7 @@ namespace AsdafObhurRealEstate.Controllers
                 _context.Remove(client);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest("حدث خطأ اثناء المسح");
             }
