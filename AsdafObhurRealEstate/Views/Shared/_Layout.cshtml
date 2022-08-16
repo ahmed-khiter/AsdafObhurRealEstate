@@ -1,8 +1,9 @@
 ﻿@inject SignInManager<BaseUser> signinManager
 @inject UserManager<BaseUser> userManager
-@{ 
+@{
     var user = await userManager.GetUserAsync(User);
     bool isLogged = signinManager.IsSignedIn(User);
+
 }
 
 <!DOCTYPE html>
@@ -37,51 +38,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css" integrity="sha512-cyIcYOviYhF0bHIhzXWJQ/7xnaBuIIOecYoPZBgJHQKFPo+TOBA+BY1EnTpmM8yKDU4ZdI3UGccNGCEUdfbBqw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link href="~/assets/css/stylesheet.css" rel="stylesheet" />
-  <style>
-      /*
-
-     
-        .client-info {
-            
-
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-          
-        }
-
-        .client-info-container {
-            display: flex;
-            justify-content: space-evenly;
-        }
-
-        .client-info-box {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            padding: 10px;
-            width: 400px;
-            margin: 10px;
-            font-size: 28px;
-            
-            min-height: 100px;
-            background-color: #d1d1d1;
-            border-radius:10px;
-        }
-
-        */
-
-        /*
-        .client-control {
-            width: 400px;
-        }
-        */
-</style>
-
-
-
     @RenderSection("Styles", required: false)
 </head>
 
@@ -120,7 +76,7 @@
                 <li class="nav-item d-flex align-items-center">
                   <a href="/" class="nav-link text-body font-weight-bold px-0">
                     <i class="fa fa-user me-sm-1"></i>
-                    <span class="d-sm-inline fs-4 d-none">مرحبا @User.FindFirst("fullName").Value</span>
+                    <span class="d-sm-inline fs-4 d-none">مرحبا @user.FirstName @user.LastName</span>
                   </a>
                 </li>
             }

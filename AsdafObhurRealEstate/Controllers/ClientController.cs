@@ -3,6 +3,8 @@ using AsdafObhurRealEstate.DTO.ClientsDataTransferObject;
 using AsdafObhurRealEstate.Helpers;
 using AsdafObhurRealEstate.Infrastructure;
 using AsdafObhurRealEstate.Models;
+using AsdafObhurRealEstate.Services.Clients;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,60 +12,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AsdafObhurRealEstate.Controllers
 {
+    [Authorize]
     public class ClientController : Controller
     {
         private readonly AsdafObhurContext _context;
         private readonly UserManager<BaseUser> _userManager;
         private readonly FileManager _fileManager;
-        public ClientController(AsdafObhurContext context, UserManager<BaseUser> userManager, FileManager fileManager)
+
+        private readonly ClientService _clientService;
+        public ClientController(AsdafObhurContext context, UserManager<BaseUser> userManager,ClientService clientService,
+            FileManager fileManager)
         {
             _context = context;
             _userManager = userManager;
             _fileManager = fileManager;
+            _clientService = clientService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(bool refreshPage)
+        public async Task<IActionResult> Index(bool refreshPage, bool isJsonReturn)
         {
-            var userId = _userManager.GetUserId(User);
+           var clients = await _clientService.GetClients(User, refreshPage);
 
-            var user = await _userManager.FindByIdAsync(userId);
-            
-            if (await _userManager.IsInRoleAsync(user,Role.GeneralManager))
-            {
-                if (refreshPage)
-                {
-                    var rslt = await _context.Clients.Select(m => new
-                    {
-                        id = m.Id,
-                        name = m.ClientName,
-                        phoneNumber = m.PhoneNumber,
-                        code = m.Code,
-                    }).ToListAsync();
+            if (isJsonReturn)
+                return Ok(clients);
 
-                    return Ok(rslt);
-
-                }
-
-                return View(await _context.Clients.ToListAsync());
-            }
-            
-            var clients = await _context.Clients.Where(m => m.BaseUserId == userId).ToListAsync();
-
-            if (refreshPage)
-            {
-
-                var rslt = clients.Select(m => new
-                {
-                    id = m.Id,
-                    name = m.ClientName,
-                    phoneNumber = m.PhoneNumber,
-                    code = m.Code,
-                });
-
-                return Ok(rslt);
-            }
-            
             return View(clients);
         }
 
@@ -85,27 +58,27 @@ namespace AsdafObhurRealEstate.Controllers
                     return Ok(
                         await _context.Clients
                         .Where(m => m.Code == code || m.ClientName.Contains(userNameOrCode))
-                        .Select(m => new
+                        .Select(m => new ListClientDTO
                         {
-                            id = m.Id,
-                            name = m.ClientName,
-                            phoneNumber = m.PhoneNumber,
-                            code = m.Code,
+                            Id = m.Id,
+                            ClientName = m.ClientName,
+                            PhoneNumber = m.PhoneNumber,
+                            Code = m.Code,
                         })
                         .ToListAsync());
                 }
-                List<object> clients = new List<object>();
+                List<ListClientDTO> clients = new List<ListClientDTO>();
                 
                 if (heCreated)
                 {
                      clients.AddRange( await _context.Clients.Where(m => (m.Code == code || m.ClientName
                         .Contains(userNameOrCode)) && m.CreatedBy == userId)
-                              .Select(m => new
+                              .Select(m => new ListClientDTO
                               {
-                                  id = m.Id,
-                                  name = m.ClientName,
-                                  phoneNumber = m.PhoneNumber,
-                                  code = m.Code,
+                                  Id = m.Id,
+                                  ClientName = m.ClientName,
+                                  PhoneNumber = m.PhoneNumber,
+                                  Code = m.Code,
                               })
                               .ToListAsync());
                 }
@@ -113,13 +86,13 @@ namespace AsdafObhurRealEstate.Controllers
                 {
                     clients.AddRange(await _context.Clients.Where(m => (m.Code == code || m.ClientName
                       .Contains(userNameOrCode)) && m.BaseUserId == userId)
-                             .Select(m => new
-                             {
-                                 id = m.Id,
-                                 name = m.ClientName,
-                                 phoneNumber = m.PhoneNumber,
-                                 code = m.Code,
-                             })
+                            .Select(m => new ListClientDTO
+                            {
+                                Id = m.Id,
+                                ClientName = m.ClientName,
+                                PhoneNumber = m.PhoneNumber,
+                                Code = m.Code,
+                            })
                              .ToListAsync());
                 }
 
@@ -127,7 +100,7 @@ namespace AsdafObhurRealEstate.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(Index), new { refreshPage = true});
+                return RedirectToAction(nameof(Index), new { refreshPage = true, isJsonReturn =true});
 
             }
         }
@@ -263,6 +236,7 @@ namespace AsdafObhurRealEstate.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{Role.GeneralManager}")]
         public async Task<IActionResult> Delete(string id)
         {
             if (string.IsNullOrEmpty(id)) 

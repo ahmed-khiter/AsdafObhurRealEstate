@@ -1,21 +1,33 @@
 using AsdafObhurRealEstate.Helpers;
 using AsdafObhurRealEstate.Infrastructure;
 using AsdafObhurRealEstate.Models;
+using AsdafObhurRealEstate.Services.Clients;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Wkhtmltopdf.NetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ClientService>();
 builder.Services.AddDbContext<AsdafObhurContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 builder.Services.Configure<IdentityOptions>(options =>
-    options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
+{
+    options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier;
+    options.ClaimsIdentity.RoleClaimType = ClaimTypes.Role;
+    options.ClaimsIdentity.EmailClaimType = ClaimTypes.Email;
+
+}) ;
 
 builder.Services.AddWkhtmltopdf();
 
@@ -27,11 +39,10 @@ builder.Services.AddIdentity<BaseUser, IdentityRole>(
                   options.Password.RequiredUniqueChars = 0;
                   options.Password.RequireLowercase = false;
                   options.Password.RequireNonAlphanumeric = false;
-              })
-              .AddEntityFrameworkStores<AsdafObhurContext>()
-              .AddDefaultTokenProviders();
+              }).AddRoles<IdentityRole>()
+              .AddEntityFrameworkStores<AsdafObhurContext>();
 
-builder.Services.AddScoped<IUserClaimsPrincipalFactory<BaseUser>, ApplicationClaimsIdentityFactory>();
+
 builder.Services.AddSingleton(typeof(FileManager));
 
 

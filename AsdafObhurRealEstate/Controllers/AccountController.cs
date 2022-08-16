@@ -39,10 +39,12 @@ namespace AsdafObhurRealEstate.Controllers
         }
        
         [HttpGet]
+        [Authorize(Roles = Role.GeneralManager)]
         public async Task<IActionResult> Register(AccountType accountType)
         {
             var departments = await _context.Departments.ToListAsync();
 
+            User.FindFirst("fullName");
             ViewData["departments"] = new SelectList(departments, "Id", "Name");
 
             var registerModel = new RegisterDTO()
@@ -54,6 +56,7 @@ namespace AsdafObhurRealEstate.Controllers
         }
        
         [HttpPost]
+        [Authorize(Roles = Role.GeneralManager)]
         public async Task<IActionResult> Register(RegisterDTO model)
         {
             var currentUserIsValidOrNot = await userManager.FindByIdAsync(userManager.GetUserId(User));
@@ -80,12 +83,12 @@ namespace AsdafObhurRealEstate.Controllers
 
             if (currentUser != null)
             {
-                ModelState.AddModelError("Email", "Email is already exists");
+                ModelState.AddModelError("Email", "الإيميل او الرقم المرور غير صحيح");
 
                 return View(model);
             }
 
-            var code = await userManager.Users.CountAsync() + 1;
+            var code = await userManager.Users.MaxAsync(m => m.Code) + 1;
 
             var user = new BaseUser
             {
@@ -100,6 +103,7 @@ namespace AsdafObhurRealEstate.Controllers
                 NormalizedEmail = model.Email.ToUpper(),
                 NormalizedUserName = model.Email.ToUpper(),
                 CreatedBy = userManager.GetUserId(User),
+                DepartmentId = model.DepartmentId,
                 CreatedAt = DateTime.Now,
             };
             using (var transaction = _context.Database.BeginTransaction())
@@ -108,14 +112,9 @@ namespace AsdafObhurRealEstate.Controllers
 
                 if (result.Succeeded)
                 {
-                    await signInManager.SignInAsync(user, true);
-
                     await AddRolesToUse(model.AccountType, user);
-
                     transaction.Commit();
-
                     ViewData["Success"] = "تم التسجيل مرحبا بك في أصداف أبحر العقارية";
-
                     return Redirect("/");
                 }
 
@@ -129,12 +128,14 @@ namespace AsdafObhurRealEstate.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginDTO model)
         {
             if (!ModelState.IsValid)
@@ -163,6 +164,7 @@ namespace AsdafObhurRealEstate.Controllers
             return Redirect("/");
         }
 
+        [Authorize]
         public async Task<IActionResult> logout()
         {
             await signInManager.SignOutAsync();
@@ -215,6 +217,7 @@ namespace AsdafObhurRealEstate.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Role.GeneralManager)]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             if (ModelState.IsValid)
@@ -253,6 +256,7 @@ namespace AsdafObhurRealEstate.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = Role.GeneralManager)]
         public async Task<IActionResult> Report(FilterReportByUserDTO model)
         {
             var reportName = $"Report.pdf";
@@ -305,6 +309,7 @@ namespace AsdafObhurRealEstate.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = Role.GeneralManager)]
         public async Task<IActionResult> DetailsOfEmployee(string userId)
         {
             var user = await userManager.FindByIdAsync(userId);

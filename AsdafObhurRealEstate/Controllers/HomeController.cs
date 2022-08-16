@@ -4,10 +4,12 @@ using AsdafObhurRealEstate.Enums;
 using AsdafObhurRealEstate.Helpers;
 using AsdafObhurRealEstate.Infrastructure;
 using AsdafObhurRealEstate.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Diagnostics;
 
 namespace AsdafObhurRealEstate.Controllers
@@ -31,6 +33,7 @@ namespace AsdafObhurRealEstate.Controllers
             return View();
         }
 
+        [Authorize(Roles = Role.GeneralManager)]
         public async Task<ActionResult> Tables()
         {
             

@@ -26,22 +26,4 @@ namespace AsdafObhurRealEstate.Helpers
 
 
 
-    public class ApplicationClaimsIdentityFactory : UserClaimsPrincipalFactory<BaseUser>
-    {
-        public ApplicationClaimsIdentityFactory(UserManager<BaseUser> userManager,
-            IOptions<IdentityOptions> optionsAccessor) : base(userManager, optionsAccessor)
-        { }
-        public async override Task<ClaimsPrincipal> CreateAsync(BaseUser user)
-        {
-            var principal = await base.CreateAsync(user);
-            ((ClaimsIdentity)principal.Identity).AddClaims(new[]
-            {
-                new Claim("fullName",$"{user.FirstName} {user.LastName}"),
-            });
-        
-            return principal;
-        }
-
-
-    }
 }

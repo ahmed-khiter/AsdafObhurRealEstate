@@ -1,11 +1,14 @@
-﻿using AsdafObhurRealEstate.Infrastructure;
+﻿using AsdafObhurRealEstate.Constants;
+using AsdafObhurRealEstate.Infrastructure;
 using AsdafObhurRealEstate.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace AsdafObhurRealEstate.Controllers
 {
+    [Authorize(Roles = $"{Role.GeneralManager}")]
     public class DepartmentController : Controller
     {
         private readonly AsdafObhurContext _context;
@@ -18,8 +21,13 @@ namespace AsdafObhurRealEstate.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = $"{Role.GeneralManager}")]
         public async Task<IActionResult> Index(string departmentName)
         {
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User));
+            var userinRole =await _userManager.GetRolesAsync(user);
+            var roleInUser = await _userManager.IsInRoleAsync(user, Role.GeneralManager);
+
             if (!string.IsNullOrEmpty(departmentName))
             {
                 var result = await _context.Departments.Where(m => m.Name.Contains(departmentName)).ToListAsync();
