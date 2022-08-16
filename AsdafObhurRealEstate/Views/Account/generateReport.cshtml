@@ -6,112 +6,140 @@
 @{
     var logo = env.WebRootFileProvider.GetFileInfo("assets/img/dark.png")?.PhysicalPath;
 }
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="@String.Format("{0}css/generate-report.css", Model.BaseUrl)" rel="stylesheet">
-</head>
 
-<body>
 
-    <section class="wrapper border">
-        <div class="header">
 
-            <div class="part deff">
-                 <div class="text-center">
-                <img src="@logo"  width="200" style="padding-top: 10px;" alt="">
-            </div>
-            </div>
 
-            <div class="part text-center">
-                   <div class="text-center">
-                <img src="" width="100" alt="">
-                  </div>
-               
-            </div>
 
+
+<div class="row mt-3 mb-3">
+    <h4 class="mt-3">بياناتا الموظف</h4>
+    <div class="col d-flex flex-column">
+        <label class="form-label fs-5 me-2" asp-for="EmployeeName"></label>
+            <input class="custom-form-input" disabled asp-for="EmployeeName" />
+    </div>
+    <div class="col col d-flex flex-column">
+        <label class="form-label fs-5 me-2" asp-for="EmployeeEmail"></label>
+        <input class="custom-form-input" disabled asp-for="EmployeeEmail" />
+    </div>
+
+    <div class="col col d-flex flex-column">
+        <label class="form-label fs-5 me-2" asp-for="PhoneNumber"></label>
+            <input class="custom-form-input" disabled asp-for="PhoneNumber" />
+    </div>
+</div>
+
+
+
+<div class="row card mt-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <h4 class="mt-3">العملاء تم إنشائهم بواسطه @Model.EmployeeName</h4>
+        <div class="tabel-search-box mt-4 ms-9" >
+            <input type="text" class="client-created-search table-search border-0" data-search="search-client-input"  placeholder="بحث بالأسم أو الكود" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            <button class="table-search" type="button" id="button-addon1">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
-
-        
-      <div class="" style="min-height:10px;" >
-          <table border="0" class="w-100" >
-               <tr>
-                   <td >
-                       <span class="dark-green-box">رقم الطلب</span>&nbsp;&nbsp; <span>sssss</span>
-                   </td>
-                   <td ><span class="dark-green-box">تاريخ الطلب</span>&nbsp;&nbsp; <span>sss</span></td>
-               </tr>
-               <tr>
-                <td colspan="2"><span class="dark-green-box">الموضوع </span>&nbsp;&nbsp; <span>طلب تعديل على الاستعمال</span></td>
-            </tr>
-            
-          </table>
-      </div>
-
-        <div class="content">
-
-          <table border="0" width="100%"  style="table-layout:fixed;" cellspacing="0" cellpadding="0">
-
-                <tr >
-                    <th class="colored-th"  colspan="7" style="text-align:center">طلب التحقق من سريان التنظيم</th>
+    </div>
+  <div class="table-responsive mt-2">
+    <table class="table align-items-center mb-0">
+      <thead>
+        <tr>
+          <th class="text-uppercase text-secondary font-weight-bolder opacity-7 fs-5">كود العميل</th>
+                    <th class="text-uppercase text-secondary  font-weight-bolder opacity-7 fs-5">اسم العميل</th>
+                    <th class="text-uppercase text-secondary  font-weight-bolder opacity-7 ps-2 fs-5">رقم تلفون العميل</th>
+                    <th class="text-uppercase text-secondary  font-weight-bolder opacity-7 ps-2 fs-5">حالة</th>
+         
+        </tr>
+      </thead>
+      <tbody id="data-client-who-created-table" class="pb-2">
+                @foreach(var record in Model.ClientsCreatedBy)
+                {
+                    <tr>
+                        <td>
+                        <div class="d-flex px-2">
+                          <div class="my-auto">
+                            <h6 class="mb-0 fs-6">@record.ClientCode</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex px-2">
+                          <div class="my-auto">
+                            <h6 class="mb-0 fs-6">@record.ClientName</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <h6 dir="rtl" class="fs-6 mb-0">@record.ClientPhone</h6>
+                      </td>
+                     <td>
+                        <h6 dir="rtl" class="fs-6 mb-0">@(record.ClientStatus.GetAttribute<DisplayAttribute>().Name)</h6>
+                     </td>
                 </tr>
 
+                }
+      </tbody>
+    </table>
+  </div>
+ 
+  </div>
 
 
-                <tr>
-                    <td  class="colored-td">بيانات الطلب</td>
-                    <td colspan="2">رقم الطلب : asdasd</td>
-                    <td colspan="2">تاريخ الطلب : asdasdasd</td>
-                    <td colspan="2"> </td>
-                </tr>
-                <!--اسم المالك / الموكل : الطرف الاول-->
-                <tr>
-                    <td  class="colored-td">بيانات المالك</td>
-                    <td colspan="2"> اسم المالك : asdasd</td>
-                    <td colspan="2"> رقم هوية المالك : asdasdsad</td>
-                    <td colspan="2"> رقم الصك : asdasdasd</td>
-                </tr>
-
-
-                <tr>
-                    <td  class="colored-td" rowspan="2">بيانات المستند التنظيمى</td>
-
-                    <td colspan="2">رقم المستند التنظيمى : asdasdasd</td>
-                    <td colspan="2"> تاريخ المستند التنظيمى :  asdasdasd</td>
-                    <td colspan="2">حالة السريان : التنظيم ساري </td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td colspan="2">رقم الطلب السابق : asdasdasd </td>
-                    <td colspan="2">تاريخ الطلب السابق : asdasdasdasdasd </td>
-                    <td colspan="2">تاريخ اعتماد السريان : asdasdasd</td>
-                    
-                </tr>
-                <tr>
-                        <td  class="colored-td" colspan="7">الملاحظات :  لا يوجد ملاحظات </td>
-                        <td  class="colored-td" colspan="7"> asdasdasdsda</td>
-                </tr>
-            </table>
-
-          
+<div class="row card mt-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <h4 class="mt-3">العملاء تم التعامل معاهم بواسطه @Model.EmployeeName</h4>
+        <div class="tabel-search-box mt-4 ms-9">
+            <input type="text" class="client-handled-search table-search border-0" data-search="search-handled-input"  placeholder="بحث بالأسم أو الكود" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            <button class="table-search" type="button" id="button-addon1">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
-        <hr>
-        <footer>
-            <p>ھذه الوثیقة صادرة إلكترونیاً عن طریق الخدمات الإلكترونیة من نظام أصداف أبحر العقارية*</p>
-        </footer>
+    </div>
 
-    </section>
+  <div class="table-responsive">
+    <table class="table align-items-center mb-0">
+      <thead>
+        <tr>
+          <th class="text-uppercase text-secondary font-weight-bolder opacity-7 fs-5">كود العميل</th>
+          <th class="text-uppercase text-secondary font-weight-bolder opacity-7 fs-5">اسم العميل</th>
+          <th class="text-uppercase text-secondary font-weight-bolder opacity-7 fs-5 ps-2">رقم تلفون العميل</th>
+          <th class="text-uppercase text-secondary font-weight-bolder opacity-7 fs-5 ps-2">حالة</th>
+         
+        </tr>
+      </thead>
+      <tbody id="data-client-who-handled-table">
+                @foreach(var record in Model.ClientsHandledBy)
+                {
+                    <tr>
+                        <td>
+                        <div class="d-flex px-2">
+                          <div class="my-auto">
+                            <h6 class="mb-0 fs-6">@record.ClientCode</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex px-2">
+                          <div class="my-auto">
+                            <h6 class="mb-0 fs-6">@record.ClientName</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <h6 dir="rtl" class="fs-6 mb-0">@record.ClientPhone</h6>
+                      </td>
+                      <td class="align-middle">
+                            <h6 dir="rtl" class="fs-6 mb-0">@(record.ClientStatus.GetAttribute<DisplayAttribute>().Name)</h6>
+                      </td>
+                </tr>
 
-</body>
+                }
+      </tbody>
+    </table>
+  </div>
+  </div>
 
-</html>
 
 

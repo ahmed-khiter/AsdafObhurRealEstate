@@ -19,7 +19,7 @@ body {
 
 .border {
     border-radius: 10px;
-    border: #69bc46 solid 2px;
+    border: #0c698a solid 2px;
     padding: 2px;
     box-sizing: border-box;
 }
@@ -80,33 +80,33 @@ th, td {
 }
 
 table {
-    border-color: #04A398;
+    border-color: #0c698a;
     border-spacing: 4px
 }
 
 .colored-block {
     background-color: #e7eaec;
     border-radius: 7px;
-    border: 2px solid #04A398;
+    border: 2px solid #0c698a;
     padding: .5rem;
     font-weight: 500;
     display: inline-block;
 }
 
 .colored-main-title {
-    color: #04A398;
+    color: #0c698a;
     font-size: 26px;
     font-weight: 700;
 }
 
 .colored-th {
-    background-color: #04A398;
+    background-color: #0c698a;
     color: #fff;
     font-weight: 700;
 }
 
 .colored-td {
-    background-color: #85bd49;
+    background-color: #0c698a;
     color: #fff;
     font-weight: 700;
 }
@@ -116,7 +116,7 @@ td {
 }
 
 .colored-label {
-    background-color: #04A398;
+    background-color: #0c698a;
     border-radius: 17px 17px 0 0;
     color: #fff;
     font-weight: 500;
@@ -132,5 +132,5 @@ td {
 }
 
 .colored-green {
-    color: #04A398;
+    color: #0c698a;
 }

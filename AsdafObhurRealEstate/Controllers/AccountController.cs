@@ -255,9 +255,9 @@ namespace AsdafObhurRealEstate.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize(Roles = Role.GeneralManager)]
-        public async Task<IActionResult> Report(FilterReportByUserDTO model)
+        public async Task<IActionResult> Report(GenerateReportDTO model)
         {
             var reportName = $"Report.pdf";
 
@@ -325,6 +325,8 @@ namespace AsdafObhurRealEstate.Controllers
             var wholeDetails = new EmployeeAndHisClients()
             {
                 Email = user.Email,
+                From = DateTime.Now,
+                To = DateTime.Now,
                 EmployeeCode = user.Code,
                 Name = $"{user.FirstName} {user.LastName}",
                 PhoneNumber = user.PhoneNumber,

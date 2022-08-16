@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace AsdafObhurRealEstate.Controllers
 {
@@ -63,6 +64,7 @@ namespace AsdafObhurRealEstate.Controllers
                             Id = m.Id,
                             ClientName = m.ClientName,
                             PhoneNumber = m.PhoneNumber,
+                            Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
                             Code = m.Code,
                         })
                         .ToListAsync());
@@ -78,6 +80,7 @@ namespace AsdafObhurRealEstate.Controllers
                                   Id = m.Id,
                                   ClientName = m.ClientName,
                                   PhoneNumber = m.PhoneNumber,
+                                  Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
                                   Code = m.Code,
                               })
                               .ToListAsync());
@@ -91,6 +94,7 @@ namespace AsdafObhurRealEstate.Controllers
                                 Id = m.Id,
                                 ClientName = m.ClientName,
                                 PhoneNumber = m.PhoneNumber,
+                                Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
                                 Code = m.Code,
                             })
                              .ToListAsync());

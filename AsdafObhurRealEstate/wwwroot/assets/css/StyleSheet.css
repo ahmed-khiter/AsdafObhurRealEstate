@@ -131,3 +131,15 @@
     border:none;
     outline:none;
 }
+
+.btn-absoulte-for-upload{
+    position:relative
+}
+.hidden-file-input {
+    position: absolute;
+    top: 13px;
+    z-index: 2;
+    opacity: 0;
+    right: 0px;
+    width: 68px;
+}

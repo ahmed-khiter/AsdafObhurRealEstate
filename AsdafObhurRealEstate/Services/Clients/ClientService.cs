@@ -5,6 +5,7 @@ using AsdafObhurRealEstate.Infrastructure;
 using AsdafObhurRealEstate.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace AsdafObhurRealEstate.Services.Clients
@@ -37,6 +38,7 @@ namespace AsdafObhurRealEstate.Services.Clients
                         ClientName = m.ClientName,
                         PhoneNumber = m.PhoneNumber,
                         Code = m.Code,
+                        Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
                         CreateAt = m.CreatedAt
                     }).ToListAsync();
 
@@ -49,6 +51,7 @@ namespace AsdafObhurRealEstate.Services.Clients
                     Id = m.Id,
                     ClientName = m.ClientName,
                     PhoneNumber = m.PhoneNumber,
+                    Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
                     Code = m.Code,
                     CreateAt = m.CreatedAt
                 }).ToListAsync();
@@ -59,6 +62,7 @@ namespace AsdafObhurRealEstate.Services.Clients
                 Id = m.Id,
                 ClientName = m.ClientName,
                 PhoneNumber = m.PhoneNumber,
+                Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
                 Code = m.Code,
                 CreateAt = m.CreatedAt
             }).ToListAsync();

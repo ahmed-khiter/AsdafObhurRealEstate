@@ -5,9 +5,17 @@ namespace AsdafObhurRealEstate.DTO.Account
 {
     public class GenerateReportDTO
     {
+        public string UserId { get; set; }
+
+        public DateTime From { get; set; }
+
+        public DateTime To { get; set; }
+
         public string BaseUrl { get; set; }
 
         public string EmployeeName { get; set; }
+
+        public string EmployeeEmail { get; set; }
 
         public int EmployeeCode { get; set; }
 
