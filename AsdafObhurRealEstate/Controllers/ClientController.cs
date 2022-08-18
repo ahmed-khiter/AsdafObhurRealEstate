@@ -21,7 +21,7 @@ namespace AsdafObhurRealEstate.Controllers
         private readonly FileManager _fileManager;
 
         private readonly ClientService _clientService;
-        public ClientController(AsdafObhurContext context, UserManager<BaseUser> userManager,ClientService clientService,
+        public ClientController(AsdafObhurContext context, UserManager<BaseUser> userManager, ClientService clientService,
             FileManager fileManager)
         {
             _context = context;
@@ -33,7 +33,7 @@ namespace AsdafObhurRealEstate.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(bool refreshPage, bool isJsonReturn)
         {
-           var clients = await _clientService.GetClients(User, refreshPage);
+            var clients = await _clientService.GetClients(User, refreshPage);
 
             if (isJsonReturn)
                 return Ok(clients);
@@ -70,20 +70,20 @@ namespace AsdafObhurRealEstate.Controllers
                         .ToListAsync());
                 }
                 List<ListClientDTO> clients = new List<ListClientDTO>();
-                
+
                 if (heCreated)
                 {
-                     clients.AddRange( await _context.Clients.Where(m => (m.Code == code || m.ClientName
-                        .Contains(userNameOrCode)) && m.CreatedBy == userId)
-                              .Select(m => new ListClientDTO
-                              {
-                                  Id = m.Id,
-                                  ClientName = m.ClientName,
-                                  PhoneNumber = m.PhoneNumber,
-                                  Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
-                                  Code = m.Code,
-                              })
-                              .ToListAsync());
+                    clients.AddRange(await _context.Clients.Where(m => (m.Code == code || m.ClientName
+                       .Contains(userNameOrCode)) && m.CreatedBy == userId)
+                             .Select(m => new ListClientDTO
+                             {
+                                 Id = m.Id,
+                                 ClientName = m.ClientName,
+                                 PhoneNumber = m.PhoneNumber,
+                                 Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
+                                 Code = m.Code,
+                             })
+                             .ToListAsync());
                 }
                 else
                 {
@@ -104,7 +104,7 @@ namespace AsdafObhurRealEstate.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(Index), new { refreshPage = true, isJsonReturn =true});
+                return RedirectToAction(nameof(Index), new { refreshPage = true, isJsonReturn = true });
 
             }
         }
@@ -113,7 +113,7 @@ namespace AsdafObhurRealEstate.Controllers
         {
             var departments = await _context.Departments.ToListAsync();
 
-            ViewData["departments"] = new SelectList( departments, "Id", "Name" );
+            ViewData["departments"] = new SelectList(departments, "Id", "Name");
 
             return View();
         }
@@ -138,7 +138,7 @@ namespace AsdafObhurRealEstate.Controllers
                 return View(ModelState);
             }
 
-            var code = await _context.Clients.MaxAsync(m =>m.Code) + 1;
+            var code = await _context.Clients.MaxAsync(m => m.Code) + 1;
 
             var client = new Client()
             {
@@ -167,7 +167,7 @@ namespace AsdafObhurRealEstate.Controllers
             if (departmentId == null)
                 return BadRequest();
 
-            var users = ( await _userManager.Users
+            var users = (await _userManager.Users
                                 .Where(m => m.DepartmentId == departmentId)
                                 .ToListAsync());
 
@@ -175,10 +175,10 @@ namespace AsdafObhurRealEstate.Controllers
 
             foreach (var user in users)
             {
-                result.Add( 
+                result.Add(
                     new
                     {
-                        id=user.Id,
+                        id = user.Id,
                         value = $"{user.FirstName} {user.LastName}"
                     });
             }
@@ -190,14 +190,14 @@ namespace AsdafObhurRealEstate.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(string clientId)
         {
-            
+
             var client = await _context.Clients
                                        .Include(m => m.Multimedias)
                                        .Include(m => m.Department)
                                        .Include(m => m.BaseUser)
                                        .SingleOrDefaultAsync(m => m.Id == clientId);
 
-            if(client.ClientStatus == Enums.StatusOfClient.NewRequest)
+            if (client.ClientStatus == Enums.StatusOfClient.NewRequest)
             {
                 var user = await _userManager.GetUserAsync(User);
 
@@ -220,7 +220,7 @@ namespace AsdafObhurRealEstate.Controllers
                 PhoneNumber = client.PhoneNumber,
                 BillsFileOld = client.BillsFile,
                 ClientName = client.ClientName,
-                Notes   = client.Notes,
+                Notes = client.Notes,
                 OldOtherFiles = new List<OldOtherFile>(),
             };
 
@@ -243,12 +243,12 @@ namespace AsdafObhurRealEstate.Controllers
         [Authorize(Roles = $"{Role.GeneralManager}")]
         public async Task<IActionResult> Delete(string id)
         {
-            if (string.IsNullOrEmpty(id)) 
-                 return BadRequest("حدث خطأ اثناء المسح");
+            if (string.IsNullOrEmpty(id))
+                return BadRequest("حدث خطأ اثناء المسح");
 
             var client = await _context.Clients.FirstOrDefaultAsync(m => m.Id == id);
 
-            if(client == null)
+            if (client == null)
                 return BadRequest("حدث خطأ اثناء المسح");
 
             try
@@ -275,7 +275,7 @@ namespace AsdafObhurRealEstate.Controllers
             if (client == null)
                 return BadRequest();
 
-            if(model.BillsFileNew != null)
+            if (model.BillsFileNew != null)
             {
                 _fileManager.Delete(client.BillsFile);
 
@@ -285,7 +285,7 @@ namespace AsdafObhurRealEstate.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            if(model.NewOtherFiles != null)
+            if (model.NewOtherFiles != null)
             {
                 foreach (var item in model.NewOtherFiles)
                 {
@@ -308,7 +308,7 @@ namespace AsdafObhurRealEstate.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToAction(nameof(Details) , new { clientId = model.ClientId});
+            return RedirectToAction(nameof(Details), new { clientId = model.ClientId });
         }
 
         [HttpGet]
@@ -323,10 +323,67 @@ namespace AsdafObhurRealEstate.Controllers
             }
             else
                 return BadRequest();
-            
+
             return Ok();
         }
 
-      
+
+        [HttpPost]
+        public async Task<IActionResult> TransformFileToFinancial(string clientId)
+        {
+            if (!ModelState.IsValid || string.IsNullOrEmpty(clientId))
+                return BadRequest();
+
+            var client = await _context.Clients.Include(m => m.Multimedias).SingleOrDefaultAsync(m => m.Id == clientId);
+
+            if (client == null)
+                return BadRequest();
+
+            client.ClientStatus = Enums.StatusOfClient.FinancialTransformation;
+
+            _context.Update(client);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FinisedFile(string clientId)
+        {
+            if (!ModelState.IsValid || string.IsNullOrEmpty(clientId))
+                return BadRequest();
+
+            var client = await _context.Clients.Include(m => m.Multimedias).SingleOrDefaultAsync(m => m.Id == clientId);
+
+            if (client == null)
+                return BadRequest();
+
+            client.ClientStatus = Enums.StatusOfClient.Finished;
+
+            _context.Update(client);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllClientHasFinancial()
+        {
+            var clients = await _context.Clients
+                        .Where(m => m.ClientStatus == Enums.StatusOfClient.FinancialTransformation)
+                        .Select(m => new ListClientDTO()
+                        {
+                            ClientName = m.ClientName,
+                            Code = m.Code,
+                            CreateAt = DateTime.Now,
+                            Id = m.Id,
+                            PhoneNumber = m.PhoneNumber,
+                            Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name
+                        }).ToListAsync();
+
+
+            return View(clients);
+        }
     }
 }

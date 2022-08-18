@@ -3,6 +3,7 @@
     var user = await userManager.GetUserAsync(User);
 
     bool isAccessToDisplay = await userManager.IsInRoleAsync(user, "GeneralManager");
+    bool isFinancialUser = await userManager.IsInRoleAsync(user, Role.Financial);
 }
 
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret  bg-gradient-dark" id="sidenav-main">
@@ -55,14 +56,26 @@
                     </a>
                 </li>
             }
-            <li class="nav-item">
-                <a class="nav-link " asp-area="" asp-controller="client" asp-action="Index">
-                <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
-                    <i class="material-icons-round opacity-10">manage_accounts</i>
-                </div>
-                <span class="nav-link-text me-1">قائمة عملائي</span>
-                </a>
-            </li>
+            @if (isFinancialUser){
+
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="" asp-controller="client" asp-action="GetAllClientHasFinancial">
+                    <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons-round opacity-10">manage_accounts</i>
+                    </div>
+                    <span class="nav-link-text me-1">قائمة عملائي</span>
+                    </a>
+                </li>
+            }else{
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="" asp-controller="client" asp-action="Index">
+                        <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons-round opacity-10">manage_accounts</i>
+                        </div>
+                        <span class="nav-link-text me-1">قائمة عملائي</span>
+                    </a>
+                </li>
+            }
             <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-action="logout" asp-controller="Account" >
                 <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">

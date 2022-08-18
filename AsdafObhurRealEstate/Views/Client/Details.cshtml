@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "تفاصيل العميل";
     var user = await userManager.GetUserAsync(User);
-    bool isAccessToDisplay = await userManager.IsInRoleAsync(user, Role.Financial);
+    bool isFinancialUser = await userManager.IsInRoleAsync(user, Role.Financial);
 
     var i = 0;
     int newFileId = 0;
@@ -47,7 +47,7 @@
                             <label class="fs-6 fw-bold">عرض الفاتورة الحالية</label>
                         </div>
                     }
-                    @if (isAccessToDisplay){
+                    @if (isFinancialUser){
                         <div class="btn-absoulte-for-upload d-flex flex-column justify-content-center align-items-center">
                             <input type="file" class="hidden-file-input" />
                             <button type="button" asp-for="BillsFileNew" class="btn btn-primary fs-4">
@@ -70,6 +70,7 @@
                         <th scope="col">الملف</th>
                         <th scope="col">وصف الملف</th>
                         <th scope="col">اضافة</th>
+                        <th scope="col">مسح</th>
                     </tr>
                 </thead>
                 <tbody id="appendNewFile">
@@ -77,8 +78,9 @@
                     {
                         <tr>
                             <th scope="row">@(++i)</th>
-                            <td> <a data-id="@item.OtherFileId">@item.Description</a></td>
                             <td>@item.FileOld</td>
+                            <td> <a data-id="@item.OtherFileId">@item.Description</a></td>
+                            <td></td>
                             <td></td>
                         </tr>
                     
@@ -87,16 +89,17 @@
                     <tr class="table-primary">
                         <th scope="row">@(++i)</th>
                         <td>
-                            <input asp-for="NewOtherFiles[newFileId].NewFile" type="file">
+                            <input class="test" id="hasFile-@i" asp-for="NewOtherFiles[newFileId].NewFile" type="file">
                         </td>
                         <td>
-                            <input asp-for="NewOtherFiles[newFileId].Description" type="text">
+                            <input id="hasDescription-@i" asp-for="NewOtherFiles[newFileId].Description" type="text">
                         </td>
                         <td>
                             <button id="remove-@i" type="button" class="add-new-otherFile btn btn-primary table-add-btn">
                                 <i class="fas fa-plus-circle fs-6"></i>
                             </button>
                         </td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
@@ -106,14 +109,19 @@
             <div class="d-flex col justify-content-center">
                 <button class="btn btn-primary">حفظ التعديلات</button>
             </div>
+            @if (isFinancialUser){
+                <div class="d-flex col justify-content-center">
+                    <a class="btn btn-secondary">انهاء الملف</a>
+                </div>
+            }
+            else{
+                <div class="d-flex col justify-content-center">
+                    <a id="" class="btn btn-secondary">تحويل الي المالية</a>
+                </div>
+            }
+
             <div class="d-flex col justify-content-center">
-                <button class="btn btn-secondary">انهاء الملف</button>
-            </div>
-            <div class="d-flex col justify-content-center">
-                <button class="btn btn-secondary">تحويل الي المالية</button>
-            </div>
-            <div class="d-flex col justify-content-center">
-                <button class="btn btn-secondary">ارجاع الي القائمة</button>
+                <a asp-area="" asp-controller="client" asp-action="index" class="btn btn-secondary">ارجاع الي القائمة</a>
             </div>
         </div>
     </div>
@@ -123,6 +131,9 @@
 
     <script>
     
+        var currentIndex = @(++i);
+        var ids = @i;
+
         $(document).ready(function () {
             $(document).on("click", "#selectDepartment", function () {
                 var subCat = this;
@@ -151,44 +162,59 @@
 
         $(document).on("click", ".add-new-otherFile", function () {
 
-            debugger;
+            let idOfFile = `hasFile-${ids}`;
+            let idOfDescriptions = `hasDescription-${ids}`;
 
-            let removeId = "remove-" + @(i);
+            let file = document.getElementById(`${idOfFile}`).value;
 
-            let removeButton = document.getElementById(removeId);
+            let descriptions = document.getElementById(`${idOfDescriptions}`).value;
 
-            removeButton.removeChild(removeButton.lastElementChild);
+            console.log(file)
+            console.log(descriptions)
 
-            removeButton.remove();
+            if (file!== ''  && descriptions !== '') {
+
+                let removeId = "remove-" + ids;
 
 
+                let removeButton = document.getElementById(removeId);
 
-            removeButton.remove();
+                removeButton.removeChild(removeButton.lastElementChild);
 
-            debugger;
-            $("#appendNewFile").append(`
-                <tr class="table-primary">
-                    <th scope="row">@(++i)</th>
-                    <td>
-                        <input type="file" id="NewOtherFiles_[@newFileId]__NewFile" name="NewOtherFiles[@newFileId].NewFile" >
-                    </td>
-                    <td>
-                        <input id="NewOtherFiles_[@newFileId]__Description" name="NewOtherFiles[@newFileId].Description" type="text">
-                    </td>
-                    <td>
-                        <button  id="remove-@(i)" type="button" class="add-new-otherFile btn btn-primary table-add-btn">
-                            <i class="fas fa-plus-circle fs-6"></i>
-                        </button>
-                    </td>
-                </tr>
+                removeButton.remove();
+
+                $("#appendNewFile").append(`
+                    <tr class="table-primary">
+                        <th scope="row">${currentIndex}</th>
+                        <td>
+                            <input type="file" id="hasFile-${ids}" name="NewOtherFiles[${ids}].NewFile" >
+                        </td>
+                        <td>
+                            <input id="hasDescription-${ids}" name="NewOtherFiles[${ids}].Description" type="text">
+                        </td>
+                        <td>
+                            <button  id="remove-${ids}" type="button" class="add-new-otherFile btn btn-primary table-add-btn">
+                                <i class="fas fa-plus-circle fs-6"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button id="delete-${ids}" style="background-color:darkred"  type="button" class="add-remove-row btn btn-primary table-add-btn">
+                                <i class="fas fa-minus-circle fs-6"></i>
+                            </button>
+                        </td>
+                    </tr>
          
+            `);
+            
+            currentIndex+=1;
+            ids+=1;
 
-        `);
-
-        @{
-            newFileId += 1;
-            ++i;
-        }
+            }
+            else{
+                Swal.fire(
+                    'يجب اختيار الملف و كتابة تفاصيل له.'
+                )
+            }
 
 
         });

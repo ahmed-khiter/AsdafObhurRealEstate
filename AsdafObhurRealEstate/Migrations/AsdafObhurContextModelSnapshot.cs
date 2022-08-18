@@ -119,7 +119,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 1,
-                            ConcurrencyStamp = "3c09b680-2244-411f-86ff-fc4a60c3f130",
+                            ConcurrencyStamp = "c6ba1da2-70a0-42a5-90a4-ccc8eac36709",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             Email = "gm@gmail.com",
@@ -129,10 +129,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GM@GMAIL.COM",
                             NormalizedUserName = "GM@GMAIL.COM",
-                            PasswordHash = "AIIZFoWIpfTeRj6JZhE0RH4ip+qkF7Hcu+P+lGBF8+zfIdfDvA21Ex0REw4DY5CPxg==",
+                            PasswordHash = "ALKyjdyF2kVmEvimIEI4525LNnwzBWJzzAzrdQW5B7emCxhEe9r9u4nkjREkOlW1dQ==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "e89109b0-f2ce-47d2-8c0a-9d66104153db",
+                            SecurityStamp = "5356d251-7e0d-4cb3-b734-347db0a7b1a3",
                             TwoFactorEnabled = false,
                             UserName = "gm@gmail.com"
                         },
@@ -142,7 +142,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 2,
-                            ConcurrencyStamp = "c4cf5b2d-f44f-4fb1-9c72-b23e35517b97",
+                            ConcurrencyStamp = "7a8b6ec0-6bc5-4ce7-a8e4-51656fbe14bf",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             DepartmentId = "f0157647-7016-41cc-9a56-3695acaa13e6",
@@ -153,10 +153,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PS@GMAIL.COM",
                             NormalizedUserName = "PS@GMAIL.COM",
-                            PasswordHash = "AGQBmse3J9N/fEoVFx4m81ONJdVN3UWzJUe/e3lWTPyseqQK0xPVpDhVgwqd09fwTA==",
+                            PasswordHash = "ABOHW6f8xQ3C3Fi5ETHnLGZlsDTUntp2S+pSluRO9OuWqZRdkIiY/K4z6JypKJnCRQ==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "9c2f154b-c90c-4d76-9e82-00fa4e40f3a0",
+                            SecurityStamp = "66166ad8-a3db-4a9b-b7be-e219bcb7a2e4",
                             TwoFactorEnabled = false,
                             UserName = "ps@gmail.com"
                         },
@@ -166,7 +166,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 3,
-                            ConcurrencyStamp = "bf110940-2b00-4758-b13e-e9a327f0348f",
+                            ConcurrencyStamp = "3fb091f5-8114-4efa-a8f5-ddd281523fbb",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             Email = "es@gmail.com",
@@ -176,10 +176,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ES@GMAIL.COM",
                             NormalizedUserName = "ES@GMAIL.COM",
-                            PasswordHash = "AFnkx2yIGB1cKGjFZTPiPbSRnLv5kHIuqxVAp0VwhH/3hF7oiI+4OPl3IjcPvex9VA==",
+                            PasswordHash = "ACOQKXTR6l51zbunG/0P0d5Ah8YA/FLDgixSxTCbTz3UQIklrCBd0ED0yCDuTpbzjA==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "b5c61a13-cf0f-4270-bba4-94534fa8986c",
+                            SecurityStamp = "7b7276bc-e2c9-45e4-9107-f8fa085ea671",
                             TwoFactorEnabled = false,
                             UserName = "es@gmail.com"
                         },
@@ -189,7 +189,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 4,
-                            ConcurrencyStamp = "a10f586a-2e20-4f5b-8160-a32d99467a02",
+                            ConcurrencyStamp = "8534a137-b420-420b-a13e-22bce6bffa23",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             DepartmentId = "62fe29f0-c227-4a03-b2f6-z97279b2bc23",
@@ -200,10 +200,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "P@GMAIL.COM",
                             NormalizedUserName = "P@GMAIL.COM",
-                            PasswordHash = "AOc30b3KpLmQjeN04XCRyRDUfnWsWeUSeT4C6XNiZsZIzW0yTVcXyEkYXKoIypumdA==",
+                            PasswordHash = "AAsiEFqnjI3VWg0xi55Gs85E2Sd/H/+S6YZZ8MdPyrDn9FoBR4uzkzJwaJdiIqJFRg==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "da4cb116-a06a-4ca5-a514-e3fa931970b9",
+                            SecurityStamp = "fe3d360b-2c16-4859-9c9e-d8a16faa4bb7",
                             TwoFactorEnabled = false,
                             UserName = "p@gmail.com"
                         },
@@ -213,7 +213,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 5,
-                            ConcurrencyStamp = "61088ff4-925e-4d89-826a-0c18637b4b21",
+                            ConcurrencyStamp = "423fdc6e-26a2-4960-97ff-83d6c429d399",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             DepartmentId = "cf8ac5ac-ee3f-4cac-988d-v45ef0eed54c",
@@ -224,10 +224,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M@GMAIL.COM",
                             NormalizedUserName = "M@GMAIL.COM",
-                            PasswordHash = "AHzMh+8yxSRY/zTg/HfmqXyrRijP+OMIkeUbwtqAYpP7inqeSB+gU3cdmTkv0RaxLg==",
+                            PasswordHash = "AOeqJgTvAb/L9VGFOJ7bV6Y20v+KG8x85yftLBVujXBzaJTO14FgS9LJfbo1w+kJkA==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "edca684d-31f4-420c-8acb-b40cfad8785e",
+                            SecurityStamp = "22387486-81d1-4b11-ad5b-e32c7a847397",
                             TwoFactorEnabled = false,
                             UserName = "m@gmail.com"
                         },
@@ -237,7 +237,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 6,
-                            ConcurrencyStamp = "9ba7cb56-ae2d-44bd-b3ba-16842cd19eec",
+                            ConcurrencyStamp = "38fb86f8-2ad5-4cfe-862b-e225cf1ef7cd",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             DepartmentId = "h3d0584e-fcd7-439c-8ae1-g5734664d6f4",
@@ -248,10 +248,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PMONITOR@GMAIL.COM",
                             NormalizedUserName = "PMONITOR@GMAIL.COM",
-                            PasswordHash = "AIZeglSqPtbZLE8f9ddGIrDO/AAwF7905ydslDK+CzFY2QpTTZFlAyBOpWQIA3/wIA==",
+                            PasswordHash = "AHxEUZM3HuwDBNxTTO8e5B9xydNCps3FJ8SlNBbSbvfNVtkVBik2yQQNUGzq+ItYBw==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "fafe63f2-3a7e-4435-b1a0-c12d06a50b2c",
+                            SecurityStamp = "e7d73efd-6b52-4d5a-b8cf-66fa50978385",
                             TwoFactorEnabled = false,
                             UserName = "pMonitor@gmail.com"
                         },
@@ -261,7 +261,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 7,
-                            ConcurrencyStamp = "c6200098-557e-428d-8059-dcfb0a9a538f",
+                            ConcurrencyStamp = "aa379277-610d-46ef-b433-d4abf6e93d12",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             DepartmentId = "h3d0584e-fcd7-439c-8ae1-g5734664d6f4",
@@ -272,10 +272,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PE@GMAIL.COM",
                             NormalizedUserName = "PE@GMAIL.COM",
-                            PasswordHash = "ALbIoV4hOQ6jAODF3PtNYhjP072DfAP+9zuY+rrCdZSFh3MsRJY+L0A8+DkI2f9p+A==",
+                            PasswordHash = "APfOHTK4Ye/KUNoVfgEP1ZJVDyXS2MLW7EGChlHPpJ2ZrAbIilS0H2yRF+tX1TCVTA==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "59acd7ce-28b9-4143-8a76-6c1d09014cb1",
+                            SecurityStamp = "9d84773c-8a91-47b8-91bc-b0e7ac203d44",
                             TwoFactorEnabled = false,
                             UserName = "pe@gmail.com"
                         },
@@ -285,7 +285,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 8,
-                            ConcurrencyStamp = "333cc64a-bdb9-4c98-9462-efcb073360fc",
+                            ConcurrencyStamp = "fbd8e8fb-65bb-499f-9869-83fbee5e3010",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             DepartmentId = "62fe29f0-c227-4a03-b2f6-z97279b2bc23",
@@ -296,10 +296,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "F@GMAIL.COM",
                             NormalizedUserName = "F@GMAIL.COM",
-                            PasswordHash = "AInMWkqSKRcdxeqx6r1CR0pR2X1R2SLaaJgBiiXx7xLGLoYDJyRmhx9KlEAteD1KSQ==",
+                            PasswordHash = "ALGR/QaCNJwITDVYFMQDGw4dAuJm+QMZ/LyW0+n7wcdi6EI1oGiOcRbaF4T+6kFJ7g==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "0f91a397-982d-46fd-a3a4-db6f852379a3",
+                            SecurityStamp = "d8786704-a986-4c05-a319-91f1a12380bb",
                             TwoFactorEnabled = false,
                             UserName = "f@gmail.com"
                         });
@@ -356,7 +356,7 @@ namespace AsdafObhurRealEstate.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Clients", (string)null);
+                    b.ToTable("Clients");
 
                     b.HasData(
                         new
@@ -371,7 +371,7 @@ namespace AsdafObhurRealEstate.Migrations
                             DepartmentId = "2bf40edf-af65-4d9e-8e6d-5f40d683cc3e",
                             Notes = "ملاحظات من المبرمج ",
                             PhoneNumber = "035453650",
-                            UpdatedAt = new DateTime(2022, 8, 14, 22, 44, 0, 208, DateTimeKind.Local).AddTicks(1025)
+                            UpdatedAt = new DateTime(2022, 8, 18, 18, 50, 54, 940, DateTimeKind.Local).AddTicks(2987)
                         },
                         new
                         {
@@ -385,7 +385,7 @@ namespace AsdafObhurRealEstate.Migrations
                             DepartmentId = "2bf40edf-af65-4d9e-8e6d-5f40d683cc3e",
                             Notes = "2ملاحظات من المبرمج ",
                             PhoneNumber = "01122332150",
-                            UpdatedAt = new DateTime(2022, 8, 14, 22, 44, 0, 208, DateTimeKind.Local).AddTicks(1028)
+                            UpdatedAt = new DateTime(2022, 8, 18, 18, 50, 54, 940, DateTimeKind.Local).AddTicks(2993)
                         },
                         new
                         {
@@ -399,7 +399,7 @@ namespace AsdafObhurRealEstate.Migrations
                             DepartmentId = "2bf40edf-af65-4d9e-8e6d-5f40d683cc3e",
                             Notes = "2ملاحظات من المبرمج ",
                             PhoneNumber = "24400",
-                            UpdatedAt = new DateTime(2022, 8, 14, 22, 44, 0, 208, DateTimeKind.Local).AddTicks(1030)
+                            UpdatedAt = new DateTime(2022, 8, 18, 18, 50, 54, 940, DateTimeKind.Local).AddTicks(2996)
                         });
                 });
 
@@ -427,7 +427,7 @@ namespace AsdafObhurRealEstate.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
 
                     b.HasData(
                         new
@@ -508,7 +508,7 @@ namespace AsdafObhurRealEstate.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("Multimedias", (string)null);
+                    b.ToTable("Multimedias");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -541,56 +541,56 @@ namespace AsdafObhurRealEstate.Migrations
                         new
                         {
                             Id = "7bf40edf-af65-4d9e-8e6d-8f40d683cc3e",
-                            ConcurrencyStamp = "e47f972e-07e3-41f0-a04d-d0f08b34d307",
+                            ConcurrencyStamp = "d0584e-fcd7-439c-8ae1-f5734664d6f",
                             Name = "GeneralManager",
                             NormalizedName = "GENERALMANAGER"
                         },
                         new
                         {
                             Id = "a0157647-7016-41cc-9a56-8695acaa13e6",
-                            ConcurrencyStamp = "76fba6a8-ffa4-488d-8191-8bdd87eb8fcb",
+                            ConcurrencyStamp = "d0584e-fcd7-439c-8ae1-f5734666d6f",
                             Name = "ProjectSupervisor",
                             NormalizedName = "PROJECTSUPERVISOR"
                         },
                         new
                         {
                             Id = "d3d0584e-fcd7-439c-8ae1-f5734664d6f4",
-                            ConcurrencyStamp = "bc4cfcf4-5e35-4abc-a8fc-088edfce6480",
+                            ConcurrencyStamp = "d0584e-fcd7-439c-9ae1-f5734666d6f",
                             Name = "ExecutiveSecretary",
                             NormalizedName = "EXECUTIVESECRETARY"
                         },
                         new
                         {
                             Id = "cf8ac5ac-ee3f-4cac-988d-f45ef0eed54c",
-                            ConcurrencyStamp = "912a002b-cb01-4c94-8c2f-fb37dd5658ed",
+                            ConcurrencyStamp = "d0554e-fcd7-439c-8ae1-f5734666d6f",
                             Name = "Personnel",
                             NormalizedName = "PERSONNEL"
                         },
                         new
                         {
                             Id = "42fe29f0-c227-4a03-b2f6-c97279b2bc23",
-                            ConcurrencyStamp = "c91b9669-a5bf-4ba0-a621-3bf385074fac",
+                            ConcurrencyStamp = "d0584e-fgd7-439c-8ae1-f5734666d6f",
                             Name = "Marketing",
                             NormalizedName = "MARKETING"
                         },
                         new
                         {
                             Id = "b71282ed-85cf-4f7c-9e05-9b28051d04e4",
-                            ConcurrencyStamp = "f0b2b03a-d745-491f-8100-3ea9272d6580",
+                            ConcurrencyStamp = "d3584e-fcd7-439c-8ae1-f5734666d6f",
                             Name = "ProjectMonitor",
                             NormalizedName = "PROJECTMONITOR"
                         },
                         new
                         {
                             Id = "e313a786-637d-40c5-8715-443bba115487",
-                            ConcurrencyStamp = "80f0f7b4-29cc-4bd9-989f-085f43095ce5",
+                            ConcurrencyStamp = "s1584e-fcd7-439c-8ae1-f5734666d6f",
                             Name = "ProjectsEngineer",
                             NormalizedName = "PROJECTSENGINEER"
                         },
                         new
                         {
                             Id = "6ecb5d3d-a7f3-4751-8ae5-524e07889bd6",
-                            ConcurrencyStamp = "c3422861-7882-4912-af53-cc253427a85a",
+                            ConcurrencyStamp = "d0584e-fcd7-439c-8ae1-f5734236d6f",
                             Name = "Financial",
                             NormalizedName = "FINANCIAL"
                         });
