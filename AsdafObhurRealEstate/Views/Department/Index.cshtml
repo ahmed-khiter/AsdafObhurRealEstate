@@ -58,7 +58,7 @@
                                 <i title="مسح" class="material-icons-round opacity-10" >delete</i>
                             </span>
                         </a>
-                      </td>
+                      </td> 
                     </tr>
 
                 }
@@ -73,11 +73,10 @@
 
 
     <script>
-
         $(document).on('change','.department-search', function(){
             const inputEle = document.querySelector('[data-search="search-input"]')
                $.ajax({
-                        url: `/department/index?departmentName=${inputEle.value}`,
+                        url: `/department/index?departmentName=${inputEle.value}&isJson=true`,
                         type:"Get",
                         success: (data) => {
                               $("#data-table").find("tr").remove();

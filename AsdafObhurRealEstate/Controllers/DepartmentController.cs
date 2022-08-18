@@ -22,7 +22,7 @@ namespace AsdafObhurRealEstate.Controllers
 
         [HttpGet]
         [Authorize(Roles = $"{Role.GeneralManager}")]
-        public async Task<IActionResult> Index(string departmentName)
+        public async Task<IActionResult> Index(string departmentName, bool isJson)
         {
             var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User));
             var userinRole =await _userManager.GetRolesAsync(user);
@@ -35,6 +35,8 @@ namespace AsdafObhurRealEstate.Controllers
             }
             else
             {
+                if (isJson)
+                    return Ok(await _context.Departments.ToListAsync());
 
                 return View(await _context.Departments.ToListAsync());
             }

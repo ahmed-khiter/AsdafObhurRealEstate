@@ -1,0 +1,109 @@
+﻿@model GenerateReportDTO
+
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env;
+
+@{
+    Layout = null;
+    var logo = env.WebRootFileProvider.GetFileInfo("assets/img/dark.png")?.PhysicalPath;
+}
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="@String.Format("{0}css/generate-report.css", Model.BaseUrl)" type="text/css">
+    <link rel="stylesheet" href="@String.Format("{0}bootstrap/css/bootstrap.css", Model.BaseUrl)" type="text/css">
+
+</head>
+<body>
+    <div class="container mt-5">
+        <h4>بيانات  @Model.Name</h4>
+        <div class="row">
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <label for="firstName" class="form-label">الاسم </label>
+                    <input type="text" class="form-control" id="firstName" placeholder="" value="@Model.Name" required="">
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="lastName" class="form-label"> ايميل </label>
+                    <input type="text" class="form-control" id="lastName" placeholder="" value="@Model.Email" required="">
+                </div>
+
+                <div class="col-12">
+                    <div class="col-sm-6">
+                        <label for="firstName" class="form-label">رقم الجوال </label>
+                        <input type="text" class="form-control" placeholder="" value="@Model.PhoneNumber" required="">
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h4>العملاء تم إنشائهم بواسطه @Model.Name</h4>
+                    <table class="table">
+
+                        <thead class="table-dark">
+                            <tr>
+                                <th>رقم الكود</th>
+                                <th>اسم العميل</th>
+                                <th>رقم تلفون العميل </th>
+                                <th>حاله العميل</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ClientsCreatedBy)
+                            {
+                                
+                                <tr>
+                                    <td>@item.ClientCode</td>
+                                    <td>@item.ClientName</td>
+                                    <td>@item.ClientPhone</td>
+                                    <td>@item.ClientStatus</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h4>العملاء تم التعامل معاهم بواسطه @Model.Name</h4>
+                    <table class="table">
+
+                        <thead class="table-dark">
+                            <tr>
+                                <th>رقم الكود</th>
+                                <th>اسم العميل</th>
+                                <th>رقم تلفون العميل </th>
+                                <th>حاله العميل</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ClientsHandledBy)
+                            {
+
+                                <tr>
+                                    <td>@item.ClientCode</td>
+                                    <td>@item.ClientName</td>
+                                    <td>@item.ClientPhone</td>
+                                    <td>@item.ClientStatus</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
+
+

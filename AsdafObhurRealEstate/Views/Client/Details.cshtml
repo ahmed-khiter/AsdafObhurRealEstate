@@ -1,11 +1,12 @@
 ﻿@model DetailsClientDTO
-
+@inject UserManager<BaseUser> userManager
 @{
-
     ViewData["Title"] = "تفاصيل العميل";
+    var user = await userManager.GetUserAsync(User);
+    bool isAccessToDisplay = await userManager.IsInRoleAsync(user, Role.Financial);
+
     var i = 0;
     int newFileId = 0;
-
 }
 
 <!-- bootstrab table -->
@@ -46,14 +47,15 @@
                             <label class="fs-6 fw-bold">عرض الفاتورة الحالية</label>
                         </div>
                     }
-                
-                    <div class="btn-absoulte-for-upload d-flex flex-column justify-content-center align-items-center">
-                        <input type="file" class="hidden-file-input" />
-                        <button type="button" asp-for="BillsFileNew" class="btn btn-primary fs-4">
-                            <i class="fas fa-upload"></i>
-                        </button>
-                        <label class="fs-6 fw-bold">رفع فاتورة</label>
-                    </div>
+                    @if (isAccessToDisplay){
+                        <div class="btn-absoulte-for-upload d-flex flex-column justify-content-center align-items-center">
+                            <input type="file" class="hidden-file-input" />
+                            <button type="button" asp-for="BillsFileNew" class="btn btn-primary fs-4">
+                                <i class="fas fa-upload"></i>
+                            </button>
+                            <label class="fs-6 fw-bold">رفع فاتورة</label>
+                        </div>
+                    }
                 </div>
             </div>
 
@@ -91,7 +93,7 @@
                             <input asp-for="NewOtherFiles[newFileId].Description" type="text">
                         </td>
                         <td>
-                            <button type="button" class="add-new-otherFile btn btn-primary table-add-btn">
+                            <button id="remove-@i" type="button" class="add-new-otherFile btn btn-primary table-add-btn">
                                 <i class="fas fa-plus-circle fs-6"></i>
                             </button>
                         </td>
@@ -150,26 +152,44 @@
         $(document).on("click", ".add-new-otherFile", function () {
 
             debugger;
+
+            let removeId = "remove-" + @(i);
+
+            let removeButton = document.getElementById(removeId);
+
+            removeButton.removeChild(removeButton.lastElementChild);
+
+            removeButton.remove();
+
+
+
+            removeButton.remove();
+
+            debugger;
             $("#appendNewFile").append(`
                 <tr class="table-primary">
                     <th scope="row">@(++i)</th>
                     <td>
-                        <input id="NewOtherFiles[@newFileId].NewFile" asp-for="NewOtherFiles[@newFileId].NewFile" type="file">
+                        <input type="file" id="NewOtherFiles_[@newFileId]__NewFile" name="NewOtherFiles[@newFileId].NewFile" >
                     </td>
                     <td>
-                        <input id="NewOtherFiles[@newFileId].Description" for="NewOtherFiles[@newFileId].Description" type="text">
+                        <input id="NewOtherFiles_[@newFileId]__Description" name="NewOtherFiles[@newFileId].Description" type="text">
                     </td>
                     <td>
-                        <button type="button" class=" add-new-otherFile btn btn-primary table-add-btn">
+                        <button  id="remove-@(i)" type="button" class="add-new-otherFile btn btn-primary table-add-btn">
                             <i class="fas fa-plus-circle fs-6"></i>
                         </button>
                     </td>
                 </tr>
-
-        @(newFileId+=1)
-        @(i++)
+         
 
         `);
+
+        @{
+            newFileId += 1;
+            ++i;
+        }
+
 
         });
 </script>

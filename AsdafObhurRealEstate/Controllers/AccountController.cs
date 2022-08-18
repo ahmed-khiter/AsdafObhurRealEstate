@@ -275,7 +275,11 @@ namespace AsdafObhurRealEstate.Controllers
             var reportModel = new GenerateReportDTO()
             {
                 BaseUrl = baseUrl,
-                EmployeeName = $"{user.FirstName} {user.LastName}",
+                Name = $"{user.FirstName} {user.LastName}",
+                EmployeeCode = model.EmployeeCode,
+                Email = model.Email,
+                From = model.From,
+                To  = model.To,
                 PhoneNumber = user.PhoneNumber,
                 ClientsCreatedBy = new List<ReportData>(),
                 ClientsHandledBy = new List<ReportData>()
@@ -301,7 +305,7 @@ namespace AsdafObhurRealEstate.Controllers
 
             _generatePdf.SetConvertOptions(options);
 
-            var pdf = await _generatePdf.GetByteArray("Views/Account/generateReport.cshtml", reportModel);
+            var pdf = await _generatePdf.GetByteArray($"Views/Account/Report.cshtml", reportModel);
             
             var pdfStream = new MemoryStream(pdf);
 
