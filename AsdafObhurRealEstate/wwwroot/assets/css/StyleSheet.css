@@ -113,24 +113,22 @@
 /*
     employess details
     */
-.tabel-search-box
-{
-    border: 1px solid #292929;
-    border-radius:15px;
-    padding:0;
-    height: 38px;
-    width:255px;
-    padding: 2px;
+.tabel-search-box {
+    border: 1px solid #c2c0c0;
+    border-radius: 10px;
+    padding-right: 8px;
+    height: 33px;
 }
 
 .table-search {
-    font-size: 15px;
-    padding: 5px 10px;
-    height: 35px;
+   /* font-size: 15px;
+    padding: 5px 10px;*/
+    height: 30px;
     background: none;
     border:none;
     outline:none;
 }
+
 
 .btn-absoulte-for-upload{
     position:relative
