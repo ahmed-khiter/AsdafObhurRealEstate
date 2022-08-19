@@ -152,6 +152,7 @@ namespace AsdafObhurRealEstate.Controllers
                 CreatedBy = _userManager.GetUserId(User),
                 UpdatedAt = DateTime.Now,
                 ClientStatus = Enums.StatusOfClient.NewRequest,
+                CustomerNeeded = model.CustomerNeeded,
             };
 
             _context.Clients.Add(client);
@@ -209,16 +210,16 @@ namespace AsdafObhurRealEstate.Controllers
                     
                     if (!client.SendFirstMessageToClient)
                     {
-                        var result = await WhatsAppsSender.SendMessage(client.ClientName, client.PhoneNumber);
-                        if (result)
-                        {
-                            client.SendFirstMessageToClient = true;
-                            ViewData["successSendMessage"] = "تم ارسال الرساله بنجاح";
-                        }
-                        else
-                        {
-                            ViewData["successSendMessage"] = "حدث خطأ أثناء ارسال الرساله";
-                        }
+                        //var result = await WhatsAppsSender.SendMessage(client.ClientName, client.PhoneNumber);
+                        //if (result)
+                        //{
+                        //    client.SendFirstMessageToClient = true;
+                        //    ViewData["successSendMessage"] = "تم ارسال الرساله بنجاح";
+                        //}
+                        //else
+                        //{
+                        //    ViewData["successSendMessage"] = "حدث خطأ أثناء ارسال الرساله";
+                        //}
 
                     }
 
@@ -227,6 +228,10 @@ namespace AsdafObhurRealEstate.Controllers
                 }
 
             }
+            
+            var createdBy = await _userManager.FindByIdAsync(client.CreatedBy);
+            var handledBy = await _userManager.FindByIdAsync(client.BaseUserId);
+
 
             var record = new DetailsClientDTO()
             {
@@ -235,6 +240,10 @@ namespace AsdafObhurRealEstate.Controllers
                 PhoneNumber = client.PhoneNumber,
                 BillsFileOld = client.BillsFile,
                 ClientName = client.ClientName,
+                CustomerNeeded = client.CustomerNeeded,
+                ClientCode = client.Code,
+                HandledBy = $"{handledBy.FirstName} {handledBy.LastName}",
+                CreatedBy = $"{createdBy.FirstName} {createdBy.LastName}",
                 Notes = client.Notes,
                 OldOtherFiles = new List<OldOtherFile>(),
             };
@@ -287,8 +296,15 @@ namespace AsdafObhurRealEstate.Controllers
 
             var client = await _context.Clients.Include(m => m.Multimedias).SingleOrDefaultAsync(m => m.Id == model.ClientId);
 
+
             if (client == null)
                 return BadRequest();
+
+            if (!string.IsNullOrEmpty(model.Notes))
+            {
+                client.Notes = model.Notes;
+            }
+
 
             if (model.BillsFileNew != null)
             {
@@ -304,18 +320,21 @@ namespace AsdafObhurRealEstate.Controllers
             {
                 foreach (var item in model.NewOtherFiles)
                 {
-                    var description = item.Description;
-                    var file = _fileManager.Upload(item.NewFile);
-
-                    client.Multimedias.Add(new Multimedia
+                    if(item.NewFile != null  || !string.IsNullOrEmpty(item.Description))
                     {
-                        ClientId = client.Id,
-                        CreatedAt = DateTime.Now,
-                        Description = description,
-                        CreatedBy = _userManager.GetUserId(User),
-                        UpdatedAt = DateTime.Now,
-                        Path = file
-                    });
+                        var description = item.Description;
+                        var file = _fileManager.Upload(item.NewFile);
+
+                        client.Multimedias.Add(new Multimedia
+                        {
+                            ClientId = client.Id,
+                            CreatedAt = DateTime.Now,
+                            Description = description,
+                            CreatedBy = _userManager.GetUserId(User),
+                            UpdatedAt = DateTime.Now,
+                            Path = file
+                        });
+                    }
                 }
 
                 _context.Update(client);

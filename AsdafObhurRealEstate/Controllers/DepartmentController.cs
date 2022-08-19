@@ -74,6 +74,15 @@ namespace AsdafObhurRealEstate.Controllers
         {
             var department = await _context.Departments.Include(m => m.Users).FirstOrDefaultAsync(m => m.Id == id);
 
+            var createdBy = await _userManager.FindByIdAsync(department.CreatedBy);
+            var modifiedBy = await _userManager.FindByIdAsync(department.ModifiedBy);
+
+            if (createdBy != null)
+                department.CreatedBy = $"{createdBy.FirstName} {createdBy.LastName}";
+
+            if (modifiedBy != null)
+                department.ModifiedBy = $"{modifiedBy.FirstName} {modifiedBy.LastName}";
+
             return View(department);
         }
 

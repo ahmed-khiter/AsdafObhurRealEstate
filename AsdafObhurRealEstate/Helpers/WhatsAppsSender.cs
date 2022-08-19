@@ -1,5 +1,6 @@
 ﻿using AsdafObhurRealEstate.Models;
 using RestSharp;
+using System.Diagnostics;
 
 namespace AsdafObhurRealEstate.Helpers
 {
@@ -54,18 +55,28 @@ namespace AsdafObhurRealEstate.Helpers
             
             request.AddBody(whatsAppDataModel);
 
-            var response = await client.PostAsync(request);
+            try
+            {
+                var response = await client.PostAsync(request);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             
 
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(ex.Message);
+            }
+
+            return false;
 
         }
     }

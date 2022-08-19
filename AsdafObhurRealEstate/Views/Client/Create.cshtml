@@ -16,39 +16,7 @@
         </div>
     </div>
 </div>
-    
-@*
-    
-<div class="row py-2">
-    <div class="col-md-12">
-        <form class="form-control" asp-area="" asp-action="Create" asp-controller="Client" method="post">
-  
-
-
-
-          <div class="form-group">
-              <label asp-for="DepartmentId"></label>
-             <select class="form-select" id="selectDepartment" asp-for="DepartmentId" asp-items="ViewBag.departments">
-                  <option value="-1" selected disabled >اختار القسم المناسب</option>
-             </select>
-          </div>
-
-        <div class="form-group">
-              <label asp-for="BaseUserId"></label>
-             <select id="selectUsers" class="form-select" asp-for="BaseUserId" >
-                  <option selected value="0" disabled >اختار الموظف</option>
-             </select>
-          </div>
-
-        <div class="pt-3">
-          <button type="submit" class="btn btn-primary">إنشاء موظف</button>
-        </div>
-        </form>
-
-        </div>
-    </div>
-</div>
-*@
+   
 
 <div class="container" >
 
@@ -73,6 +41,12 @@
             <input class="custom-form-input" type="text" id="Address" asp-for="Address" aria-describedby="Address" placeholder="عنوان بالتفصيل">
             <span asp-validation-for="Address" class="text-danger"></span>
           </div>
+            <div class="form-col">
+                <label class="form-label" asp-for="CustomerNeeded">احتياج العميل </label>
+                <input class="custom-form-input" type="text" id="CustomerNeeded" asp-for="CustomerNeeded" aria-describedby="CustomerNeeded" placeholder="احتياج العميل ">
+                <span asp-validation-for="CustomerNeeded" class="text-danger"></span>
+            </div>
+
     </div>
 
     <div class="form-two-col">

@@ -4,6 +4,7 @@ using AsdafObhurRealEstate.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AsdafObhurRealEstate.Migrations
 {
     [DbContext(typeof(AsdafObhurContext))]
-    partial class AsdafObhurContextModelSnapshot : ModelSnapshot
+    [Migration("20220819212705_addedCustomerNeeded")]
+    partial class addedCustomerNeeded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

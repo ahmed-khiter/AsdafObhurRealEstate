@@ -30,12 +30,29 @@
                 </div>
             </div>
 
+              <div class="client-info-container row">
+                <div class="client-info-box col bg-primary text-light m-2">
+                    <h4 class="text-light m-0">تفاصيل احتياج العميل</h4>
+                   <h3 class="m-0 text-light"> <strong class="info-label fs-4">@Model.CustomerNeeded</strong> </h3>
+                </div>
+                <div class="client-info-box col bg-secondary text-light m-2">
+                    <h4 class="text-light m-0">تم انشاء الملف بواسطه</h4>
+                    <h3 class="m-0 text-light"> <strong class="info-label fs-4">@Model.CreatedBy</strong> </h3>
+                </div>
+                <div class="client-info-box col bg-secondary text-light m-2">
+                    <h4 class="text-light m-0">تم التعامل مع الملف بواسطه</h4>
+                    <h3 class="m-0 text-light"> <strong class="info-label fs-4">@Model.HandledBy</strong> </h3>
+                </div>
+            </div>
+
+
             <div class="client-info-container row ">
                 <div class="client-info-box client-notes col-lg-8 bg-secondary text-light m-2">
                     <strong class="info-label">ملاحظات</strong>
                     <input class="client-notes-input text-end text-light fs-5 pe-2" asp-for="Notes" value="@Model.Notes" />
-               
                 </div>
+
+               
                 <div class=" d-flex  justify-content-around client-control col-lg-3 m-2">
                     @if(!string.IsNullOrEmpty(Model.BillsFileOld))
                     {

@@ -17,13 +17,14 @@ namespace AsdafObhurRealEstate.Models
 
         public string Notes { get; set; }
 
-
         public StatusOfClient ClientStatus { get; set; }
 
         public bool SendFirstMessageToClient { get; set; }
 
         public bool SendSecondMessageToClient { get; set; }
 
+        //تفاصيل احتياج العميل
+        public string CustomerNeeded { get; set; }
 
         public string BaseUserId { get; set; }
         public BaseUser BaseUser { get; set; }

@@ -89,7 +89,7 @@ namespace AsdafObhurRealEstate.Controllers
                     Name = $"{item.ClientName}",
                     Code= item.Code,
                     PhoneNumber = item.PhoneNumber,
-                    Status = item.ClientStatus
+                    Status = item.ClientStatus.GetAttribute<DisplayAttribute>().Name,
 
                 });
                 

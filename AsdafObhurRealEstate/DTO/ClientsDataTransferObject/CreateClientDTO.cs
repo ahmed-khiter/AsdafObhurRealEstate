@@ -25,5 +25,9 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
         [Display(Name = "الموظفين")]
         public string BaseUserId { get; set; }
 
+        [Display(Name = "تفاصيل احتياج العميل")]
+        public string CustomerNeeded { get; set; }
+
+
     }
 }

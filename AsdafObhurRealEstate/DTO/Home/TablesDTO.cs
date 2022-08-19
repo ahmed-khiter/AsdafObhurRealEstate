@@ -20,7 +20,7 @@ namespace AsdafObhurRealEstate.DTO.Home
 
         public string PhoneNumber { get; set; }
 
-        public StatusOfClient Status { get; set; }
+        public string Status { get; set; }
 
     }
 }
