@@ -206,6 +206,21 @@ namespace AsdafObhurRealEstate.Controllers
                 if (!isUserGeneralManager)
                 {
                     client.ClientStatus = Enums.StatusOfClient.UnderProgress;
+                    
+                    if (!client.SendFirstMessageToClient)
+                    {
+                        var result = await WhatsAppsSender.SendMessage(client.ClientName, client.PhoneNumber);
+                        if (result)
+                        {
+                            client.SendFirstMessageToClient = true;
+                            ViewData["successSendMessage"] = "تم ارسال الرساله بنجاح";
+                        }
+                        else
+                        {
+                            ViewData["successSendMessage"] = "حدث خطأ أثناء ارسال الرساله";
+                        }
+
+                    }
 
                     _context.Update(client);
                     await _context.SaveChangesAsync();
@@ -341,6 +356,23 @@ namespace AsdafObhurRealEstate.Controllers
 
             client.ClientStatus = Enums.StatusOfClient.FinancialTransformation;
 
+            if (!client.SendSecondMessageToClient)
+            {
+
+                var result = await WhatsAppsSender.SendMessage(client.ClientName, client.PhoneNumber);
+                if (result)
+                {
+                    client.SendSecondMessageToClient = true;
+                    ViewData["successSendMessage"] = "تم ارسال الرساله بنجاح";
+                }
+                else
+                {
+                    ViewData["successSendMessage"] = "حدث خطأ أثناء ارسال الرساله";
+                }
+
+            }
+
+
             _context.Update(client);
             await _context.SaveChangesAsync();
 
@@ -381,6 +413,7 @@ namespace AsdafObhurRealEstate.Controllers
                             PhoneNumber = m.PhoneNumber,
                             Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name
                         }).ToListAsync();
+
 
 
             return View(clients);
