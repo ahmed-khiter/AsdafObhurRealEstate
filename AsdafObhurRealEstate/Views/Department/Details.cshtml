@@ -6,57 +6,56 @@
 
 <h3 class="mb-5"> تفاصيل قسم @Model.Name</h3>
 
-<div class="client-info">
-    <h3 class="mb-3">المعلومات الرئيسية</h3>
-    <div class="client-info-container row">
-        <div class="client-info-box col bg-primary text-light m-2">
-            <h4 class="text-light m-0">اسم</h4>
-           <h3 class="m-0 text-light"> <strong class="info-label fs-4">@Model.Name</strong> </h3>
+<div class="row client-info card p-3">
+    <div class="row client-info-container">
+        <div class="client-info-box col-md-4">
+            <h5 class="m-0 info-header">الاسم</h5>
+            <h5 class="m-0 info">@Model.Name </h5>
         </div>
-        <div class="client-info-box col bg-secondary text-light m-2">
-            <h4 class="text-light m-0">تاريخ الانشاء</h4>
-            <h3 class="m-0 text-light"> <strong class="info-label fs-4">@Model.CreatedAt.ToString("dd/MM/yyyy", new CultureInfo("ar-AE"))</strong> </h3>
+        <div class="client-info-box col-md-4">
+            <h5 class="m-0 info-header">تاريخ الانشاء</h5>
+            <h5 class="m-0 info">@Model.CreatedAt</h5>
         </div>
-        <div class="client-info-box col bg-secondary text-light m-2">
-            <h4 class="text-light m-0">تم الإنشاء بواسطه</h4>
-            <h3 class="m-0 text-light"> <strong class="info-label fs-4">@Model.CreatedBy</strong> </h3>
+        <div class="client-info-box col-md-4">
+            <h5 class="m-0 info-header">تم الانشاء بواسطة</h5>
+            <h5 class="m-0 info">@Model.CreatedBy</h5>
         </div>
     </div>
 
-    <div class="client-info-container row ">
-            @if (!string.IsNullOrEmpty(Model.ModifiedBy))
-        {
-            <div class="client-info-box client-notes col-lg-8 bg-secondary text-light m-2">
-                <strong class="info-label">تم التعديل بواسطة</strong>
-                 <h3 class="m-0 text-light"> <strong class="info-label fs-4"> @Model.ModifiedBy</strong> </h3>
-               
-            </div>
-        }
+
+    <div class="client-info-container align-items-center row mt-2">
+        <div class="client-info-box client-notes col-sm-12 col-md-9 p-0">
+            <h5 class="info-header">تم التعديل بواسطة</h5>
+            <h5 class="m-0 info">@Model.ModifiedBy </h5>
         </div>
-        
+    </div>
+
 </div>
 
 <div class="row">
-    <h3 class="m-3">الموظفين بداخل قسم @Model.Name</h3>
-
     
-<div class="card row mt-5">
-      <div class="d-flex justify-content-between align-items-center">
-        <h4 class="mt-3">الموظفين</h4>
-        <div class="tabel-search-box mt-4 ms-9" >
-            <input type="text" class="table-search border-0"  placeholder="بحث بالاسم او الكود" aria-label="Example text with button addon" aria-describedby="button-addon1">
-            <button class="table-search" type="button" id="button-addon1">
-                <i class="fas fa-search"></i>
-            </button>
+<h4 class="mt-5">الموظفين</h4>
+<div class="card row mt-2">
+<div class="d-flex justify-content-end align-items-center">
+    <div class='col-xs-8 col-sm-7 col-md-4 col-lg-3 m-3'>
+        <div class='navbar-form'>
+            <div class='input-group tabel-search-box'>
+                <input id="searchInput" class='form-control table-search' type='text' data-search="search-input" placeholder='إبحث بإسم القسم' />
+                <button id="button-addon1" type='button' class='btn table-search d-flex'>
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
         </div>
     </div>
+</div>
+
   <div class="table-responsive">
     <table class="table align-items-center mb-0">
       <thead>
-        <tr>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">اسم الموظف</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">رقم تلفون</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">رقم تلفون</th>
+        <tr class="text-dark">
+          <th class="text-dark fs-5 font-weight-bolder">اسم الموظف</th>
+          <th class="text-dark fs-5 font-weight-bolder">رقم تلفون</th>
+          <th class="text-dark fs-5 font-weight-bolder">رقم تلفون</th>
         </tr>
       </thead>
       <tbody>
@@ -66,12 +65,12 @@
                       <td>
                         <div class="d-flex px-2">
                           <div class="my-auto">
-                            <h6 class="mb-0 text-xs">@record.FirstName @record.LastName</h6>
+                            <h6 class="mb-0 fs-5">@record.FirstName @record.LastName</h6>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-normal mb-0">@record.PhoneNumber</p>
+                        <p class="fs-5 font-weight-normal mb-0">@record.PhoneNumber</p>
                       <td class="align-middle">
                               <a class="text-secondary font-weight-bold text-xs" asp-area="" asp-action="detailsOfEmployee" asp-controller="Account" asp-route-userId="@record.Id">
                                 <span class="material-symbols-outlined">

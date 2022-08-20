@@ -7,26 +7,25 @@
 
 
 
-<form class="custom-form" asp-area="" asp-action="Create" asp-controller="Department" method="post">
+<form class="p-3" asp-area="" asp-action="Create" asp-controller="Department" method="post" style="width:fit-content">
 
-    <div class="form-two-col">
-        <div class="form-col">
+    <div class="d-flex flex-column m-3">
+
+        <div class="d-flex flex-column">
             <label asp-for="Name">اسم القسم</label>
             <input class="custom-form-input" type="text" placeholder="ادخل الاسم" id="clientName" asp-for="Name" aria-describedby="clientName">
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-     
-    </div>
 
-      <div class="row">
-        <div class="col-md-2">
+      <div class="d-flex justify-content-between m-3">
+        <div>
              <button type="submit" class="btn btn-primary">إضافة القسم</button>
         </div>
-         <div class="col-md-2">
+         <div>
             <a class="btn btn-secondary" asp-area="" asp-action="Index" asp-controller="DEpartment">إرجاع إلى القائمة</a>
         </div>
     </div>
-
+    </div>
 
 </form>
 
