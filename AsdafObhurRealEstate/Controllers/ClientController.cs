@@ -443,7 +443,13 @@ namespace AsdafObhurRealEstate.Controllers
         [HttpGet]
         public async Task<IActionResult> DownloadFile(string fileName)
         {
-            return Ok();
+            var result = await _fileManager.DownloadFile(fileName);
+
+            var extension = Path.GetExtension(fileName);
+
+            var descriptionFile = (await _context.Multimedias.SingleOrDefaultAsync(m => m.Path == fileName)).Description+extension;
+            
+            return File(result.Memory,result.ContentType,descriptionFile);
         }
     }
 }

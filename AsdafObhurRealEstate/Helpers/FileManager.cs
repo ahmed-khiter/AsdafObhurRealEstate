@@ -1,4 +1,6 @@
-﻿namespace AsdafObhurRealEstate.Helpers
+﻿using Microsoft.AspNetCore.StaticFiles;
+
+namespace AsdafObhurRealEstate.Helpers
 {
     public class FileManager
     {
@@ -50,6 +52,28 @@
             return model;
         }
 
+        public async Task<(MemoryStream Memory, string ContentType)> DownloadFile(string fileName)
+        {
+            try
+            {
+                var filePath = GetDestination(fileName);
+
+                if (File.Exists(filePath))
+                    new Exception();
+
+                var memory = new MemoryStream();
+                await using (var stream = new FileStream(filePath, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memory);
+                }
+                memory.Position = 0;
+
+                return (memory, GetContentType(filePath));
+            }
+            catch { throw; }
+
+        }
+
         public bool Delete(string file)
         {
             if (string.IsNullOrEmpty(file))
@@ -79,6 +103,20 @@
         {
             return Path.Combine(env.WebRootPath, folder, file);
         }
+
+        private string GetContentType(string path)
+        {
+            var provider = new FileExtensionContentTypeProvider();
+            string contentType;
+
+            if (!provider.TryGetContentType(path, out contentType))
+            {
+                contentType = "application/octet-stream";
+            }
+
+            return contentType;
+        }
+
 
     }
 }

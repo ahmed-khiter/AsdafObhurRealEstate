@@ -99,7 +99,7 @@
                             <th scope="row">@(++i)</th>
                             <td>
                                 <div class="d-flex flex-column justify-content-center align-items-center">
-                                            <button id="downloadFile" data-downloadFile="download" value="@item.FileOld" class="btn btn-primary fs-4">
+                                    <button type="button" id="downloadFile" data-downloadfilebyname="@item.FileOld" class="btn btn-primary fs-4">
                                             <i class="fas fa-download"></i>
                                     </button>
                                 </div>
@@ -141,7 +141,7 @@
             }
             else{
                 <div class="d-flex col justify-content-center">
-                    <a id="" class="btn btn-secondary">تحويل الي المالية</a>
+                    <a id="transformToFinancial" data-getclientid="@Model.ClientId" class="btn btn-secondary">تحويل الي المالية</a>
                 </div>
             }
 
@@ -179,7 +179,9 @@
                         subCateList.append(users);
                     },
                     error: function (data) {
-                        return "Error";
+                        return Swal.fire(
+                            "حدث خطأ اثناء اختيار القسم"
+                        );
                     }
                 });
             });
@@ -246,21 +248,30 @@
 
 
         $(document).on("click", "#downloadFile", function(){
+            var downloadFile = $(this).data("downloadfilebyname");
+            console.log(downloadFile);
+
             const inputEle = document.querySelector('[data-downloadFile="download"]')
+            window.open(document.location.origin + "/client/DownloadFile?fileName=" + downloadFile, '_blank');
+        });
+
+
+        $(document).on("click", "#transformToFinancial", function(){
+            var clientId = $(this).data("getclientid");
             $.ajax({
-                url: "/client/DownloadFile?fileName=" +inputEle.value,
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                datatype: JSON,
-                success: function (result) {
+                url: '/Client/TransformFileToFinancial?clientId='+clientId,
+                type: "POST",
+                contentType: 'application/x-www-form-urlencoded',
+                data: clientId,
+                success: (data) => {
                    
                 },
-                error: function (data) {
-                    return Swal.fire(
-                        "حدث خطأ "
-                    );
+                error: function (eventFromParam) {
+                    Swal.fire(
+                    "حدث خطأ أثناء التحويل للماليه حاول مرة اخرى"
+                    )
                 }
-            });
+            })
 
         });
 
