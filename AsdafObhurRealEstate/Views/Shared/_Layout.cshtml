@@ -61,7 +61,7 @@
             @if (isLogged)
             {
                             
-                <li class="breadcrumb-item fs-4 ps-2"><a class="opacity-5 text-dark" href="javascript:;">لوحة القيادة</a></li>
+                <li class="breadcrumb-item fs-4 ps-2"><a class="nav-link opacity-5 text-dark" href="javascript:;">لوحة القيادة</a></li>
             }
           </ol>
         </nav>
@@ -98,7 +98,7 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-            <div class="container">
+            <div class="container-fluid">
                 @RenderBody()
             </div>
     
@@ -142,6 +142,8 @@
 
   
     <script src="~/assets/js/material-dashboard.min.js?v=3.0.4"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="~/assets/js/jqueryscript.js"></script>
   @RenderSection("Scripts", required: false)
 </body>
 
