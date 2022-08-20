@@ -2,7 +2,7 @@
 {
     public class WhatsAppDataModel
     {
-        public string messageing_product { get; set; }
+        public string messaging_product { get; set; }
 
         public string to { get; set; }
 

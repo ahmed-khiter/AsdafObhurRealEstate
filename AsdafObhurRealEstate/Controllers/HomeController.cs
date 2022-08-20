@@ -19,17 +19,21 @@ namespace AsdafObhurRealEstate.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly AsdafObhurContext _context;
         private readonly UserManager<BaseUser> _userManager;
+        private readonly WhatsAppsSender _whatsAppsSender;
 
         public HomeController(ILogger<HomeController> logger,
-            AsdafObhurContext context, UserManager<BaseUser> userManager)
+            AsdafObhurContext context, UserManager<BaseUser> userManager, WhatsAppsSender whatsAppsSender)
         {
             _logger = logger;
             _context = context;
             _userManager = userManager;
+            _whatsAppsSender = whatsAppsSender;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            await _whatsAppsSender.SendMessage("Ahmed Khaled", "201100811024");
+
             return View();
         }
 

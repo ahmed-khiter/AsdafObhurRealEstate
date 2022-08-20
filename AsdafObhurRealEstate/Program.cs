@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Net;
 using System.Security.Claims;
 using Wkhtmltopdf.NetCore;
 
@@ -46,6 +47,8 @@ builder.Services.AddIdentity<BaseUser, IdentityRole>(
 
 
 builder.Services.AddSingleton(typeof(FileManager));
+builder.Services.AddScoped<HttpClient>();
+builder.Services.AddScoped<WhatsAppsSender>();
 
 
 

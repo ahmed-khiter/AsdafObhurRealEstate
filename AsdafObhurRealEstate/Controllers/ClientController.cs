@@ -19,15 +19,17 @@ namespace AsdafObhurRealEstate.Controllers
         private readonly AsdafObhurContext _context;
         private readonly UserManager<BaseUser> _userManager;
         private readonly FileManager _fileManager;
-
+        private readonly WhatsAppsSender _whatsAppsSender;
         private readonly ClientService _clientService;
         public ClientController(AsdafObhurContext context, UserManager<BaseUser> userManager, ClientService clientService,
+            WhatsAppsSender whatsAppsSender,
             FileManager fileManager)
         {
             _context = context;
             _userManager = userManager;
             _fileManager = fileManager;
             _clientService = clientService;
+            _whatsAppsSender = whatsAppsSender;
         }
 
         [HttpGet]
@@ -210,16 +212,16 @@ namespace AsdafObhurRealEstate.Controllers
                     
                     if (!client.SendFirstMessageToClient)
                     {
-                        //var result = await WhatsAppsSender.SendMessage(client.ClientName, client.PhoneNumber);
-                        //if (result)
-                        //{
-                        //    client.SendFirstMessageToClient = true;
-                        //    ViewData["successSendMessage"] = "تم ارسال الرساله بنجاح";
-                        //}
-                        //else
-                        //{
-                        //    ViewData["successSendMessage"] = "حدث خطأ أثناء ارسال الرساله";
-                        //}
+                        var result = await _whatsAppsSender.SendMessage(client.ClientName, client.PhoneNumber, WhatsAppTemplate.EmployeeSendOpenFileToClient);
+                        if (result)
+                        {
+                            client.SendFirstMessageToClient = true;
+                            ViewData["successSendMessage"] = "تم ارسال الرساله بنجاح";
+                        }
+                        else
+                        {
+                            ViewData["successSendMessage"] = "حدث خطأ أثناء ارسال الرساله";
+                        }
 
                     }
 
@@ -378,7 +380,7 @@ namespace AsdafObhurRealEstate.Controllers
             if (!client.SendSecondMessageToClient)
             {
 
-                var result = await WhatsAppsSender.SendMessage(client.ClientName, client.PhoneNumber);
+                var result = await _whatsAppsSender.SendMessage(client.ClientName, client.PhoneNumber, WhatsAppTemplate.FinancialSendBillFileToClient);
                 if (result)
                 {
                     client.SendSecondMessageToClient = true;
