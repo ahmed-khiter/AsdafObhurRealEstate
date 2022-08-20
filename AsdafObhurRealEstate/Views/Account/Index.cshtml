@@ -264,7 +264,7 @@
         $(document).on('change','.employee-search', function(){
             const inputEle = document.querySelector('[data-search="search-input"]')
                $.ajax({
-                        url: `/account/index?userNameOrCode=${inputEle.value}&refresh=true`,
+                        url: `/account/SearchUser?userName=${inputEle.value}`,
                         type:"Get",
                         success: (data) => {
                               $("#data-table").find("tr").remove();

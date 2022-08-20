@@ -32,8 +32,6 @@ namespace AsdafObhurRealEstate.Controllers
 
         public async Task<IActionResult> Index()
         {
-            await _whatsAppsSender.SendMessage("Ahmed Khaled", "201100811024");
-
             return View();
         }
 

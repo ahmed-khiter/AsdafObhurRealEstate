@@ -7,6 +7,7 @@ using AsdafObhurRealEstate.DTO.Account;
 using AsdafObhurRealEstate.Enums;
 using AsdafObhurRealEstate.Infrastructure;
 using AsdafObhurRealEstate.Models;
+using AsdafObhurRealEstate.Services.AccountManagement;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -24,11 +25,14 @@ namespace AsdafObhurRealEstate.Controllers
         private readonly AsdafObhurContext _context;
         private IGeneratePdf _generatePdf;
 
+        private readonly AccountService _accountService;
+
         public AccountController
         (
             UserManager<BaseUser> userManager,
             SignInManager<BaseUser> signInManager,
             AsdafObhurContext context,
+            AccountService accountService,
             IGeneratePdf generatePdf
         )
         {
@@ -36,6 +40,7 @@ namespace AsdafObhurRealEstate.Controllers
             this.signInManager = signInManager;
             _context = context;
             _generatePdf = generatePdf;
+            _accountService = accountService;
         }
        
         [HttpGet]
@@ -112,7 +117,8 @@ namespace AsdafObhurRealEstate.Controllers
 
                 if (result.Succeeded)
                 {
-                    await AddRolesToUse(model.AccountType, user);
+                    await _accountService.AddRolesToUseService(model.AccountType, user);
+
                     transaction.Commit();
                     ViewData["Success"] = "تم التسجيل مرحبا بك في أصداف أبحر العقارية";
                     return Redirect("/");
@@ -171,49 +177,23 @@ namespace AsdafObhurRealEstate.Controllers
             return Redirect("/");
         }
 
-       
+
         [Authorize(Roles = Role.GeneralManager)]
         [HttpGet]
-        public async Task<IActionResult> Index(string userNameOrCode,bool refresh )
+        public async Task<IActionResult> SearchUser(string userName)
         {
-            if(!string.IsNullOrEmpty(userNameOrCode))
-            {
-                int code = 0; 
-                var ifIsCode = int.TryParse(userNameOrCode, out code);
+            var users = await _accountService.SearcUser(userName);
 
-                var users = await userManager.Users
-                    .Include(m => m.Department)
-                    .Where(m => m.Code == code || 
-                    m.FirstName.Contains(userNameOrCode) || m.LastName.Contains(userNameOrCode))
-                    .Select(m => new
-                    {
-                        id = m.Id,
-                        code = m.Code,
-                        fullName = $"{m.FirstName} {m.LastName}",
-                        phoneNumber = m.PhoneNumber,
-                    })
-                    .ToListAsync();
+            return Ok(users);
+        }
 
-                return Ok(users);
-            }
-            else
-            {
 
-                var users = await userManager.Users.Include(m => m.Department).ToListAsync();
-
-                if (refresh)
-                {
-                    return Ok(users.Select(m => new
-                    {
-                        id = m.Id,
-                        code = m.Code,
-                        fullName = $"{m.FirstName} {m.LastName}",
-                        phoneNumber = m.PhoneNumber,
-                    }));
-                }
-
-                return View(users);
-            }
+        [Authorize(Roles = Role.GeneralManager)]
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var users = await userManager.Users.Include(m => m.Department).ToListAsync();
+            return View(users);
         }
 
         [HttpPost]
@@ -227,25 +207,7 @@ namespace AsdafObhurRealEstate.Controllers
                     return BadRequest();
                 }
 
-                var user = await userManager.FindByIdAsync(id);
-                var rolesForUser = await userManager.GetRolesAsync(user);
-
-                using (var transaction = _context.Database.BeginTransaction())
-                {
-                   
-
-                    if (rolesForUser.Count() > 0)
-                    {
-                        foreach (var item in rolesForUser.ToList())
-                        {
-                            // item should be the name of the role
-                            var result = await userManager.RemoveFromRoleAsync(user, item);
-                        }
-                    }
-
-                    await userManager.DeleteAsync(user);
-                    transaction.Commit();
-                }
+                await _accountService.DeleteAccount(id);
 
                 return RedirectToAction("Index");
             }
@@ -316,81 +278,11 @@ namespace AsdafObhurRealEstate.Controllers
         [Authorize(Roles = Role.GeneralManager)]
         public async Task<IActionResult> DetailsOfEmployee(string userId)
         {
-            var user = await userManager.FindByIdAsync(userId);
+            var details = await _accountService.DetailsOfEmployee(userId);
 
-
-            var employeeCreatedClient = await _context.Clients
-                .Where(m => m.CreatedBy == user.Id ).ToListAsync();
-
-
-            var employeeHandledClient = await _context.Clients
-                .Where(m => m.BaseUserId == user.Id ).ToListAsync();
-
-            var wholeDetails = new EmployeeAndHisClients()
-            {
-                Email = user.Email,
-                From = DateTime.Now,
-                To = DateTime.Now,
-                EmployeeCode = user.Code,
-                Name = $"{user.FirstName} {user.LastName}",
-                PhoneNumber = user.PhoneNumber,
-                UserId = user.Id,
-                ClientsWhoCreated = new List<ClientDetailsDto>(),
-                ClientsWhoHandled = new List<ClientDetailsDto>()
-            };
-
-            foreach (var item in employeeCreatedClient)
-            {
-                wholeDetails.ClientsWhoCreated.Add(new ClientDetailsDto
-                {
-                    PhoneNumber = item.PhoneNumber,
-                    ClientCode = item.Code,
-                    ClientId = item.Id,
-                    Name = item.ClientName,
-                    Status = item.ClientStatus
-                });
-            }
-
-            foreach (var item in employeeHandledClient)
-            {
-                wholeDetails.ClientsWhoHandled.Add(new ClientDetailsDto
-                {
-                    PhoneNumber = item.PhoneNumber,
-                    ClientCode = item.Code,
-                    ClientId = item.Id,
-                    Name = item.ClientName,
-                    Status = item.ClientStatus
-                });
-            }
-
-
-            return View(wholeDetails);
+            return View(details);
         }
 
-
-        private async Task<bool> AddRolesToUse(AccountType accountType, BaseUser user)
-        {
-            if (accountType == AccountType.GeneralManager)
-                await userManager.AddToRoleAsync(user, Role.GeneralManager);
-            else if (accountType == AccountType.ProjectSupervisor)
-                await userManager.AddToRoleAsync(user, Role.ProjectSupervisor);
-            else if (accountType == AccountType.ExecutiveSecretary)
-                await userManager.AddToRoleAsync(user, Role.ExecutiveSecretary);
-            else if (accountType == AccountType.Personnel)
-                await userManager.AddToRoleAsync(user, Role.Personnel);
-            else if (accountType == AccountType.marketing)
-                await userManager.AddToRoleAsync(user, Role.Marketing);
-            else if (accountType == AccountType.ProjectMonitor)
-                await userManager.AddToRoleAsync(user, Role.ProjectMonitor);
-            else if (accountType == AccountType.projectsEngineer)
-                await userManager.AddToRoleAsync(user, Role.ProjectsEngineer);
-            else if (accountType == AccountType.Financial)
-                await userManager.AddToRoleAsync(user, Role.Financial);
-            else
-                return false;
-
-            return true;
-        
-        }
+    
     }
 }

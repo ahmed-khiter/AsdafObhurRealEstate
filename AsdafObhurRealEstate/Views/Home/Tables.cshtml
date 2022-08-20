@@ -14,7 +14,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <h4 class="mt-3">اسماء الموظفين</h4>
         <div class="tabel-search-box mt-4 ms-9" >
-            <input type="text" class="table-search border-0" placeholder="بحث بالأسم أو الكود" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            <input type="text" class="employee-search border-0" data-search="search-input" placeholder="بحث بالأسم أو الكود" aria-label="Example text with button addon" aria-describedby="button-addon1">
             <button class="table-search" type="button" id="button-addon1">
                 <i class="fas fa-search"></i>
             </button>
@@ -77,7 +77,7 @@
     <div class="d-flex justify-content-between align-items-center">
         <h4 class="mt-3">أسماء العملاء</h4>
         <div class="tabel-search-box mt-4 ms-9" >
-            <input type="text" class="table-search border-0"  placeholder="بحث بالأسم أو الكود" aria-label="Example text with button addon" aria-describedby="button-addon1">
+            <input type="text" class="client-search border-0" data-searchClient="search-input" placeholder="بحث بالأسم أو الكود" aria-label="Example text with button addon" aria-describedby="button-addon1">
             <button class="table-search" type="button" id="button-addon1">
                 <i class="fas fa-search"></i>
             </button>
@@ -96,7 +96,7 @@
 
                 </tr>
             </thead>
-            <tbody id="data-table">
+            <tbody id="client-table">
                 @foreach (var record in Model.Clients)
                 {
                     <tr>
@@ -151,72 +151,72 @@
 
     <script>
 
-        $(document).on('change','.employee-search', function(){
+        $(document).on('change', '.employee-search', function () {
             const inputEle = document.querySelector('[data-search="search-input"]')
-               $.ajax({
-                        url: `/account/index?userNameOrCode=${inputEle.value}&refresh=true`,
-                        type:"Get",
-                        success: (data) => {
-                              $("#data-table").find("tr").remove();
-                              data.forEach(element => {
-                                  let dateHijri = element.createdAt;
-                                  $("#data-table").append(`
-                                      <tr>
-                                        <td class="d-flex px-2">
-                                            <div class="my-auto">
-                                                <h6 class="mb-0 text-xs" >${element.code}</h6>
-                                            </div>
-                                        </td>
-                                        <td>
-                                        <div class="d-flex px-2">
-                                            <div class="my-auto">
-                                            <h6 class="mb-0 text-xs">${element.fullName}</h6>
-                                            </div>
-                                        </div>
-                                        </td>
-                                        <td>
-                                        <p dir="rtl" class="text-xs font-weight-normal mb-0">${element.phoneNumber}</p>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a class="text-secondary font-weight-bold text-xs" href="/account/detailsOfEmployee?userId=${element.id}" >
-                                            <span class="material-symbols-outlined">
-                                                <i title="تفاصيل" class="material-icons-round opacity-10">info</i>
-                                            </span>
-                                            </a>
+            $.ajax({
+                url: `/account/SearchUser?userName=${inputEle.value}`,
+                type: "Get",
+                success: (data) => {
+                    $("#data-table").find("tr").remove();
+                    data.forEach(element => {
+                        let dateHijri = element.createdAt;
+                        $("#data-table").append(`
+                                              <tr>
+                                                <td class="d-flex px-2">
+                                                    <div class="my-auto">
+                                                        <h6 class="mb-0 text-xs" >${element.code}</h6>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                <div class="d-flex px-2">
+                                                    <div class="my-auto">
+                                                    <h6 class="mb-0 text-xs">${element.fullName}</h6>
+                                                    </div>
+                                                </div>
+                                                </td>
+                                                <td>
+                                                <p dir="rtl" class="text-xs font-weight-normal mb-0">${element.phoneNumber}</p>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <a class="text-secondary font-weight-bold text-xs" href="/account/detailsOfEmployee?userId=${element.id}" >
+                                                    <span class="material-symbols-outlined">
+                                                        <i title="تفاصيل" class="material-icons-round opacity-10">info</i>
+                                                    </span>
+                                                    </a>
 
-                                        <a class="del-record text-secondary font-weight-bold text-xs" data-id="${element.id}" >
-                                                <span class="material-symbols-outlined">
-                                                    <i title="مسح" class="material-icons-round opacity-10" >delete</i>
-                                                </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                              
-                                  `)
-                              });
+                                                <a class="del-record text-secondary font-weight-bold text-xs" data-id="${element.id}" >
+                                                        <span class="material-symbols-outlined">
+                                                            <i title="مسح" class="material-icons-round opacity-10" >delete</i>
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                          `)
+                    });
 
 
-                        },
-                        error: function (eventFromParam) {
-                            Swal.fire({
-                                title: 'خطأ اثناء البحث',
-                            })
-                        }
+                },
+                error: function (eventFromParam) {
+                    Swal.fire({
+                        title: 'خطأ اثناء البحث',
                     })
+                }
+            })
         });
 
 
         
         $(document).on('change', '.client-search', function () {
 
-            const inputEle = document.querySelector('[data-search="search-input"]')
+            const inputEle = document.querySelector('[data-searchClient="search-input"]')
             $.ajax({
                 url: `/client/SearchClient?userNameOrCode=${inputEle.value}&heCreated=false`,
                 type: "Get",
                 success: (data) => {
-                    $("#data-table").find("tr").remove();
+                    $("#client-table").find("tr").remove();
                     data.forEach(element => {
-                            $("#data-table").append(`
+                        $("#client-table").append(`
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2">

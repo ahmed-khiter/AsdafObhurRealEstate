@@ -1,6 +1,7 @@
 using AsdafObhurRealEstate.Helpers;
 using AsdafObhurRealEstate.Infrastructure;
 using AsdafObhurRealEstate.Models;
+using AsdafObhurRealEstate.Services.AccountManagement;
 using AsdafObhurRealEstate.Services.Clients;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -45,6 +46,7 @@ builder.Services.AddIdentity<BaseUser, IdentityRole>(
               }).AddRoles<IdentityRole>()
               .AddEntityFrameworkStores<AsdafObhurContext>();
 
+builder.Services.AddScoped<AccountService>();
 
 builder.Services.AddSingleton(typeof(FileManager));
 builder.Services.AddScoped<HttpClient>();
