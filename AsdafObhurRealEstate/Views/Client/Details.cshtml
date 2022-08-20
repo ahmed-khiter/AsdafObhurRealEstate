@@ -4,6 +4,7 @@
     ViewData["Title"] = "تفاصيل العميل";
     var user = await userManager.GetUserAsync(User);
     bool isFinancialUser = await userManager.IsInRoleAsync(user, Role.Financial);
+    bool isGeneralManager = await userManager.IsInRoleAsync(user, Role.GeneralManager);
 
     var i = 0;
     int newFileId = 0;
@@ -64,7 +65,8 @@
                             <label class="fs-6 fw-bold">عرض الفاتورة الحالية</label>
                         </div>
                     }
-                    @if (isFinancialUser){
+                    @if (isFinancialUser || isGeneralManager)
+                    {
                         <div class="btn-absoulte-for-upload d-flex flex-column justify-content-center align-items-center">
                             <input type="file" class="hidden-file-input" />
                             <button type="button" asp-for="BillsFileNew" class="btn btn-primary fs-4">
@@ -95,8 +97,14 @@
                     {
                         <tr>
                             <th scope="row">@(++i)</th>
-                            <td>@item.FileOld</td>
-                            <td> <a data-id="@item.OtherFileId">@item.Description</a></td>
+                            <td>
+                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                            <button id="downloadFile" data-downloadFile="download" value="@item.FileOld" class="btn btn-primary fs-4">
+                                            <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td>@item.Description</td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -235,6 +243,27 @@
 
 
         });
+
+
+        $(document).on("click", "#downloadFile", function(){
+            const inputEle = document.querySelector('[data-downloadFile="download"]')
+            $.ajax({
+                url: "/client/DownloadFile?fileName=" +inputEle.value,
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                datatype: JSON,
+                success: function (result) {
+                   
+                },
+                error: function (data) {
+                    return Swal.fire(
+                        "حدث خطأ "
+                    );
+                }
+            });
+
+        });
+
 </script>
 }
 

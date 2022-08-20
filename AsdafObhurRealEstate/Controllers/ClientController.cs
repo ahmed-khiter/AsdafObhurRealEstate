@@ -439,5 +439,11 @@ namespace AsdafObhurRealEstate.Controllers
 
             return View(clients);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DownloadFile(string fileName)
+        {
+            return Ok();
+        }
     }
 }
