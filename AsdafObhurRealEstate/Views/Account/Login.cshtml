@@ -4,50 +4,31 @@
     ViewData["Title"] = "Login";
 }
 
-<div class="p-4 bg-light">
-    <form style="min-height:500px" asp-controller="account" asp-action="login" method="post" >
-      <div class="row">
-           
-           <div class="col-md-2"></div>
+<div class="container d-flex justify-content-center p-4">
+    <form class="login-form card p-3" asp-controller="account" asp-action="login" method="post" >
+      <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="input-group input-group-outline my-3">
-            <label asp-for="Email" class="form-label">البريد الالكتروني</label>
-            <input asp-for="Email"  type="email" class="form-control">
+            <input asp-for="Email"  type="email" class="form-control" placeholder="البريد الالكتروني">
           </div>
         </div>
-        <div class="col-md-2"></div>
-      </div>
 
-      <div class="row">
-          <div class="col-md-2"></div>
         <div class="col-md-8">
           <div class="input-group input-group-outline my-3">
-            <label asp-for="Password" class="form-label">الرقم السرى</label>
-            <input asp-for="Password" type="password" class="form-control">
+            <input asp-for="Password" type="password" class="form-control" placeholder="كلمة المرور">
           </div>
         </div>
-        <div class="col-md-2"></div>
-      </div>
 
-       <div class="row">
-          <div class="col-md-2"></div>
         <div class="col-md-8">
           <div class="input-group input-group-outline my-3">
             <span dir="rtl"> <input asp-for="RememberMe"> ابقى على تسجيل الدخول </span>
           </div>
         </div>
-        <div class="col-md-2"></div>
 
+        <div class="col-md-8 d-flex justify-content-center">
+            <button type="submit" class="btn btn-info">تسجيل الدخول</button>
+        </div>
+        <div asp-validation-summary="All" class="col-12 text-danger"></div>
       </div>
- 
-     <div class="row">
-     
-         <div class="col-md-6"></div>
-          <div class="col-md-4">
-             <button type="submit" class="btn btn-info" >تسجيل الدخول</button>
-             <div asp-validation-summary="All" class="text-danger"></div>
-          </div>
-          <div class="col-md-2"></div>
-    </div>
     </form>
 </div>

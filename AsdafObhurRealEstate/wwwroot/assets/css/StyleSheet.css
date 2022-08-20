@@ -2,6 +2,12 @@
     icons
 */
 
+/* Login form */
+.login-form
+{
+    width:fit-content;
+}
+
 /* Navbar */
 
 .navbar-vertical .navbar-nav > .nav-item .nav-link.active {
