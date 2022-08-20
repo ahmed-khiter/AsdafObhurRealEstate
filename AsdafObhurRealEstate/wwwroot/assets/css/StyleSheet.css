@@ -2,10 +2,18 @@
     icons
 */
 
-.fa-user
-{
-    font-size:18px;
-    margin-left:5px;
+/* Navbar */
+
+.navbar-vertical .navbar-nav > .nav-item .nav-link.active {
+    border-right-width: 0;
+    border-bottom-width: 0;
+    background: linear-gradient(90deg, rgba(29,164,212,1) 0%, rgba(21,141,183,1) 100%) !important;
+    box-shadow:none !important;
+}
+
+.fa-user {
+    font-size: 18px;
+    margin-left: 5px;
 }
 
 .custom-form {
@@ -69,6 +77,7 @@
 .client-info-container {
     display: flex;
     width: 100%;
+    justify-content: center;
 }
 
 .client-info-box {
@@ -76,11 +85,11 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    padding: 10px;
-    min-height: 100px;
+    padding: 5px;
+    min-height: 80px;
     background-color: #d1d1d1;
     border-radius: 10px;
-    font-size: 28px;
+    font-size: 22px;
 }
 
 
