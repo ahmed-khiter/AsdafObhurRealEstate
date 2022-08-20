@@ -91,19 +91,21 @@
 }
 
     .client-info-box .info-header {
-        opacity: .6;
+        opacity: .9;
+        font-weight:400;
     }
-    .client-info-box h5
-    {
-        font-weight: 500;
+    .client-info-box .info {
+        font-weight: 600;
     }
 
 .client-notes-input {
+    height: 50px;
     width: 100%;
     background: none;
-    border: 1px solid #dad9d9;
+    border: 1px solid #787878;
     border-radius: 10px;
     outline: none;
+    color: #393939;
 }
 
 .table
@@ -112,15 +114,24 @@
 }
 
 .table-add-btn {
-    height: 40px;
-    width: 40px;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:0;
-    margin:0;
+    height: 35px;
+    width: 35px;
+    border: 1px solid #787878;
+    color: #787878;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    padding: 0;
+    margin: 0;
 }
+
+    .table-add-btn:hover {
+        background-color: #787878;
+        color:white;
+        transition: 150ms ease-in-out;
+    }
 
 
 /*

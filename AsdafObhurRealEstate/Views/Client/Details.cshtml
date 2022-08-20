@@ -11,80 +11,80 @@
 }
 
 <!-- bootstrab table -->
-<form asp-area="" asp-controller="client" asp-action="SavedFileAboutClient" enctype="multipart/form-data" >
+<form class="row" asp-area="" asp-controller="client" asp-action="SavedFileAboutClient" enctype="multipart/form-data" >
     <input type="hidden" asp-for="ClientId" />
-    <div>
+    <div class="row">
         <h3 class="mb-3">المعلومات الرئيسية</h3>
         <div class="row client-info card p-3">
             <div class="row client-info-container">
                 <div class="client-info-box col-md-4">
                    <h5 class="m-0 info-header">اسم العميل</h5>
-                   <h5 class="m-0">@Model.ClientName </h5>
+                   <h5 class="m-0 info">@Model.ClientName </h5>
                 </div>
                 <div class="client-info-box col-md-4">
                     <h5 class="m-0 info-header">رقم الهاتف</h5>
-                    <h5 class="m-0">@Model.PhoneNumber</h5>
+                    <h5 class="m-0 info">@Model.PhoneNumber</h5>
                 </div>
                 <div class="client-info-box col-md-4">
                     <h5 class="m-0 info-header">العنوان</h5>
-                    <h5 class="m-0">@Model.Address</h5>
+                    <h5 class="m-0 info">@Model.Address</h5>
                 </div>
             </div>
 
             <div class="row client-info-container mt-2">
                 <div class="client-info-box col-md-4">
                     <h5 class="m-0 info-header">تفاصيل احتياج العميل</h5>
-                    <h5 class="m-0">@Model.CustomerNeeded</h5>
+                    <h5 class="m-0 info">@Model.CustomerNeeded</h5>
                 </div>
                 <div class="client-info-box col-md-4">
                     <h5 class="m-0 info-header">تم انشاء الملف بواسطه</h5>
-                    <h5 class="m-0">@Model.CreatedBy</h5>
+                    <h5 class="m-0 info">@Model.CreatedBy</h5>
                 </div>
                 <div class="client-info-box col-md-4">
                     <h5 class="m-0 info-header">تم التعامل مع الملف بواسطه</h5>
-                    <h5 class="m-0">@Model.HandledBy</h5>
+                    <h5 class="m-0 info">@Model.HandledBy</h5>
                 </div>
             </div>
 
 
-            <div class="client-info-container row mt-2">
-                <div class="client-info-box client-notes col">
+            <div class="client-info-container align-items-center row mt-2">
+                <div class="client-info-box client-notes col-sm-12 col-md-9 p-0">
                     <strong class="info-label">ملاحظات</strong>
-                    <input class="client-notes-input text-end   fs-5 pe-2" asp-for="Notes" value="@Model.Notes" />
+                    <input class="client-notes-input text-end fs-5 pe-2" asp-for="Notes" value="@Model.Notes" />
                 </div>
 
                
-                <div class=" d-flex  justify-content-around client-control col-lg-3 m-2">
+                <div class="d-flex justify-content-center align-self-end client-control col-sm-12 col-lg-3 mt-xs-2 mt-sm-2">
                     @if(!string.IsNullOrEmpty(Model.BillsFileOld))
                     {
 
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                            <button data-id="@Model.ClientId" class="btn btn-primary fs-4">
-                                    <i class="fas fa-download"></i>
+                        <div class="d-flex justify-content-center align-items-end">
+                            <button data-id="@Model.ClientId" class="btn btn-primary fs-6 m-0">
+                                    عرض الفاتورة الحالية
                             </button>
-                            <label class="fs-6 fw-bold">عرض الفاتورة الحالية</label>
                         </div>
                     }
                     @if (isFinancialUser || isGeneralManager)
                     {
-                        <div class="btn-absoulte-for-upload d-flex flex-column justify-content-center align-items-center">
+                        <div class="btn-absoulte-for-upload d-flex justify-content-center align-items-end">
                             <input type="file" class="hidden-file-input" />
-                            <button type="button" asp-for="BillsFileNew" class="btn btn-primary fs-4">
-                                <i class="fas fa-upload"></i>
+                            <button type="button" asp-for="BillsFileNew" class="btn btn-primary fs-6 m-0">
+                                رفع فاتورة
                             </button>
-                            <label class="fs-6 fw-bold">رفع فاتورة</label>
                         </div>
                     }
                 </div>
             </div>
 
         </div>
-        <div class="mt-4">
-            <h3 class="mb-3"> ملفات اخرى</h3>
 
-            <table class="table table-secondary">
+        <h3 class="mt-5 mb-1"> ملفات اخرى</h3>
+
+        <div class="row card mt-4 mb-4">
+
+            <table class="table table-bordered table-hover">
                 <thead>
-                    <tr>
+                    <tr class="text-dark">
                         <th scope="col">#</th>
                         <th scope="col">الملف</th>
                         <th scope="col">وصف الملف</th>
@@ -111,7 +111,7 @@
                     
                     }
 
-                    <tr class="table-primary">
+                    <tr class="">
                         <th scope="row">@(++i)</th>
                         <td>
                             <input class="test" id="hasFile-@i" asp-for="NewOtherFiles[newFileId].NewFile" type="file">
@@ -119,9 +119,9 @@
                         <td>
                             <input id="hasDescription-@i" asp-for="NewOtherFiles[newFileId].Description" type="text">
                         </td>
-                        <td>
-                            <button id="remove-@i" type="button" class="add-new-otherFile btn btn-primary table-add-btn">
-                                <i class="fas fa-plus-circle fs-6"></i>
+                        <td class="d-flex justify-content-center">
+                            <button id="remove-@i" type="button" class="add-new-otherFile table-add-btn">
+                                <i class="fas fa-plus fs-6"></i>
                             </button>
                         </td>
                         <td></td>
