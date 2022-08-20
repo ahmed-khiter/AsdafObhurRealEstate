@@ -45,12 +45,7 @@
     padding: 8px 10px;
     border: 1px solid #aaa;
     border-radius: 10px;
-    width: 300px;
-}
-
-.form-col label {
-    font-size: 28px;
-    padding-right: 10px;
+    width:100%;
 }
 
 .custom-form-btn-container {
