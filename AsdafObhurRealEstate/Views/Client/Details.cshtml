@@ -14,43 +14,43 @@
 <form asp-area="" asp-controller="client" asp-action="SavedFileAboutClient" enctype="multipart/form-data" >
     <input type="hidden" asp-for="ClientId" />
     <div>
-        <div class="client-info">
-            <h3 class="mb-3">المعلومات الرئيسية</h3>
-            <div class="client-info-container row">
-                <div class="client-info-box col-sm-3 bg-primary text-light m-1">
-                    <h4 class="text-light m-0">اسم العميل</h4>
-                   <h3 class="m-0 text-light"> <strong class="info-label fs-5">@Model.ClientName</strong> </h3>
+        <h3 class="mb-3">المعلومات الرئيسية</h3>
+        <div class="row client-info card p-3">
+            <div class="row client-info-container">
+                <div class="client-info-box col-md-4">
+                   <h5 class="m-0 info-header">اسم العميل</h5>
+                   <h5 class="m-0">@Model.ClientName </h5>
                 </div>
-                <div class="client-info-box col-sm-3 bg-secondary text-light m-1">
-                    <h4 class="text-light m-0">رقم الهاتف</h4>
-                    <h3 class="m-0 text-light"> <strong class="info-label fs-5">@Model.PhoneNumber</strong> </h3>
+                <div class="client-info-box col-md-4">
+                    <h5 class="m-0 info-header">رقم الهاتف</h5>
+                    <h5 class="m-0">@Model.PhoneNumber</h5>
                 </div>
-                <div class="client-info-box col-sm-3 bg-secondary text-light m-1">
-                    <h4 class="text-light m-0">العنوان</h4>
-                    <h3 class="m-0 text-light"> <strong class="info-label fs-5">@Model.Address</strong> </h3>
+                <div class="client-info-box col-md-4">
+                    <h5 class="m-0 info-header">العنوان</h5>
+                    <h5 class="m-0">@Model.Address</h5>
                 </div>
             </div>
 
-              <div class="client-info-container row mt-2">
-                <div class="client-info-box col-sm-3 bg-primary text-light m-1">
-                    <h4 class="text-light m-0">تفاصيل احتياج العميل</h4>
-                   <h3 class="m-0 text-light"> <strong class="info-label fs-5">@Model.CustomerNeeded</strong> </h3>
+            <div class="row client-info-container mt-2">
+                <div class="client-info-box col-md-4">
+                    <h5 class="m-0 info-header">تفاصيل احتياج العميل</h5>
+                    <h5 class="m-0">@Model.CustomerNeeded</h5>
                 </div>
-                <div class="client-info-box col-sm-3 bg-secondary text-light m-1">
-                    <h4 class="text-light m-0">تم انشاء الملف بواسطه</h4>
-                    <h3 class="m-0 text-light"> <strong class="info-label fs-5">@Model.CreatedBy</strong> </h3>
+                <div class="client-info-box col-md-4">
+                    <h5 class="m-0 info-header">تم انشاء الملف بواسطه</h5>
+                    <h5 class="m-0">@Model.CreatedBy</h5>
                 </div>
-                <div class="client-info-box col-sm-3 bg-secondary text-light m-1">
-                    <h4 class="text-light m-0">تم التعامل مع الملف بواسطه</h4>
-                    <h3 class="m-0 text-light"> <strong class="info-label fs-5">@Model.HandledBy</strong> </h3>
+                <div class="client-info-box col-md-4">
+                    <h5 class="m-0 info-header">تم التعامل مع الملف بواسطه</h5>
+                    <h5 class="m-0">@Model.HandledBy</h5>
                 </div>
             </div>
 
 
             <div class="client-info-container row mt-2">
-                <div class="client-info-box client-notes col-lg-8 bg-secondary text-light m-2">
+                <div class="client-info-box client-notes col">
                     <strong class="info-label">ملاحظات</strong>
-                    <input class="client-notes-input text-end text-light fs-5 pe-2" asp-for="Notes" value="@Model.Notes" />
+                    <input class="client-notes-input text-end   fs-5 pe-2" asp-for="Notes" value="@Model.Notes" />
                 </div>
 
                

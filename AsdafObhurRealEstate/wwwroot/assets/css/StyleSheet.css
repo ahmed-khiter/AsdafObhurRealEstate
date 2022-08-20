@@ -75,24 +75,28 @@
 }
 
 .client-info-container {
-    display: flex;
-    width: 100%;
-    justify-content: center;
+  
+   width:100%;
 }
 
 .client-info-box {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: flex-start;
     padding: 5px;
     min-height: 80px;
-    background-color: #d1d1d1;
     border-radius: 10px;
     font-size: 22px;
 }
 
-
+    .client-info-box .info-header {
+        opacity: .6;
+    }
+    .client-info-box h5
+    {
+        font-weight: 500;
+    }
 
 .client-notes-input {
     width: 100%;
