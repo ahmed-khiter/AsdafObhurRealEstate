@@ -20,54 +20,54 @@
 
 <div class="container" >
 
-    <form class="custom-form" asp-area="" asp-action="Create" asp-controller="Client" method="post">
+    <form class="row custom-form" asp-area="" asp-action="Create" asp-controller="Client" method="post">
         <input asp-for="ClientId" type="hidden" />
 
-    <div class="form-two-col">
-        <div class="form-col">
-            <label asp-for="ClientName">اسم العميل</label>
+        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column m-2">
+                <label class="fs-5" asp-for="ClientName">اسم العميل</label>
             <input class="custom-form-input" type="text" placeholder="ادخل الاسم" id="clientName" asp-for="ClientName" aria-describedby="clientName">
             <span asp-validation-for="ClientName" class="text-danger"></span>
         </div>
-       <div class="form-col">
-                <label class="form-label" asp-for="PhoneNumber">رقم الهاتف</label>
+            <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column m-2">
+                <label class="fs-5" asp-for="PhoneNumber">رقم الهاتف</label>
                 <input class="custom-form-input" type="number" id="phonenumber" asp-for="PhoneNumber" aria-describedby="phoneNumber" placeholder="رقم الهاتف">
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
         </div>
     </div>
-    <div class="form-two-col">
-          <div class="form-col">
-            <label class="form-label" asp-for="Address">عنوان بالتفصيل</label>
+        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column m-2">
+                <label class="fs-5" asp-for="Address">عنوان بالتفصيل</label>
             <input class="custom-form-input" type="text" id="Address" asp-for="Address" aria-describedby="Address" placeholder="عنوان بالتفصيل">
             <span asp-validation-for="Address" class="text-danger"></span>
           </div>
-            <div class="form-col">
-                <label class="form-label" asp-for="CustomerNeeded">احتياج العميل </label>
+            <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column m-2">
+                <label class="fs-5" asp-for="CustomerNeeded">احتياج العميل </label>
                 <input class="custom-form-input" type="text" id="CustomerNeeded" asp-for="CustomerNeeded" aria-describedby="CustomerNeeded" placeholder="احتياج العميل ">
                 <span asp-validation-for="CustomerNeeded" class="text-danger"></span>
             </div>
 
     </div>
 
-    <div class="form-two-col">
-         <div class="form-col">
-            <label asp-for="DepartmentId">أختار القسم</label>
+        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column m-2">
+                <label class="fs-5" asp-for="DepartmentId">أختار القسم</label>
                 <select id="selectDepartment" class="custom-form-input custom-select" asp-for="DepartmentId" asp-items="ViewBag.departments">
                     <option value="-1" selected disabled>اختار القسم المناسب</option>
             </select>
         </div>
 
-        <div class="form-col">
-            <label asp-for="BaseUserId">أختار الموظف</label>
+            <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column m-2">
+                <label class="fs-5" asp-for="BaseUserId">أختار الموظف</label>
                 <select id="selectUsers" class="custom-form-input custom-select" asp-for="BaseUserId" >
                     <option value="-1" selected disabled>اختار الموظف</option>
             </select>
         </div>
     </div>
 
-    <div class="form-two-col">
+        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-10">
        
-        <div class="form-col custom-form-btn-container">
+        <div class="row col-12 form-col custom-form-btn-container">
             <button class="custom-form-btn custom-form-input btn btn-primary m-0" type="submit">أدخل</button>
         </div>
     </div>
