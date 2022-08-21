@@ -1,5 +1,5 @@
 ﻿// quering the elements
-const navLinks = document.querySelectorAll(".nav-link");
+//const navLinks = document.querySelectorAll(".nav-link");
 
 
 // storing the class in the local storage

@@ -154,9 +154,15 @@
     outline:none;
 }
 
+/* pagination */
+.active-pagination {
+    color: white !important;
+    background-color: var(--bs-link-color) !important;
+    border:none;
+}
 
-.btn-absoulte-for-upload{
-    position:relative
+.btn-absoulte-for-upload {
+    position: relative
 }
 .hidden-file-input {
     position: absolute;
@@ -166,3 +172,4 @@
     right: 0px;
     width: 68px;
 }
+
