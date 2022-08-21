@@ -411,10 +411,23 @@ namespace AsdafObhurRealEstate.Controllers
             if (client == null)
                 return BadRequest();
 
+            if(client.ClientStatus == Enums.StatusOfClient.UnderProgress)
+            {
+                return BadRequest("يجب تحويل الملف للمالية أولا");
+            }
+
             client.ClientStatus = Enums.StatusOfClient.Finished;
 
-            _context.Update(client);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Update(client);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("حدث خطأ أثناء الإغلاق الملف حاول مرة اخرى");
+            }
 
             return RedirectToAction(nameof(Index));
         }
@@ -451,5 +464,19 @@ namespace AsdafObhurRealEstate.Controllers
             
             return File(result.Memory,result.ContentType,descriptionFile);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DownloadBill(string clientId)
+        {
+            var client = (await _context.Clients.SingleOrDefaultAsync(m => m.Id == clientId));
+            var result = await _fileManager.DownloadFile(client.BillsFile);
+
+            var extension = Path.GetExtension(client.BillsFile);
+
+            var fileDescription = $"فاتورة العميل {client.ClientName}"+ extension;
+            return File(result.Memory, result.ContentType, fileDescription);
+        }
+
+
     }
 }

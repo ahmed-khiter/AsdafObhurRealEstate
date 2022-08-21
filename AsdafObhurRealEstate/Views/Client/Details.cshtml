@@ -8,6 +8,7 @@
 
     var i = 0;
     int newFileId = 0;
+   
 }
 
 <!-- bootstrab table -->
@@ -59,7 +60,7 @@
                     {
 
                         <div class="d-flex justify-content-center align-items-end">
-                            <button data-id="@Model.ClientId" class="btn btn-primary fs-6 m-0">
+                            <button id="oldBill" type="button" data-id="@Model.ClientId" data-value="@Model.BillsFileOld" class="btn btn-primary fs-6 m-0">
                                     عرض الفاتورة الحالية
                             </button>
                         </div>
@@ -67,8 +68,8 @@
                     @if (isFinancialUser || isGeneralManager)
                     {
                         <div class="btn-absoulte-for-upload d-flex justify-content-center align-items-end">
-                            <input type="file" class="hidden-file-input" />
-                            <button type="button" asp-for="BillsFileNew" class="btn btn-primary fs-6 m-0">
+                            <input asp-for="BillsFileNew" type="file" class="hidden-file-input" />
+                            <button type="button" class="btn btn-primary fs-6 m-0">
                                 رفع فاتورة
                             </button>
                         </div>
@@ -82,7 +83,7 @@
 
         <div class="row card mt-4 mb-4">
 
-            <table class="table table-bordered table-hover">
+            <table  id="table-file" class="table table-bordered table-hover">
                 <thead>
                     <tr class="text-dark">
                         <th scope="col">#</th>
@@ -98,10 +99,10 @@
                         <tr>
                             <th scope="row">@(++i)</th>
                             <td>
-                                <div class="d-flex flex-column justify-content-center align-items-center">
-                                    <button type="button" id="downloadFile" data-downloadfilebyname="@item.FileOld" class="btn btn-primary fs-4">
-                                            <i class="fas fa-download"></i>
-                                    </button>
+                                <div href="#" class="d-flex flex-column">
+                                    <label style="cursor: pointer" id="downloadFile" data-downloadfilebyname="@item.FileOld" class="fs-4">
+                                            اضغط هنا لتنزيل الملف
+                                    </label>
                                 </div>
                             </td>
                             <td>@item.Description</td>
@@ -110,8 +111,10 @@
                         </tr>
                     
                     }
-
-                    <tr class="">
+                    @{
+                        var row = i;
+                    }
+                    <tr id="row-@(row+=1)">
                         <th scope="row">@(++i)</th>
                         <td>
                             <input class="test" id="hasFile-@i" asp-for="NewOtherFiles[newFileId].NewFile" type="file">
@@ -134,12 +137,13 @@
             <div class="d-flex col justify-content-center">
                 <button class="btn btn-primary">حفظ التعديلات</button>
             </div>
-            @if (isFinancialUser){
+            @if (isFinancialUser || isGeneralManager){
                 <div class="d-flex col justify-content-center">
-                    <a class="btn btn-secondary">انهاء الملف</a>
+                    <a id="finishFile" data-getclientid="@Model.ClientId" class="btn btn-secondary">انهاء الملف</a>
                 </div>
             }
-            else{
+            @if (!isFinancialUser || isGeneralManager)
+            {
                 <div class="d-flex col justify-content-center">
                     <a id="transformToFinancial" data-getclientid="@Model.ClientId" class="btn btn-secondary">تحويل الي المالية</a>
                 </div>
@@ -154,127 +158,18 @@
 
 @section Scripts{
 
-    <script>
-    
-        var currentIndex = @(++i);
-        var ids = @i;
 
-        $(document).ready(function () {
-            $(document).on("click", "#selectDepartment", function () {
-                var subCat = this;
-                $.ajax({
-                    url: "GetUsersByDepartmentId?departmentId=" + $(subCat).val(),
-                    type: "GET",
-                    contentType: "application/json; charset=utf-8",
-                    datatype: JSON,
-                    success: function (result) {
-                        debugger;
-                        var users = '<option selected disabled value="0">اختار الموظف</option>';
-                        $(result).each(function () {
-                            users = users + '<option value="' + this.id + '">' + this.value + '</option>'
-                        });
-                        var subCateList = $("#selectUsers");
-                        subCateList.empty();
-                        subCateList.append()
-                        subCateList.append(users);
-                    },
-                    error: function (data) {
-                        return Swal.fire(
-                            "حدث خطأ اثناء اختيار القسم"
-                        );
-                    }
-                });
-            });
-        });
+<script src="~/custom-javascript/client-details/download-file.js"></script>
+<script src="~/custom-javascript/client-details/transformfileto.js"></script>
 
-        $(document).on("click", ".add-new-otherFile", function () {
-
-            let idOfFile = `hasFile-${ids}`;
-            let idOfDescriptions = `hasDescription-${ids}`;
-
-            let file = document.getElementById(`${idOfFile}`).value;
-
-            let descriptions = document.getElementById(`${idOfDescriptions}`).value;
-
-            console.log(file)
-            console.log(descriptions)
-
-            if (file!== ''  && descriptions !== '') {
-
-                let removeId = "remove-" + ids;
-
-
-                let removeButton = document.getElementById(removeId);
-
-                removeButton.removeChild(removeButton.lastElementChild);
-
-                removeButton.remove();
-
-                $("#appendNewFile").append(`
-                    <tr class="table-primary">
-                        <th scope="row">${currentIndex}</th>
-                        <td>
-                            <input type="file" id="hasFile-${ids}" name="NewOtherFiles[${ids}].NewFile" >
-                        </td>
-                        <td>
-                            <input id="hasDescription-${ids}" name="NewOtherFiles[${ids}].Description" type="text">
-                        </td>
-                        <td>
-                            <button  id="remove-${ids}" type="button" class="add-new-otherFile btn btn-primary table-add-btn">
-                                <i class="fas fa-plus-circle fs-6"></i>
-                            </button>
-                        </td>
-                        <td>
-                            <button id="delete-${ids}" style="background-color:darkred"  type="button" class="add-remove-row btn btn-primary table-add-btn">
-                                <i class="fas fa-minus-circle fs-6"></i>
-                            </button>
-                        </td>
-                    </tr>
-         
-            `);
-            
-            currentIndex+=1;
-            ids+=1;
-
-            }
-            else{
-                Swal.fire(
-                    'يجب اختيار الملف و كتابة تفاصيل له.'
-                )
-            }
-
-
-        });
-
-
-        $(document).on("click", "#downloadFile", function(){
-            var downloadFile = $(this).data("downloadfilebyname");
-            console.log(downloadFile);
-
-            const inputEle = document.querySelector('[data-downloadFile="download"]')
-            window.open(document.location.origin + "/client/DownloadFile?fileName=" + downloadFile, '_blank');
-        });
-
-
-        $(document).on("click", "#transformToFinancial", function(){
-            var clientId = $(this).data("getclientid");
-            $.ajax({
-                url: '/Client/TransformFileToFinancial?clientId='+clientId,
-                type: "POST",
-                contentType: 'application/x-www-form-urlencoded',
-                data: clientId,
-                success: (data) => {
-                   
-                },
-                error: function (eventFromParam) {
-                    Swal.fire(
-                    "حدث خطأ أثناء التحويل للماليه حاول مرة اخرى"
-                    )
-                }
-            })
-
-        });
+<script>
+        var currentIndex = @(i);
+        var nextIndex = @(++i);
+        var ids = 1;
 
 </script>
+
+    <script src="~/custom-javascript/client-details/plusorminusfile.js"></script>
+
 }
 
