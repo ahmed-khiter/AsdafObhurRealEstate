@@ -1,6 +1,7 @@
 ﻿@model GenerateReportDTO
 
-@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env;
+@*@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env;*@
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env;
 
 @{
     Layout = null;
@@ -19,7 +20,93 @@
 
 </head>
 <body>
-    <div class="container mt-5">
+
+    <div class="container-fluid mt-5">
+        <!--Page header-->
+        <header class=" d-flex justify-content-between mb-5 px-4 py-3">
+            <img src="~/assets/img/asdaf logo.png" alt="Company logo">
+            <img src="~/assets/img/Saudi_Vision_2030_logo light.png" alt="Saudi Vision 2030 logo">
+        </header>
+        <h2 class="text-center">تقرير</h2>
+        <div class="row">
+            <section class="d-flex flex-column justify-content-around">
+                <h4 class="section-header fw-bold">بيانات المدير العام</h4>
+                <div class="d-flex justify-content-between w-75">
+                    <div class="d-flex">
+                        <h4 class="m-2">الاسم:</h4>
+                        <h4 class="m-2">المدير العام</h4>
+                    </div>
+
+                    <div class="d-flex">
+                        <h4 class="m-2">رقم الجوال:</h4>
+                        <h4 class="m-2">01120169782 </h4>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="d-flex">
+                        <h4 class="m-2">البريد الالكتروني:</h4>
+                        <h4 class="m-2">the-betengany-manager@asdaf.com </h4>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-5">
+                <h4 class="section-header fw-bold">عملاء تم إنشائهم بواسطه: @Model.Name</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>رقم الكود</th>
+                            <th>اسم العميل</th>
+                            <th>رقم تلفون العميل </th>
+                            <th>حاله العميل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in Model.ClientsCreatedBy)
+                        {
+
+                        <tr>
+                            <td>@item.ClientCode</td>
+                            <td>@item.ClientName</td>
+                            <td>@item.ClientPhone</td>
+                            <td>@item.ClientStatus</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="row mt-5">
+                <h4 class="section-header fw-bold">العملاء تم التعامل معاهم بواسطه @Model.Name</h4>
+                <table class="table">
+
+                    <thead>
+                        <tr>
+                            <th>رقم الكود</th>
+                            <th>اسم العميل</th>
+                            <th>رقم تلفون العميل </th>
+                            <th>حاله العميل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                         @foreach (var item in Model.ClientsHandledBy)
+                            {
+                        <tr>
+                            <td>@item.ClientCode</td>
+                            <td>@item.ClientName</td>
+                            <td>@item.ClientPhone</td>
+                            <td>@item.ClientStatus</td>
+                        </tr>
+                            }
+                    </tbody>
+                </table>
+            </section>
+
+        </div>
+
+    </div>
+   @* <div class="container mt-5">
         <h4>بيانات  @Model.Name</h4>
         <div class="row">
             <div class="row g-3">
@@ -102,7 +189,7 @@
 
         </div>
 
-    </div>
+    </div>*@
 </body>
 </html>
 

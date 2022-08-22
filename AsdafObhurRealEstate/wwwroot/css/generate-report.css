@@ -1,17 +1,51 @@
 ﻿
-@font-face {
-    font-family: 'majalla';
-    src: url('../fonts/majalla.ttf') format('truetype')
-}
+@media print 
+    {
 
-.wrapper {
-    text-align: right;
-    direction: rtl;
-}
+        @font-face {
+            font-family: 'majalla';
+            src: url('../fonts/majalla.ttf') format('truetype')
+        }
 
 
-body {
-    font-family: 'majalla',Verdana, Geneva, Tahoma, sans-serif;
+        @font-face {
+            font-family: 'majalla';
+            src: url('majalla.ttf') format('truetype')
+        }
+
+        .wrapper {
+            text-align: right;
+            direction: rtl;
+        }
+
+
+        body {
+            print-color-adjust:exact;
+            font-family: 'majalla',Verdana, Geneva, Tahoma, sans-serif;
+            color:#000;
+        }
+
+        header {
+            background-color: #3e88a2;
+            height: fit-content;
+        }
+
+        header img:first-of-type {
+            height: 50px;
+        }
+
+        header img:last-of-type {
+            height: 60px;
+        }
+
+        .section-header {
+            color: #3e88a2;
+        }
+
+        thead {
+            background-color: #3e88a2 !important;
+            color: white !important;
+        }
 
 }
 
