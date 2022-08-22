@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AsdafObhurRealEstate.Constants;
+using AsdafObhurRealEstate.Core;
 using AsdafObhurRealEstate.DTO.Account;
 using AsdafObhurRealEstate.Enums;
 using AsdafObhurRealEstate.Infrastructure;
@@ -283,6 +284,27 @@ namespace AsdafObhurRealEstate.Controllers
             return View(details);
         }
 
-    
+
+        [HttpGet]
+        public async Task<IActionResult> PaginationEmployees(QueryParameters param)
+        {
+            // Get all clients as collection of queryable
+            var query = userManager.Users.OrderBy(m => m.Code).AsQueryable();
+            var count = await query.CountAsync();
+            var items = await query.Skip((param.Page) * param.Limit).Take(param.Limit).ToListAsync();
+            var resultPageList = new PagedList<BaseUser>(items, count, param.Page, param.Limit);
+
+            var output = new PagedListModel<GenericListItemDTO>
+            {
+                Data = resultPageList.Select(c => new GenericListItemDTO(c)).ToList(),
+                Page = param.Page,
+                Limit = param.Limit,
+                Length = resultPageList.TotalCount,
+                //Pages = pages.TotalPages
+            };
+            return Ok(output);
+        }
+
+
     }
 }

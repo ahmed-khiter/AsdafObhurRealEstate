@@ -1,0 +1,46 @@
+[
+
+  {
+    "Id": 1,
+    "nameAr": "968",
+    "nameEn": "Oman",
+    "code": "عمان +968"
+  },
+  {
+    "Id": 2,
+    "nameAr": "966",
+    "nameEn": "Sudia Arabian",
+    "code": "سعودية +966"
+  },
+  {
+    "Id": 3,
+    "nameAr": "965",
+    "nameEn": "Kuwait",
+    "code": "الكويت +965"
+  },
+  {
+    "Id": 4,
+    "nameAr": "973",
+    "nameEn": "Bahrain",
+    "code": "البحرين +973"
+  },
+  {
+    "Id": 5,
+    "nameAr": "971",
+    "nameEn": "UAE",
+    "code": "الإمارات +971"
+  },
+  {
+    "Id": 6,
+    "nameAr": "974",
+    "nameEn": "Qatar",
+    "code": "قطر +974"
+  },
+  {
+    "Id": 7,
+    "nameAr": "20",
+    "nameEn": "Egypt",
+    "code": "مصر +20"
+  }
+
+]

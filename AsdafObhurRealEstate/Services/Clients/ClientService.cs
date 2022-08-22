@@ -32,7 +32,10 @@ namespace AsdafObhurRealEstate.Services.Clients
             {
                 if (refreshPage)
                 {
-                    var rslt = await _context.Clients.Select(m => new ListClientDTO
+                    var rslt = await _context.Clients
+                        .OrderBy(m => m.Code)
+                        .Take(10)
+                        .Select(m => new ListClientDTO
                     {
                         Id = m.Id,
                         ClientName = m.ClientName,
@@ -46,7 +49,9 @@ namespace AsdafObhurRealEstate.Services.Clients
 
                 }
 
-                return await _context.Clients.Select(m => new ListClientDTO
+                return await _context.Clients
+                        .OrderBy(m => m.Code)
+                        .Take(10).Select(m => new ListClientDTO
                 {
                     Id = m.Id,
                     ClientName = m.ClientName,
@@ -57,7 +62,9 @@ namespace AsdafObhurRealEstate.Services.Clients
                 }).ToListAsync();
             }
 
-            var clients = await _context.Clients.Where(m => m.BaseUserId == userId).Select(m => new ListClientDTO
+            var clients = await _context.Clients.Where(m => m.BaseUserId == userId)
+                        .OrderBy(m => m.Code)
+                        .Take(10).Select(m => new ListClientDTO
             {
                 Id = m.Id,
                 ClientName = m.ClientName,

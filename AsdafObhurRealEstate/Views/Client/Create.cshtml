@@ -29,28 +29,42 @@
             <input class="custom-form-input" type="text" placeholder="ادخل الاسم" id="clientName" asp-for="ClientName" aria-describedby="clientName">
             <span asp-validation-for="ClientName" class="text-danger"></span>
         </div>
-            <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column m-2">
+
+        <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column m-2">
+            <label class="fs-5" asp-for="Address">عنوان بالتفصيل</label>
+            <input class="custom-form-input" type="text" id="Address" asp-for="Address" aria-describedby="Address" placeholder="عنوان بالتفصيل">
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+       
+    </div>
+        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-10">
+
+            <div class="row col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-11 d-flex flex-column m-2">
+                    <label class="fs-5" asp-for="CodePhoneNumber">اختار كود الدوله</label>
+                    <select id="codePhoneNumber" class="custom-form-input custom-select" asp-for="CodePhoneNumber" asp-items="ViewBag.listPhone">
+                        <option value="-1" selected disabled>اختار كود الدوله</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-5 d-flex flex-column m-2">
                 <label class="fs-5" asp-for="PhoneNumber">رقم الهاتف</label>
                 <input class="custom-form-input" type="number" id="phonenumber" asp-for="PhoneNumber" aria-describedby="phoneNumber" placeholder="رقم الهاتف">
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-        </div>
+            </div>
     </div>
+
         <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-10">
-            <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column m-2">
-                <label class="fs-5" asp-for="Address">عنوان بالتفصيل</label>
-            <input class="custom-form-input" type="text" id="Address" asp-for="Address" aria-describedby="Address" placeholder="عنوان بالتفصيل">
-            <span asp-validation-for="Address" class="text-danger"></span>
-          </div>
+
             <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column m-2">
                 <label class="fs-5" asp-for="CustomerNeeded">احتياج العميل </label>
                 <input class="custom-form-input" type="text" id="CustomerNeeded" asp-for="CustomerNeeded" aria-describedby="CustomerNeeded" placeholder="احتياج العميل ">
                 <span asp-validation-for="CustomerNeeded" class="text-danger"></span>
             </div>
 
-    </div>
-
-        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-10">
-            <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column m-2">
+        <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column m-2">
                 <label class="fs-5" asp-for="DepartmentId">أختار القسم</label>
                 <select id="selectDepartment" class="custom-form-input custom-select" asp-for="DepartmentId" asp-items="ViewBag.departments">
                     <option value="-1" selected disabled>اختار القسم المناسب</option>
@@ -66,7 +80,9 @@
     </div>
 
         <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-10">
-       
+
+
+
         <div class="row col-12 form-col custom-form-btn-container">
             <button class="custom-form-btn custom-form-input btn btn-primary m-0" type="submit">أدخل</button>
         </div>

@@ -1,4 +1,5 @@
 ﻿using AsdafObhurRealEstate.Constants;
+using AsdafObhurRealEstate.Core;
 using AsdafObhurRealEstate.DTO.ClientsDataTransferObject;
 using AsdafObhurRealEstate.Helpers;
 using AsdafObhurRealEstate.Infrastructure;
@@ -9,7 +10,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace AsdafObhurRealEstate.Controllers
 {
@@ -117,6 +120,11 @@ namespace AsdafObhurRealEstate.Controllers
 
             ViewData["departments"] = new SelectList(departments, "Id", "Name");
 
+            var countryPhone = ListOfPhoneNumber();
+
+            ViewData["listPhone"] = new SelectList(countryPhone, "nameAr", "code");
+
+
             return View();
         }
 
@@ -130,6 +138,10 @@ namespace AsdafObhurRealEstate.Controllers
 
                 ViewData["departments"] = new SelectList(departments, "Id", "Name");
 
+                var countryPhone = ListOfPhoneNumber();
+
+                ViewData["listPhone"] = new SelectList(countryPhone, "Id", "code");
+
                 foreach (var modelState in ViewData.ModelState.Values)
                 {
                     foreach (var error in modelState.Errors)
@@ -142,6 +154,14 @@ namespace AsdafObhurRealEstate.Controllers
 
             var code = await _context.Clients.MaxAsync(m => m.Code) + 1;
 
+            var resultString = Regex.Match(model.CodePhoneNumber, @"\d+").Value;
+            int codeNumber = 966; 
+            
+            int.TryParse(resultString,out codeNumber);
+
+            model.PhoneNumber = model.PhoneNumber.Remove(0, 1);
+            model.PhoneNumber = codeNumber + model.PhoneNumber;
+            
             var client = new Client()
             {
                 BaseUserId = model.BaseUserId,
@@ -209,7 +229,7 @@ namespace AsdafObhurRealEstate.Controllers
                 if (!isUserGeneralManager)
                 {
                     client.ClientStatus = Enums.StatusOfClient.UnderProgress;
-                    
+
                     if (!client.SendFirstMessageToClient)
                     {
                         var result = await _whatsAppsSender.SendMessage(client.ClientName, client.PhoneNumber, WhatsAppTemplate.EmployeeSendOpenFileToClient);
@@ -230,7 +250,7 @@ namespace AsdafObhurRealEstate.Controllers
                 }
 
             }
-            
+
             var createdBy = await _userManager.FindByIdAsync(client.CreatedBy);
             var handledBy = await _userManager.FindByIdAsync(client.BaseUserId);
 
@@ -322,7 +342,7 @@ namespace AsdafObhurRealEstate.Controllers
             {
                 foreach (var item in model.NewOtherFiles)
                 {
-                    if(item.NewFile != null  || !string.IsNullOrEmpty(item.Description))
+                    if (item.NewFile != null || !string.IsNullOrEmpty(item.Description))
                     {
                         var description = item.Description;
                         var file = _fileManager.Upload(item.NewFile);
@@ -411,7 +431,7 @@ namespace AsdafObhurRealEstate.Controllers
             if (client == null)
                 return BadRequest();
 
-            if(client.ClientStatus == Enums.StatusOfClient.UnderProgress)
+            if (client.ClientStatus == Enums.StatusOfClient.UnderProgress)
             {
                 return BadRequest("يجب تحويل الملف للمالية أولا");
             }
@@ -436,8 +456,11 @@ namespace AsdafObhurRealEstate.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllClientHasFinancial()
         {
+            ViewData["TotalCount"] = await _context.Clients.CountAsync();
             var clients = await _context.Clients
                         .Where(m => m.ClientStatus == Enums.StatusOfClient.FinancialTransformation)
+                        .OrderBy(m => m.Code)
+                        .Take(10)
                         .Select(m => new ListClientDTO()
                         {
                             ClientName = m.ClientName,
@@ -460,9 +483,9 @@ namespace AsdafObhurRealEstate.Controllers
 
             var extension = Path.GetExtension(fileName);
 
-            var descriptionFile = (await _context.Multimedias.SingleOrDefaultAsync(m => m.Path == fileName)).Description+extension;
-            
-            return File(result.Memory,result.ContentType,descriptionFile);
+            var descriptionFile = (await _context.Multimedias.SingleOrDefaultAsync(m => m.Path == fileName)).Description + extension;
+
+            return File(result.Memory, result.ContentType, descriptionFile);
         }
 
         [HttpGet]
@@ -473,10 +496,42 @@ namespace AsdafObhurRealEstate.Controllers
 
             var extension = Path.GetExtension(client.BillsFile);
 
-            var fileDescription = $"فاتورة العميل {client.ClientName}"+ extension;
+            var fileDescription = $"فاتورة العميل {client.ClientName}" + extension;
             return File(result.Memory, result.ContentType, fileDescription);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> PaginationClient(QueryParameters param)
+        {
+            // Get all clients as collection of queryable
+            var query = _context.Clients.OrderBy(m => m.Code).AsQueryable();
+            var count = await query.CountAsync();
+            var items = await query.Skip((param.Page) * param.Limit).Take(param.Limit).ToListAsync();
+            var resultPageList = new PagedList<Client>(items, count, param.Page, param.Limit);
 
+            var output = new PagedListModel<GenericListItemDTO>
+            {
+                Data = resultPageList.Select(c => new GenericListItemDTO(c)).ToList(),
+                Page = param.Page,
+                Limit = param.Limit,
+                Length = resultPageList.TotalCount,
+                //Pages = pages.TotalPages
+            };
+            return Ok(output);
+        }
+
+
+        private List<CountryPhoneNumber> ListOfPhoneNumber()
+        {
+            var countryPhone = new List<CountryPhoneNumber>();
+            using (StreamReader r = new StreamReader("LanguagePhone.json"))
+            {
+                string json = r.ReadToEnd();
+                countryPhone.AddRange(JsonConvert.DeserializeObject<List<CountryPhoneNumber>>(json));
+            }
+
+            return countryPhone;
+        }
     }
+
 }

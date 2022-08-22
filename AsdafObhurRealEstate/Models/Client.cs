@@ -23,6 +23,9 @@ namespace AsdafObhurRealEstate.Models
 
         public bool SendSecondMessageToClient { get; set; }
 
+        public int CodeNumber { get; set; }
+
+
         //تفاصيل احتياج العميل
         public string CustomerNeeded { get; set; }
 

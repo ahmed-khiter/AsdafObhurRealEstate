@@ -17,6 +17,7 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
 
         [Display(Name ="رقم التلفون")]
         [Required(ErrorMessage = "رقم التلفون إجبارى")]
+        //[RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "هذا الرقم غير صحيح")]
         public string PhoneNumber { get; set; }
 
         [Display(Name ="اختار القسم")]
@@ -27,6 +28,9 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
 
         [Display(Name = "تفاصيل احتياج العميل")]
         public string CustomerNeeded { get; set; }
+
+        [Display(Name ="كود الدولة")]
+        public string CodePhoneNumber { get; set; }
 
 
     }
