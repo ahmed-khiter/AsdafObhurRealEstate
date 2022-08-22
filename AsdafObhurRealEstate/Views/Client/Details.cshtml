@@ -60,7 +60,7 @@
                     {
 
                         <div class="d-flex justify-content-center align-items-end">
-                            <button id="oldBill" type="button" data-id="@Model.ClientId" data-value="@Model.BillsFileOld" class="btn btn-primary fs-6 m-0">
+                            <button id="oldBill" type="button" data-id="@Model.ClientId" data-value="@Model.BillsFileOld" class="btn btn-primary btn-sm m-1">
                                     عرض الفاتورة الحالية
                             </button>
                         </div>
@@ -69,7 +69,7 @@
                     {
                         <div class="btn-absoulte-for-upload d-flex justify-content-center align-items-end">
                             <input asp-for="BillsFileNew" type="file" class="hidden-file-input" />
-                            <button type="button" class="btn btn-primary fs-6 m-0">
+                            <button type="button" class="btn btn-primary btn-sm m-1">
                                 رفع فاتورة
                             </button>
                         </div>
@@ -82,8 +82,8 @@
         <h3 class="mt-5 mb-1"> ملفات اخرى</h3>
 
         <div class="row card mt-4 mb-4">
-
-            <table  id="table-file" class="table table-bordered table-hover">
+            <div class="table-responsive">
+                <table  id="table-file" class="table table-bordered table-hover overflow-scroll">
                 <thead>
                     <tr class="text-dark">
                         <th scope="col">#</th>
@@ -131,6 +131,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
         </div>
 
         <div class="row justify-content-center">
