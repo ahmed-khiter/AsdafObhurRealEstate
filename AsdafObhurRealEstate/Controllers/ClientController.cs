@@ -408,7 +408,9 @@ namespace AsdafObhurRealEstate.Controllers
                 }
                 else
                 {
-                    ViewData["successSendMessage"] = "حدث خطأ أثناء ارسال الرساله";
+                    ViewData["errorSendMessage"] = "حدث خطأ أثناء ارسال الرساله";
+
+                    return View();
                 }
 
             }

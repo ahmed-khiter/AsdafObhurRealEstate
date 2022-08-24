@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Configuration;
 using System.Net;
 using System.Security.Claims;
 using Wkhtmltopdf.NetCore;
@@ -20,6 +21,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ClientService>();
 builder.Services.AddDbContext<AsdafObhurContext>(options =>
 {
+    //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    //options.UseMySql(connectionString,
+    //    ServerVersion.AutoDetect(connectionString));
+
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 

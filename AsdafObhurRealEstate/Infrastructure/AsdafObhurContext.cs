@@ -34,7 +34,5 @@ namespace AsdafObhurRealEstate.Infrastructure
         }
 
 
-
-
         }
 }

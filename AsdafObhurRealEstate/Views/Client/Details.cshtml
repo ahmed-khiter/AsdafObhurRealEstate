@@ -10,6 +10,9 @@
     int newFileId = 0;
    
 }
+<script>
+    Swal.fire(@(ViewBag.errorSendMessage));
+</script>
 
 <!-- bootstrab table -->
 <form class="row" asp-area="" asp-controller="client" asp-action="SavedFileAboutClient" enctype="multipart/form-data" >
@@ -51,7 +54,9 @@
             <div class="client-info-container align-items-center row mt-2">
                 <div class="client-info-box client-notes col-sm-12 col-md-9 p-0">
                     <strong class="info-label">ملاحظات</strong>
-                    <input class="client-notes-input text-end fs-5 pe-2" asp-for="Notes" value="@Model.Notes" />
+                    <textarea style="min-height:100px" class="client-notes-input text-end fs-5 pe-2" asp-for="Notes" value="@Model.Notes" >
+
+                    </textarea>
                 </div>
 
                
