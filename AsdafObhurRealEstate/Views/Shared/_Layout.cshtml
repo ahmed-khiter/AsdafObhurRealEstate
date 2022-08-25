@@ -44,7 +44,7 @@
     @RenderSection("Styles", required: false)
 </head>
 
-<body class="g-sidenav-show rtl bg-gray-200">
+<body class="g-sidenav-show height-vh-100 rtl bg-gray-200">
   
     
     @if (isLogged)
@@ -52,7 +52,7 @@
 
           <partial name="_RightSideBar.cshtml" />
     }
-  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg overflow-x-hidden">
+  <main class="main-content position-relative h-100 border-radius-lg overflow-x-hidden">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
       <div class="container-fluid py-1 px-3">
@@ -98,19 +98,19 @@
     </nav>
     <!-- End Navbar -->
 
-    <div class="container-fluid d-flex justify-content-center py-2">
+    <div class="main-container container-fluid py-2">
             <div class="container-fluid row d-flex justify-content-center p-0">
                 @RenderBody()
             </div>
     
-            @if (!isLogged)
-            {
-                <partial name="_Footer.cshtml" />
-            }
+            
 
     </div>
   </main>
-
+  @if (!isLogged)
+            {
+                <partial name="_Footer.cshtml" />
+            }
   
   <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
   <script src="~/lib/jquery-validate/jquery.validate.js"> </script>

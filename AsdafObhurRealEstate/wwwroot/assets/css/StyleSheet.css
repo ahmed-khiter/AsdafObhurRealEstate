@@ -2,10 +2,13 @@
     icons
 */
 
+.main-container {
+    min-height: 75vh;
+}
+
 /* Login form */
-.login-form
-{
-    width:fit-content;
+.login-form {
+    width: fit-content;
 }
 
 /* Navbar */
