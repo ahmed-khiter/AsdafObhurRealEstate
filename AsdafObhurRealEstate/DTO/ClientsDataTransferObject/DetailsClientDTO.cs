@@ -33,6 +33,7 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
         [Display(Name = "تم التعامل مع الملف بواسطة")]
         public string HandledBy { get; set; }
 
+        public string Status { get; set; }
 
 
         public int ClientCode { get; set; }

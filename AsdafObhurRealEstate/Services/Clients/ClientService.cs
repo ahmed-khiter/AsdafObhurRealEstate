@@ -22,7 +22,7 @@ namespace AsdafObhurRealEstate.Services.Clients
             _fileManager = fileManager;
         }
 
-        public async Task<List<ListClientDTO>> GetClients(ClaimsPrincipal User,bool refreshPage)
+        public async Task<List<ListClientDTO>> GetClients(ClaimsPrincipal User)
         {
             var userId = _userManager.GetUserId(User);
 
@@ -30,58 +30,43 @@ namespace AsdafObhurRealEstate.Services.Clients
 
             if (await _userManager.IsInRoleAsync(user, Role.GeneralManager))
             {
-                if (refreshPage)
-                {
-                    var rslt = await _context.Clients
-                        .OrderBy(m => m.Code)
-                        .Take(10)
+                var rslt = await _context.Clients
+                        .OrderByDescending(m => m.Code)
+                        .Take(2)
                         .Select(m => new ListClientDTO
-                    {
-                        Id = m.Id,
-                        ClientName = m.ClientName,
-                        PhoneNumber = m.PhoneNumber,
-                        Code = m.Code,
-                        Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
-                        CreateAt = m.CreatedAt
-                    }).ToListAsync();
+                        {
+                            Id = m.Id,
+                            ClientName = m.ClientName,
+                            PhoneNumber = m.PhoneNumber,
+                            Code = m.Code,
+                            Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
+                            CreateAt = m.CreatedAt
+                        }).ToListAsync();
 
-                    return rslt;
-
-                }
-
-                return await _context.Clients
-                        .OrderBy(m => m.Code)
-                        .Take(10).Select(m => new ListClientDTO
-                {
-                    Id = m.Id,
-                    ClientName = m.ClientName,
-                    PhoneNumber = m.PhoneNumber,
-                    Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
-                    Code = m.Code,
-                    CreateAt = m.CreatedAt
-                }).ToListAsync();
+              return rslt;
             }
 
-            var clients = await _context.Clients.Where(m => m.BaseUserId == userId)
-                        .OrderBy(m => m.Code)
-                        .Take(10).Select(m => new ListClientDTO
-            {
-                Id = m.Id,
-                ClientName = m.ClientName,
-                PhoneNumber = m.PhoneNumber,
-                Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
-                Code = m.Code,
-                CreateAt = m.CreatedAt
-            }).ToListAsync();
+            var clients = await _context.Clients
+                        .Where(m => m.BaseUserId == userId)
+                        .OrderByDescending(m => m.Code)
+                        .Take(2).
+                        Select(m => new ListClientDTO
+                        {
+                            Id = m.Id,
+                            ClientName = m.ClientName,
+                            PhoneNumber = m.PhoneNumber,
+                            Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
+                            Code = m.Code,
+                            CreateAt = m.CreatedAt
+                        }).ToListAsync();
 
-            if (refreshPage)
-            {
-                return clients;
-            }
 
             return clients;
 
         }
+
+
+
 
 
 

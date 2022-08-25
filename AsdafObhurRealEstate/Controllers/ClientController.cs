@@ -36,12 +36,14 @@ namespace AsdafObhurRealEstate.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(bool refreshPage, bool isJsonReturn)
+        public async Task<IActionResult> Index()
         {
-            var clients = await _clientService.GetClients(User, refreshPage);
 
-            if (isJsonReturn)
-                return Ok(clients);
+            var clients = await _clientService.GetClients(User);
+
+            var userId = _userManager.GetUserId(User);
+            int totalCount = (await _context.Clients.Where(m => m.BaseUserId == userId).CountAsync()) / 2;
+            ViewData["TotalCount"] = totalCount;
 
             return View(clients);
         }
@@ -267,6 +269,7 @@ namespace AsdafObhurRealEstate.Controllers
                 HandledBy = $"{handledBy.FirstName} {handledBy.LastName}",
                 CreatedBy = $"{createdBy.FirstName} {createdBy.LastName}",
                 Notes = client.Notes,
+                Status = client.ClientStatus.GetAttribute<DisplayAttribute>().Name,
                 OldOtherFiles = new List<OldOtherFile>(),
             };
 

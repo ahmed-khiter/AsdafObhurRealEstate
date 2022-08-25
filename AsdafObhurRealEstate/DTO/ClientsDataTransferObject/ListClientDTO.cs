@@ -12,6 +12,9 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
         public int Code { get; set; }
         public DateTime CreateAt { get; set; }
 
+        public int TotalCount { get; set; }
+
+
     }
 
 }
