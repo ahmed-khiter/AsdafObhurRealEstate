@@ -32,6 +32,7 @@ namespace AsdafObhurRealEstate.Controllers
 
         public async Task<IActionResult> Index()
         {
+            await _whatsAppsSender.SendMessage("احمد خالد", "201100811024", WhatsAppTemplate.EmployeeSendOpenFileToClient);
             return View();
         }
 
