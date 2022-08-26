@@ -3,7 +3,6 @@ using System;
 using AsdafObhurRealEstate.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -18,14 +17,12 @@ namespace AsdafObhurRealEstate.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.8")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("AsdafObhurRealEstate.Models.BaseUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -38,65 +35,65 @@ namespace AsdafObhurRealEstate.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("DepartmentId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("ProfilePic")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
@@ -107,8 +104,7 @@ namespace AsdafObhurRealEstate.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
 
@@ -119,7 +115,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 1,
-                            ConcurrencyStamp = "333605b5-8ad1-42d8-b298-52f540b97faa",
+                            ConcurrencyStamp = "afe716c8-911a-4c0e-8254-94a0951caa9e",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             Email = "gm@gmail.com",
@@ -129,10 +125,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GM@GMAIL.COM",
                             NormalizedUserName = "GM@GMAIL.COM",
-                            PasswordHash = "ADb9R9GmQHov81hd0NvmTF/37K4noL4EtcuKqn6hKKMACeA4XEc2jx3xAqR3weF83g==",
+                            PasswordHash = "ALbkWs6y7xmRpW3fWzRVAJ1bz2cqxgSDcBcyVGP0Met/q04FvonaFTWHxAVZI2YwBg==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "0336b048-6a1a-4680-af7f-d295d661751d",
+                            SecurityStamp = "e1a51bfa-6c14-4d0c-a191-919ff2bcf7d5",
                             TwoFactorEnabled = false,
                             UserName = "gm@gmail.com"
                         },
@@ -142,7 +138,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 2,
-                            ConcurrencyStamp = "280700be-4b91-4fc4-bfeb-726d1a7f6788",
+                            ConcurrencyStamp = "fb3e18c3-6093-4327-a5c5-c32431d8f19e",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             DepartmentId = "f0157647-7016-41cc-9a56-3695acaa13e6",
@@ -153,10 +149,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PS@GMAIL.COM",
                             NormalizedUserName = "PS@GMAIL.COM",
-                            PasswordHash = "AA57C1hLuLuY5iPypbG6Myjh1UxockhQHZqfj6/zMuqU5eWi4zrzmxeGt3rvy6VhzQ==",
+                            PasswordHash = "AApamNeyA+w8U5n/MeI56uVK4p9a9+zZ1AvKiLM8LF+O6P4yTJExydsfsio9XyWQog==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "f4d9438b-3272-43aa-b1c0-8e7bdf7577de",
+                            SecurityStamp = "02d6e2d8-db12-4ed2-a7e0-615fd3584d30",
                             TwoFactorEnabled = false,
                             UserName = "ps@gmail.com"
                         },
@@ -166,7 +162,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 3,
-                            ConcurrencyStamp = "3818dc8d-f9cc-4ee6-b2ea-83eab0a3b718",
+                            ConcurrencyStamp = "bf358dbc-cfbb-4960-acd7-1546c9095301",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             Email = "es@gmail.com",
@@ -176,10 +172,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ES@GMAIL.COM",
                             NormalizedUserName = "ES@GMAIL.COM",
-                            PasswordHash = "AKVMA0dj7hv0DnqSpYC0BdT62akJRgcJp3qZhQIhq5ankcIgwz/akLWLYx0ed94Seg==",
+                            PasswordHash = "AFea7sS6foAH5KlPFPQpNYBP/gFfoSW6xIbtWKr8XYVGrQn0UR59UciKyNcxdjTZLQ==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "587ff881-9967-4151-8ab7-54af62b48850",
+                            SecurityStamp = "ed9a9dbf-4f8c-4f49-8b29-27b3ba458d64",
                             TwoFactorEnabled = false,
                             UserName = "es@gmail.com"
                         },
@@ -189,7 +185,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 4,
-                            ConcurrencyStamp = "37819f54-37a1-45bf-89ab-03977f9f3248",
+                            ConcurrencyStamp = "626f6a4d-4ddc-4de0-b4c4-4ac2ea5d750f",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             DepartmentId = "62fe29f0-c227-4a03-b2f6-z97279b2bc23",
@@ -200,10 +196,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "P@GMAIL.COM",
                             NormalizedUserName = "P@GMAIL.COM",
-                            PasswordHash = "AHEUkNMWy2tdhndRweynnTFLFyag7tFeB87K0LMhf4ThViiLanGWilAJ9b6uvcxaWw==",
+                            PasswordHash = "AKqO91KlKAyYvfyxdOaZf0tuSW6Ar85EYrl7ZjYCTjDuysIYXs8fU4PeIkx/bk3QlA==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "892b7beb-42ee-4a84-95b0-f6d3fd687d58",
+                            SecurityStamp = "e55d2945-ec6a-45ca-9a93-f8bb2365b218",
                             TwoFactorEnabled = false,
                             UserName = "p@gmail.com"
                         },
@@ -213,7 +209,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 5,
-                            ConcurrencyStamp = "457bd2f4-d8ff-4b45-b005-bebc0776baeb",
+                            ConcurrencyStamp = "8c2573f7-da70-4825-8c7b-842fd0841db3",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             DepartmentId = "cf8ac5ac-ee3f-4cac-988d-v45ef0eed54c",
@@ -224,10 +220,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M@GMAIL.COM",
                             NormalizedUserName = "M@GMAIL.COM",
-                            PasswordHash = "AJCbScnTvK/BCoS0PQ09yY9Kl48/wbjL1Y94ozzgZjCby+6RvyhoQWZbj7jpWURdZw==",
+                            PasswordHash = "ADEQoQ5tZKfUtvEcrLAcx/WcPsc4Fk1acHTsX36vdTmGE18EJu1RAB/4sU72qOzDLw==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "812659d8-0c6b-4e31-8968-2457057e1d41",
+                            SecurityStamp = "1d6063de-f60d-47cf-a88d-eb73aa5d1b82",
                             TwoFactorEnabled = false,
                             UserName = "m@gmail.com"
                         },
@@ -237,7 +233,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 6,
-                            ConcurrencyStamp = "63d28c4f-89af-4bc0-b287-edc3a4e363e7",
+                            ConcurrencyStamp = "50b652dc-4a3a-4cfe-8954-21d2941dd1ea",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             DepartmentId = "h3d0584e-fcd7-439c-8ae1-g5734664d6f4",
@@ -248,10 +244,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PMONITOR@GMAIL.COM",
                             NormalizedUserName = "PMONITOR@GMAIL.COM",
-                            PasswordHash = "AKzdCGfIUwYA2xa4sJttZhtraxV4O4stO2P8DGre+rTklZRKCbi8/OTlapHmLTUZbQ==",
+                            PasswordHash = "AA7kcNsDqjJiiI3MRmbUb1pQddVq+RDGMhFLtFYOrNR8WuThj3xz4IWgGqYDnH0A6Q==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "10f174e3-9ecb-4af1-b8ee-5c07dc2984c9",
+                            SecurityStamp = "66f59237-9830-4bae-81b0-f3204c95c539",
                             TwoFactorEnabled = false,
                             UserName = "pMonitor@gmail.com"
                         },
@@ -261,7 +257,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 7,
-                            ConcurrencyStamp = "885d639d-a4a9-4d4b-bd75-55c38bdd8c74",
+                            ConcurrencyStamp = "99660d57-f69d-43ab-81cd-1f1bc47a615f",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             DepartmentId = "h3d0584e-fcd7-439c-8ae1-g5734664d6f4",
@@ -272,10 +268,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PE@GMAIL.COM",
                             NormalizedUserName = "PE@GMAIL.COM",
-                            PasswordHash = "AK0aO5sXvfzPwjxr2IR8VYpqe0OmXbb6AQ6Bkq+rfEiKjIQFG7olNT+XSFtRut8OEA==",
+                            PasswordHash = "ABSd8uc8lq/E1U8psxv8v7JgF05hXBpp09jLtywIFKKrGFHNXosk4HNt6LhqACaKTw==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "2700c260-35cb-44e1-8041-923992ef6fd2",
+                            SecurityStamp = "8f0d0f6d-0592-4495-88ff-9c29efc249f3",
                             TwoFactorEnabled = false,
                             UserName = "pe@gmail.com"
                         },
@@ -285,7 +281,7 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 8,
-                            ConcurrencyStamp = "4589faf9-1cf1-4f3e-873e-39b70aafab9f",
+                            ConcurrencyStamp = "90fc32a5-0ae8-4279-87ca-b5037dceab1d",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "Developer",
                             DepartmentId = "62fe29f0-c227-4a03-b2f6-z97279b2bc23",
@@ -296,10 +292,10 @@ namespace AsdafObhurRealEstate.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "F@GMAIL.COM",
                             NormalizedUserName = "F@GMAIL.COM",
-                            PasswordHash = "ALPBM9dtjEcVxKarKY8U6L8F5JGFVSyjqK7izruMf7+SPLBI8oMPr4aAhBVzSvP+nw==",
+                            PasswordHash = "AHCjY1rNRHap+jEldKXeHK8wJvEQBlzPvi7eDLggjR5wTQWoTFcnT1FBg6IShaA67A==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "ff1bacbb-75fe-44d4-8ef9-d5af75277a31",
+                            SecurityStamp = "f83d2ef3-36b4-428d-a847-a5b967080685",
                             TwoFactorEnabled = false,
                             UserName = "f@gmail.com"
                         });
@@ -309,19 +305,19 @@ namespace AsdafObhurRealEstate.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("BaseUserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("BillsFile")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClientName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("ClientStatus")
                         .HasColumnType("int");
@@ -333,34 +329,34 @@ namespace AsdafObhurRealEstate.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("CustomerNeeded")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("DepartmentId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("SendFirstMessageToClient")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("SendSecondMessageToClient")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -386,7 +382,7 @@ namespace AsdafObhurRealEstate.Migrations
                             PhoneNumber = "035453650",
                             SendFirstMessageToClient = false,
                             SendSecondMessageToClient = false,
-                            UpdatedAt = new DateTime(2022, 8, 22, 21, 22, 28, 95, DateTimeKind.Local).AddTicks(1523)
+                            UpdatedAt = new DateTime(2022, 8, 26, 17, 8, 13, 632, DateTimeKind.Local).AddTicks(8716)
                         },
                         new
                         {
@@ -403,7 +399,7 @@ namespace AsdafObhurRealEstate.Migrations
                             PhoneNumber = "01122332150",
                             SendFirstMessageToClient = false,
                             SendSecondMessageToClient = false,
-                            UpdatedAt = new DateTime(2022, 8, 22, 21, 22, 28, 95, DateTimeKind.Local).AddTicks(1532)
+                            UpdatedAt = new DateTime(2022, 8, 26, 17, 8, 13, 632, DateTimeKind.Local).AddTicks(8723)
                         },
                         new
                         {
@@ -420,7 +416,7 @@ namespace AsdafObhurRealEstate.Migrations
                             PhoneNumber = "24400",
                             SendFirstMessageToClient = false,
                             SendSecondMessageToClient = false,
-                            UpdatedAt = new DateTime(2022, 8, 22, 21, 22, 28, 95, DateTimeKind.Local).AddTicks(1537)
+                            UpdatedAt = new DateTime(2022, 8, 26, 17, 8, 13, 632, DateTimeKind.Local).AddTicks(8726)
                         });
                 });
 
@@ -428,23 +424,23 @@ namespace AsdafObhurRealEstate.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -502,28 +498,28 @@ namespace AsdafObhurRealEstate.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ClientId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Path")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -535,26 +531,25 @@ namespace AsdafObhurRealEstate.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
 
@@ -623,17 +618,15 @@ namespace AsdafObhurRealEstate.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -648,17 +641,15 @@ namespace AsdafObhurRealEstate.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -670,17 +661,17 @@ namespace AsdafObhurRealEstate.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -692,10 +683,10 @@ namespace AsdafObhurRealEstate.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -749,16 +740,16 @@ namespace AsdafObhurRealEstate.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 

@@ -6,6 +6,7 @@
         contentType: 'application/x-www-form-urlencoded',
         data: clientId,
         success: (data) => {
+            document.location.reload();
         },
         error: function (eventFromParam) {
             Swal.fire("حدث خطأ أثناء التحويل للماليه حاول مرة اخرى")
