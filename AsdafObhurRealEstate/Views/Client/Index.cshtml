@@ -7,7 +7,36 @@
     ViewData["Title"] = "العملاء";
     int totalCount = (int)ViewData["TotalCount"];
 
+    string messageError = ViewData["errorSendMessage"] as string;
+
 }
+
+@if(!string.IsNullOrEmpty(messageError)){
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<!-- Button trigger modal -->
+<button id="#fireModal" type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+</button>
 
 
 <div class="row mb-1" >
@@ -94,7 +123,7 @@
     <tfoot>
         <tr>
             <td>
-                <ul class="pagination mt-2">
+                <ul  class="pagination mt-2">
                     @if (totalCount > 0)
                     {
                         <li class="page-item disabled">
@@ -104,8 +133,8 @@
                         </li>
                         @for (int i = 0; i < totalCount; i++)
                         {
-                            <li class="page-item">
-                                <a id="paging-@i" class="page-link @(i==0? "active-pagination":"")" href="#">@(i + 1)</a>
+                            <li class="page-item btngan">
+                                <button id="paging-@i"  class="paganiation-js page-link @(i==0? "active-pagination":"")" data-idpage="@(i+1)" href="#">@(i + 1)</button>
                             </li>
                         }
                         <li class="page-item">
@@ -127,8 +156,53 @@
 @section Scripts{
 
     <script>
+         var isDeletDisplay = @(isAccessToDisplay.ToString().ToLower());
+
+        $(document).on("click", ".paganiation-js", function () {
+
+            let userId = `@(user.Id.ToString())`;
+
+            var pageNumber = $(this).data("idpage");
+
+            let data = {
+                        page:pageNumber,
+                        limit:2
+            
+            };
+
+            $.ajax({
+                url: '/client/PaginationClient?userId='+userId,
+                type: "POST",
+                contentType: 'application/x-www-form-urlencoded',
+                data: data,
+                success: (data) => {
+                    console.log(data)
+                },
+                error: function (eventFromParam) {
+                   
+                }
+            })
+
+        });
+
+        //console.log("text")
+        //var paginations = document.querySelectorAll(".btngan");
+        //console.log(paginations);
     
-        var isDeletDisplay = @(isAccessToDisplay.ToString().ToLower());
+        //paginations.forEach(page => function() {
+        //    console.log(page);
+        //})
+
+        //let firePopUp = @messageError;
+
+        //var fire = documenmt.getElementById("fireModal");
+        //console.log(fire);
+        //if(firePopUp !== ''){
+        //    console.log("hello from the c# code");
+        //    fire.click();
+        //}
+
+       
       
     </script>
 

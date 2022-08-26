@@ -165,7 +165,6 @@ namespace AsdafObhurRealEstate.Controllers
             
             int.TryParse(resultString,out codeNumber);
 
-            model.PhoneNumber = model.PhoneNumber.Remove(0, 1);
             model.PhoneNumber = codeNumber + model.PhoneNumber;
             
             var client = new Client()
@@ -415,9 +414,7 @@ namespace AsdafObhurRealEstate.Controllers
                 }
                 else
                 {
-                    ViewData["errorSendMessage"] = "حدث خطأ أثناء ارسال الرساله";
-
-                    return View();
+                    ViewData["errorSendMessage"] = "حدث خطأ أثناء ارسال الرساله الي العميل";
                 }
 
             }
@@ -426,7 +423,7 @@ namespace AsdafObhurRealEstate.Controllers
             _context.Update(client);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return Ok();
         }
 
         [HttpPost]
@@ -509,11 +506,12 @@ namespace AsdafObhurRealEstate.Controllers
             return File(result.Memory, result.ContentType, fileDescription);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> PaginationClient(QueryParameters param)
+        [HttpPost]
+        public async Task<IActionResult> PaginationClient(QueryParameters param, [FromQuery] string userId)
         {
             // Get all clients as collection of queryable
             var query = _context.Clients.OrderBy(m => m.Code).AsQueryable();
+            query = query.Where(m => m.BaseUserId == userId);
             var count = await query.CountAsync();
             var items = await query.Skip((param.Page) * param.Limit).Take(param.Limit).ToListAsync();
             var resultPageList = new PagedList<Client>(items, count, param.Page, param.Limit);

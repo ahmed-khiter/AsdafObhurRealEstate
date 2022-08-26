@@ -102,7 +102,6 @@ $(document).on('change', '.table-search', function () {
 
 
 $(document).on('click', '.del-record', function () {
-    debugger;
     var id = $(this).data("id");
     var data = { id };
     Swal.fire({

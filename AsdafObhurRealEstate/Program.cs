@@ -21,11 +21,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ClientService>();
 builder.Services.AddDbContext<AsdafObhurContext>(options =>
 {
-    //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    //options.UseMySql(connectionString,
-    //    ServerVersion.AutoDetect(connectionString));
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    options.UseMySql(connectionString,
+        ServerVersion.AutoDetect(connectionString));
 
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 builder.Services.AddHttpContextAccessor();
