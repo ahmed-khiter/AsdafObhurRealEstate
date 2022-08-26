@@ -36,7 +36,7 @@ namespace AsdafObhurRealEstate.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(bool isJson)
         {
 
             var clients = await _clientService.GetClients(User);
@@ -45,6 +45,9 @@ namespace AsdafObhurRealEstate.Controllers
             int totalCount = (await _context.Clients.Where(m => m.BaseUserId == userId).CountAsync()) / 2;
             ViewData["TotalCount"] = totalCount;
 
+            if (isJson)
+                return Ok(clients);
+
             return View(clients);
         }
 
@@ -52,12 +55,13 @@ namespace AsdafObhurRealEstate.Controllers
         [HttpGet]
         public async Task<IActionResult> SearchClient(string userNameOrCode, bool heCreated)
         {
+            int code = 0;
+            var isNumber = int.TryParse(userNameOrCode, out code);
+            var userId = _userManager.GetUserId(User);
+
             if (!string.IsNullOrEmpty(userNameOrCode))
             {
-                int code = 0;
-                var isNumber = int.TryParse(userNameOrCode, out code);
 
-                var userId = _userManager.GetUserId(User);
 
                 var user = await _userManager.FindByIdAsync(userId);
 
@@ -111,7 +115,7 @@ namespace AsdafObhurRealEstate.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(Index), new { refreshPage = true, isJsonReturn = true });
+                return RedirectToAction(nameof(Index), new { isJson = true });
 
             }
         }
