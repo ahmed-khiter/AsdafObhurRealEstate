@@ -28,9 +28,8 @@ namespace AsdafObhurRealEstate.Infrastructure
 
             SeedData.SeedRoles(builder, _loggerFactory);
             SeedData.SeedUsers(builder, _loggerFactory);
-            //SeedData.SeedRoleToUsers(builder, _loggerFactory);
+            SeedData.SeedRoleToUsers(builder, _loggerFactory);
             SeedData.SeedDepartment(builder, _loggerFactory);
-            //SeedData.SeedClients(builder, _loggerFactory);
         }
 
 

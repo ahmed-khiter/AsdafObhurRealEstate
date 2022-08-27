@@ -353,10 +353,10 @@ namespace AsdafObhurRealEstate.Infrastructure
                         },
                         new IdentityUserRole<string>()
                         {
-                            RoleId = ConstantIDs.roles[5],
-                            UserId = ConstantIDs.users[5]
+                            RoleId = ConstantIDs.roles[6],
+                            UserId = ConstantIDs.users[6]
                         },
-                    
+
                         new IdentityUserRole<string>()
                         {
                             RoleId = ConstantIDs.roles[7],
@@ -455,71 +455,7 @@ namespace AsdafObhurRealEstate.Infrastructure
             }
         }
 
-        public static void SeedClients(ModelBuilder builder, ILoggerFactory loggerFactory)
-        {
-            try
-            {
-                builder.Entity<Client>(entity =>
-                {
-                    entity.HasData(
-                        new Client()
-                        {
-                            Id = ConstantIDs.users[0],
-
-                            BaseUserId = ConstantIDs.users[0],
-                            ClientName = "Client Ahmed",
-                            ClientStatus = Enums.StatusOfClient.UnderProgress,
-                            Code = 1,
-                            CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy = ConstantIDs.users[0],
-                            DepartmentId = ConstantIDs.department[0],
-                            Notes = "ملاحظات من المبرمج ",
-                            PhoneNumber = "035453650",
-
-                        },
-
-                           new Client()
-                           {
-                               Id = ConstantIDs.users[1],
-                               BaseUserId = ConstantIDs.users[0],
-                               ClientName = "Client Ahmed2",
-                               ClientStatus = Enums.StatusOfClient.UnderProgress,
-                               Code = 2,
-                               CreatedAt = new DateTime(2022, 8, 14),
-                               CreatedBy = ConstantIDs.users[0],
-                               DepartmentId = ConstantIDs.department[0],
-                               Notes = "2ملاحظات من المبرمج ",
-                               PhoneNumber = "01122332150",
-                           },
-
-                             new Client()
-                             {
-                                 Id = ConstantIDs.users[2],
-                                 BaseUserId = ConstantIDs.users[0],
-                                 ClientName = "Client Ahmed 3 ",
-                                 ClientStatus = Enums.StatusOfClient.UnderProgress,
-                                 Code = 3,
-                                 CreatedAt = new DateTime(2022, 8, 14),
-                                 CreatedBy = ConstantIDs.users[0],
-                                 DepartmentId = ConstantIDs.department[0],
-                                 Notes = "2ملاحظات من المبرمج ",
-                                 PhoneNumber = "24400",
-                             }
-
-                        );
-
-
-                });
-
-            }
-            catch (Exception ex)
-            {
-                var logger = loggerFactory.CreateLogger<SeedData>();
-                logger.LogError(ex.Message);
-            }
-
-        }
-
+    
         private static string PasswordHash(string password)
         {
 
