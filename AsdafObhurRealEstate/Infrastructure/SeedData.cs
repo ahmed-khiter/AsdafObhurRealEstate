@@ -65,6 +65,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             NormalizedName = Role.Marketing.ToUpper(),
                             ConcurrencyStamp = "d0584e-fgd7-439c-8ae1-f5734666d6f"
                         },
+                        // مراقب مشاريع 
                         new IdentityRole()
                         {
                             Id = ConstantIDs.roles[5],
@@ -72,7 +73,6 @@ namespace AsdafObhurRealEstate.Infrastructure
                             NormalizedName = Role.ProjectMonitor.ToUpper(),
                             ConcurrencyStamp = "d3584e-fcd7-439c-8ae1-f5734666d6f"
                         },
-
                         //مهندس المشاريع
                         //ProjectsEngineer
                         new IdentityRole()
@@ -82,7 +82,6 @@ namespace AsdafObhurRealEstate.Infrastructure
                             NormalizedName = Role.ProjectsEngineer.ToUpper(),
                             ConcurrencyStamp = "s1584e-fcd7-439c-8ae1-f5734666d6f"
                         },
-
                         //مالية
                         // Financial
                         new IdentityRole()
@@ -116,168 +115,194 @@ namespace AsdafObhurRealEstate.Infrastructure
                         {
                             Id = ConstantIDs.users[0],
                             Code = 1,
-                            FirstName = "المدير",
-                            LastName = "العام",
-                            Email = "gm@gmail.com",
+                            FirstName = "فؤاد",
+                            LastName = "الغامدي",
+                            Email = "fouad@asdaf.com",
                             AccountType = Enums.AccountType.GeneralManager,
                             CreatedAt = new DateTime(2022,8,14),
-                            CreatedBy = "Developer",
-                            NormalizedEmail = "gm@gmail.com".ToUpper(),
-                            UserName = "gm@gmail.com",
-                            NormalizedUserName = "gm@gmail.com".ToUpper(),
+                            CreatedBy = ConstantIDs.users[0],
+                            NormalizedEmail = "fouad@asdaf.com".ToUpper(),
+                            UserName = "fouad@asdaf.com",
+                            NormalizedUserName = "fouad@asdaf.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
                         },
-
                         //مشرف مشاريع
                         // Project Supervisor
                         new BaseUser()
                         {
                             Id = ConstantIDs.users[1],
                             Code = 2,
-                            FirstName = "مشرف",
-                            LastName = "مشاريع",
-                            Email = "ps@gmail.com",
-                            AccountType = Enums.AccountType.GeneralManager,
+                            FirstName = "مهند",
+                            LastName = "حريري",
+                            Email = "mohand@asdaf.com",
+                            AccountType = Enums.AccountType.ProjectSupervisor,
                             CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy = "Developer",
-                            NormalizedEmail = "ps@gmail.com".ToUpper(),
-                            UserName = "ps@gmail.com",
-                            NormalizedUserName = "ps@gmail.com".ToUpper(),
+                            CreatedBy = ConstantIDs.users[0],
+                            NormalizedEmail = "mohand@asdaf.com".ToUpper(),
+                            UserName = "mohand@asdaf.com",
+                            NormalizedUserName = "mohand@asdaf.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
                             DepartmentId = ConstantIDs.department[1]
                         },
-
+                        new BaseUser()
+                        {
+                            Id = ConstantIDs.users[8],
+                            Code = 9,
+                            FirstName = "صادق",
+                            LastName = "الأبيض",
+                            Email = "sadek@asdaf.com",
+                            AccountType = Enums.AccountType.ProjectSupervisor,
+                            CreatedAt = new DateTime(2022, 8, 14),
+                            CreatedBy = ConstantIDs.users[0],
+                            NormalizedEmail = "sadek@asdaf.com".ToUpper(),
+                            UserName = "sadek@asdaf.com",
+                            NormalizedUserName = "sadek@asdaf.com".ToUpper(),
+                            EmailConfirmed = true,
+                            PasswordHash = PasswordHash("qaz2wsxedc"),
+                            PhoneNumber = "01100811024",
+                            PhoneNumberConfirmed = true,
+                            DepartmentId = ConstantIDs.department[1]
+                        },
+                        new BaseUser()
+                        {
+                            Id = ConstantIDs.users[9],
+                            Code = 10,
+                            FirstName = "خليل",
+                            LastName = "محمد",
+                            Email = "khalil@asdaf.com",
+                            AccountType = Enums.AccountType.ProjectSupervisor,
+                            CreatedAt = new DateTime(2022, 8, 14),
+                            CreatedBy = ConstantIDs.users[0],
+                            NormalizedEmail = "khalil@asdaf.com".ToUpper(),
+                            UserName = "khalil@asdaf.com",
+                            NormalizedUserName = "khalil@asdaf.com".ToUpper(),
+                            EmailConfirmed = true,
+                            PasswordHash = PasswordHash("qaz2wsxedc"),
+                            PhoneNumber = "01100811024",
+                            PhoneNumberConfirmed = true,
+                            DepartmentId = ConstantIDs.department[1]
+                        },
                         //سكرتير التنفيذي
                         //Executive Secretary
                         new BaseUser()
                         {
                             Id = ConstantIDs.users[2],
                             Code = 3,
-                            FirstName = "سكرتير",
-                            LastName = "التنفيذي",
-                            Email = "es@gmail.com",
-                            AccountType = Enums.AccountType.GeneralManager,
+                            FirstName = "غدير",
+                            LastName = "ابو داود",
+                            Email = "ghadeer@asdaf.com",
+                            AccountType = Enums.AccountType.ExecutiveSecretary,
                             CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy = "Developer",
-                            NormalizedEmail = "es@gmail.com".ToUpper(),
-                            UserName = "es@gmail.com",
-                            NormalizedUserName = "es@gmail.com".ToUpper(),
+                            CreatedBy = ConstantIDs.users[0],
+                            NormalizedEmail = "ghadeer@asdaf.com".ToUpper(),
+                            UserName = "ghadeer@asdaf.com",
+                            NormalizedUserName = "ghadeer@asdaf.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
                         },
-
-                        //شؤون موظفين
-                        // Personnel
-                        new BaseUser()
-                        {
-                            Id = ConstantIDs.users[3],
-                            Code = 4,
-                            FirstName = "شؤون",
-                            LastName = "موظفين",
-                            Email = "p@gmail.com",
-                            AccountType = Enums.AccountType.GeneralManager,
-                            CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy = "Developer",
-                            NormalizedEmail = "p@gmail.com".ToUpper(),
-                            UserName = "p@gmail.com",
-                            NormalizedUserName = "p@gmail.com".ToUpper(),
-                            EmailConfirmed = true,
-                            PasswordHash = PasswordHash("qaz2wsxedc"),
-                            PhoneNumber = "01100811024",
-                            PhoneNumberConfirmed = true,
-                            DepartmentId = ConstantIDs.department[4]
-
-                        },
-
                         //تسويق
                         //marketing
                         new BaseUser()
                         {
                             Id = ConstantIDs.users[4],
                             Code = 5,
-                            FirstName = "تسويق",
-                            LastName = "تسويق",
-                            Email = "m@gmail.com",
-                            AccountType = Enums.AccountType.GeneralManager,
+                            FirstName = "تركي",
+                            LastName = "العصلاني",
+                            Email = "turki@asdaf.com",
+                            AccountType = Enums.AccountType.marketing,
                             CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy = "Developer",
-                            NormalizedEmail = "m@gmail.com".ToUpper(),
-                            UserName = "m@gmail.com",
-                            NormalizedUserName = "m@gmail.com".ToUpper(),
+                            CreatedBy = ConstantIDs.users[0],
+                            NormalizedEmail = "turki@asdaf.com".ToUpper(),
+                            UserName = "turki@asdaf.com",
+                            NormalizedUserName = "turki@asdaf.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
                             DepartmentId = ConstantIDs.department[3]
                         },
-
-                        //مراقب مشاريع
-                        //Project Monitor
                         new BaseUser()
                         {
-                            Id = ConstantIDs.users[5],
-                            Code = 6,
-                            FirstName = "مراقب",
-                            LastName = "مشاريع",
-                            Email = "pMonitor@gmail.com",
-                            AccountType = Enums.AccountType.GeneralManager,
+                            Id = ConstantIDs.users[10],
+                            Code = 11,
+                            FirstName = "أمل",
+                            LastName = "الشريف",
+                            Email = "amal@asdaf.com",
+                            AccountType = Enums.AccountType.marketing,
                             CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy = "Developer",
-                            NormalizedEmail = "pMonitor@gmail.com".ToUpper(),
-                            UserName = "pMonitor@gmail.com",
-                            NormalizedUserName = "pMonitor@gmail.com".ToUpper(),
+                            CreatedBy = ConstantIDs.users[0],
+                            NormalizedEmail = "amal@asdaf.com".ToUpper(),
+                            UserName = "amal@asdaf.com",
+                            NormalizedUserName = "amal@asdaf.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            DepartmentId = ConstantIDs.department[2]
+                            DepartmentId = ConstantIDs.department[3]
                         },
-
                         //مهندس المشاريع
                         //projects Engineer
                         new BaseUser()
                         {
                             Id = ConstantIDs.users[6],
                             Code = 7,
-                            FirstName = "مهندس",
-                            LastName = "مشاريع",
-                            Email = "pe@gmail.com",
-                            AccountType = Enums.AccountType.GeneralManager,
+                            FirstName = "حسام",
+                            LastName = "الديني",
+                            Email = "hossam@asdaf.com",
+                            AccountType = Enums.AccountType.projectsEngineer,
                             CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy = "Developer",
-                            NormalizedEmail = "pe@gmail.com".ToUpper(),
-                            UserName = "pe@gmail.com",
-                            NormalizedUserName = "pe@gmail.com".ToUpper(),
+                            CreatedBy = ConstantIDs.users[0],
+                            NormalizedEmail = "hossam@asdaf.com".ToUpper(),
+                            UserName = "hossam@asdaf.com",
+                            NormalizedUserName = "hossam@asdaf.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
                             DepartmentId = ConstantIDs.department[2]
                         },
-                        
+                        new BaseUser()
+                        {
+                            Id = ConstantIDs.users[11],
+                            Code = 12,
+                            FirstName = "منصور",
+                            LastName = "الأحمدي",
+                            Email = "mansor@asdaf.com",
+                            AccountType = Enums.AccountType.projectsEngineer,
+                            CreatedAt = new DateTime(2022, 8, 14),
+                            CreatedBy = ConstantIDs.users[0],
+                            NormalizedEmail = "mansor@asdaf.com".ToUpper(),
+                            UserName = "mansor@asdaf.com",
+                            NormalizedUserName = "mansor@asdaf.com".ToUpper(),
+                            EmailConfirmed = true,
+                            PasswordHash = PasswordHash("qaz2wsxedc"),
+                            PhoneNumber = "01100811024",
+                            PhoneNumberConfirmed = true,
+                            DepartmentId = ConstantIDs.department[2]
+                        },
                         //مالية
                         //Financial
                         new BaseUser()
                         {
                             Id = ConstantIDs.users[7],
                             Code = 8,
-                            FirstName = "المالية",
-                            LastName = "مالية",
-                            Email = "f@gmail.com",
-                            AccountType = Enums.AccountType.GeneralManager,
+                            FirstName = "مروة",
+                            LastName = "عبد العاطي",
+                            Email = "marwa@asdaf.com",
+                            AccountType = Enums.AccountType.Financial,
                             CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy = "Developer",
-                            NormalizedEmail = "f@gmail.com".ToUpper(),
-                            UserName = "f@gmail.com",
-                            NormalizedUserName = "f@gmail.com".ToUpper(),
+                            CreatedBy = ConstantIDs.users[0],
+                            NormalizedEmail = "marwa@asdaf.com".ToUpper(),
+                            UserName = "marwa@asdaf.com",
+                            NormalizedUserName = "marwa@asdaf.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
                             PhoneNumber = "01100811024",
@@ -323,11 +348,6 @@ namespace AsdafObhurRealEstate.Infrastructure
                         },
                         new IdentityUserRole<string>()
                         {
-                            RoleId = ConstantIDs.roles[3],
-                            UserId = ConstantIDs.users[3]
-                        },
-                        new IdentityUserRole<string>()
-                        {
                             RoleId = ConstantIDs.roles[4],
                             UserId = ConstantIDs.users[4]
                         },
@@ -336,16 +356,33 @@ namespace AsdafObhurRealEstate.Infrastructure
                             RoleId = ConstantIDs.roles[5],
                             UserId = ConstantIDs.users[5]
                         },
-                        new IdentityUserRole<string>()
-                        {
-                            RoleId = ConstantIDs.roles[6],
-                            UserId = ConstantIDs.users[6]
-                        },
+                    
                         new IdentityUserRole<string>()
                         {
                             RoleId = ConstantIDs.roles[7],
                             UserId = ConstantIDs.users[7]
+                        },
+                        new IdentityUserRole<string>()
+                        {
+                            RoleId = ConstantIDs.roles[1],
+                            UserId = ConstantIDs.users[8]
+                        },
+                        new IdentityUserRole<string>()
+                        {
+                            RoleId = ConstantIDs.roles[1],
+                            UserId = ConstantIDs.users[9]
+                        },
+                        new IdentityUserRole<string>()
+                        {
+                            RoleId = ConstantIDs.roles[4],
+                            UserId = ConstantIDs.users[10]
+                        },
+                        new IdentityUserRole<string>()
+                        {
+                            RoleId = ConstantIDs.roles[6],
+                            UserId = ConstantIDs.users[11]
                         }
+
 
                     );
                 });
@@ -368,8 +405,8 @@ namespace AsdafObhurRealEstate.Infrastructure
                         {
                             Id = ConstantIDs.department[0],
                             CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy = "Developer",
-                            ModifiedBy = "Developer",
+                            CreatedBy = ConstantIDs.users[0],
+                            ModifiedBy = ConstantIDs.users[0],
                             Name = "الديكور",
                             UpdatedAt = new DateTime(2022, 8, 14)
                         },
@@ -377,8 +414,8 @@ namespace AsdafObhurRealEstate.Infrastructure
                         {
                             Id = ConstantIDs.department[1],
                             CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy = "Developer",
-                            ModifiedBy = "Developer",
+                            CreatedBy = ConstantIDs.users[0],
+                            ModifiedBy = ConstantIDs.users[0],
                             Name = "العقار",
                             UpdatedAt = new DateTime(2022, 8, 14)
                         },
@@ -386,8 +423,8 @@ namespace AsdafObhurRealEstate.Infrastructure
                         {
                             Id = ConstantIDs.department[2],
                             CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy = "Developer",
-                            ModifiedBy = "Developer",
+                            CreatedBy = ConstantIDs.users[0],
+                            ModifiedBy = ConstantIDs.users[0],
                             Name = "المقاولات",
                             UpdatedAt = new DateTime(2022, 8, 14),
                         },
@@ -395,8 +432,8 @@ namespace AsdafObhurRealEstate.Infrastructure
                         {
                             Id = ConstantIDs.department[3],
                             CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy = "Developer",
-                            ModifiedBy = "Developer",
+                            CreatedBy = ConstantIDs.users[0],
+                            ModifiedBy = ConstantIDs.users[0],
                             Name = "الأعلام و التسويق",
                             UpdatedAt = new DateTime(2022, 8, 14),
                         },
@@ -404,8 +441,8 @@ namespace AsdafObhurRealEstate.Infrastructure
                         {
                             Id = ConstantIDs.department[4],
                             CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy = "Developer",
-                            ModifiedBy = "Developer",
+                            CreatedBy = ConstantIDs.users[0],
+                            ModifiedBy = ConstantIDs.users[0],
                             Name = "المالية",
                             UpdatedAt = new DateTime(2022, 8, 14),
                         });
@@ -428,17 +465,17 @@ namespace AsdafObhurRealEstate.Infrastructure
                         new Client()
                         {
                             Id = ConstantIDs.users[0],
-                            
+
                             BaseUserId = ConstantIDs.users[0],
                             ClientName = "Client Ahmed",
                             ClientStatus = Enums.StatusOfClient.UnderProgress,
-                            Code= 1,
+                            Code = 1,
                             CreatedAt = new DateTime(2022, 8, 14),
-                            CreatedBy= ConstantIDs.users[0],
+                            CreatedBy = ConstantIDs.users[0],
                             DepartmentId = ConstantIDs.department[0],
                             Notes = "ملاحظات من المبرمج ",
                             PhoneNumber = "035453650",
-                            
+
                         },
 
                            new Client()

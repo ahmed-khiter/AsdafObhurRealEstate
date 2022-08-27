@@ -19,11 +19,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ClientService>();
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+
+
 builder.Services.AddDbContext<AsdafObhurContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    options.UseMySql(connectionString,
-        ServerVersion.AutoDetect(connectionString));
+    //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    //options.UseMySql(connectionString,
+    //    ServerVersion.AutoDetect(connectionString));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 
     //options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
@@ -78,5 +84,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
 app.Run();
