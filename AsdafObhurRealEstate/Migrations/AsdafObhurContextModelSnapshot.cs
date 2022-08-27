@@ -118,22 +118,22 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 1,
                             Code = 1,
-                            ConcurrencyStamp = "e3857c4d-9812-436a-8e9a-4f9fc1011058",
+                            ConcurrencyStamp = "923eb281-3fbd-45eb-b483-1438ae525397",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e",
-                            Email = "fouad@asdaf.com",
+                            Email = "ceo-foad@asdaf-aom.com",
                             EmailConfirmed = true,
                             FirstName = "فؤاد",
                             LastName = "الغامدي",
                             LockoutEnabled = false,
-                            NormalizedEmail = "FOUAD@ASDAF.COM",
-                            NormalizedUserName = "FOUAD@ASDAF.COM",
-                            PasswordHash = "ADmI2fW0o/bK9eumP7R7bRJ1ahB7Z6K1P71l/SmEnfsatT5hFTJWbEip4aP8O3l+Mg==",
+                            NormalizedEmail = "CEO-FOAD@ASDAF-AOM.COM",
+                            NormalizedUserName = "CEO-FOAD@ASDAF-AOM.COM",
+                            PasswordHash = "AOmyApFerYSAc94gyt5yn1i6bHxnr1fsYc8rTKSY4aBSJFYuZUtisNcHPzpQAgpGWQ==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "cd0e7da9-41bc-4a83-9b6a-288e05052a9e",
+                            SecurityStamp = "e150c682-7680-4c27-b2ab-7a03b1fc45c1",
                             TwoFactorEnabled = false,
-                            UserName = "fouad@asdaf.com"
+                            UserName = "ceo-foad@asdaf-aom.com"
                         },
                         new
                         {
@@ -141,23 +141,23 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 2,
                             Code = 2,
-                            ConcurrencyStamp = "74d2d985-b98f-4454-b00b-38dc3b653a4f",
+                            ConcurrencyStamp = "002cd0aa-a5aa-41a7-9a52-30970b2b7491",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e",
                             DepartmentId = "f0157647-7016-41cc-9a56-3695acaa13e6",
-                            Email = "mohand@asdaf.com",
+                            Email = "Muhannad@Asdaf-aom.com",
                             EmailConfirmed = true,
                             FirstName = "مهند",
                             LastName = "حريري",
                             LockoutEnabled = false,
-                            NormalizedEmail = "MOHAND@ASDAF.COM",
-                            NormalizedUserName = "MOHAND@ASDAF.COM",
-                            PasswordHash = "AMq3vpWokXql4QzJNY5HTvdmA+CDLyrZzcmCxNq2UuEXCbIcNtZbgKUMMbNIWIzsyA==",
+                            NormalizedEmail = "MUHANNAD@ASDAF-AOM.COM",
+                            NormalizedUserName = "MUHANNAD@ASDAF-AOM.COM",
+                            PasswordHash = "ACmaDVJSkVIGy2H7r94Nyckc+r8GJYRYphN/Ho1Ht1G6OndYRvXGJdSWtTtdXsQ2OQ==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "4b464725-5927-4143-977c-d43317acdd6d",
+                            SecurityStamp = "b2bb8a4e-dc6e-4eea-81cd-7dcaac54dcf0",
                             TwoFactorEnabled = false,
-                            UserName = "mohand@asdaf.com"
+                            UserName = "Muhannad@Asdaf-aom.com"
                         },
                         new
                         {
@@ -165,23 +165,23 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 2,
                             Code = 9,
-                            ConcurrencyStamp = "ddbdbd4b-2845-46d8-a5d6-876bb9cd3dfe",
+                            ConcurrencyStamp = "eef07a36-d1cf-4314-8a86-6947c72c2e77",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e",
                             DepartmentId = "f0157647-7016-41cc-9a56-3695acaa13e6",
-                            Email = "sadek@asdaf.com",
+                            Email = "sadek@asdaf-aom.com",
                             EmailConfirmed = true,
                             FirstName = "صادق",
                             LastName = "الأبيض",
                             LockoutEnabled = false,
-                            NormalizedEmail = "SADEK@ASDAF.COM",
-                            NormalizedUserName = "SADEK@ASDAF.COM",
-                            PasswordHash = "AMbPxp2You9jlBywHF6IC3URP+h70CwMz3UA5rOplAYaHyhNOnXSLcjTuA4ejQjlCg==",
+                            NormalizedEmail = "SADEK@ASDAF-AOM.COM",
+                            NormalizedUserName = "SADEK@ASDAF-AOM.COM",
+                            PasswordHash = "ALAyPalC8nes/W9YCj23EmTJbshiPP6mb9NCOyFkQvGCMJY8eTEqjTDSiFnY3rwj1w==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "5cb7165c-3630-4248-ba91-ddae2774951a",
+                            SecurityStamp = "5e86db92-e6aa-4e6d-a3d1-9cbe64e028c8",
                             TwoFactorEnabled = false,
-                            UserName = "sadek@asdaf.com"
+                            UserName = "sadek@asdaf-aom.com"
                         },
                         new
                         {
@@ -189,23 +189,23 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 2,
                             Code = 10,
-                            ConcurrencyStamp = "40472def-1d14-4db3-9401-e92691244c45",
+                            ConcurrencyStamp = "70beee77-0a08-4af9-b17e-5e70bf33e333",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e",
                             DepartmentId = "f0157647-7016-41cc-9a56-3695acaa13e6",
-                            Email = "khalil@asdaf.com",
+                            Email = "khalil@asdaf-aom.com",
                             EmailConfirmed = true,
                             FirstName = "خليل",
                             LastName = "محمد",
                             LockoutEnabled = false,
-                            NormalizedEmail = "KHALIL@ASDAF.COM",
-                            NormalizedUserName = "KHALIL@ASDAF.COM",
-                            PasswordHash = "ALO4nJ6Xpbm1mk7avM/EYjriOvBSK35ae7LZia99xkc1Q80JnsflQQt+yMqvcrL64w==",
+                            NormalizedEmail = "KHALIL@ASDAF-AOM.COM",
+                            NormalizedUserName = "KHALIL@ASDAF-AOM.COM",
+                            PasswordHash = "ACR3igMKvCVfDi/SiCFtdYcv/nMW4ayL4Jes+ipdjdjeifSeQdiPghaMq1hvcXc/qw==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "f67bef1d-6336-4af3-bf97-601e351066e5",
+                            SecurityStamp = "b9837065-0905-46d9-ac7a-a1791e1203fa",
                             TwoFactorEnabled = false,
-                            UserName = "khalil@asdaf.com"
+                            UserName = "khalil@asdaf-aom.com"
                         },
                         new
                         {
@@ -213,22 +213,22 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 3,
                             Code = 3,
-                            ConcurrencyStamp = "29788d59-7c4b-4230-9c88-f79bacebb999",
+                            ConcurrencyStamp = "793869dc-6509-472d-a5a3-2c8d46d1e3c8",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e",
-                            Email = "ghadeer@asdaf.com",
+                            Email = "Ghadeer.Sec@Asdaf-aom.com",
                             EmailConfirmed = true,
                             FirstName = "غدير",
                             LastName = "ابو داود",
                             LockoutEnabled = false,
-                            NormalizedEmail = "GHADEER@ASDAF.COM",
-                            NormalizedUserName = "GHADEER@ASDAF.COM",
-                            PasswordHash = "AA0VFIbOq5NGr6WxchQbPqcleafGhDbi0Ndn9tfexb+B/Ri+pkD1a1dkagHjhQgfEA==",
+                            NormalizedEmail = "GHADEER.SEC@ASDAF-AOM.COM",
+                            NormalizedUserName = "GHADEER.SEC@ASDAF-AOM.COM",
+                            PasswordHash = "AMeUeE99E8cPzuesH0/5Ck7E/ijdZwR8ipbZsKS1U/hDc0ygjTaWN4Jlyx6a/wYnWQ==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "c360324b-6b4f-4be8-af84-f48f3b7ce8bb",
+                            SecurityStamp = "f356e1e1-8f59-41e7-b4ee-d2488e005bbf",
                             TwoFactorEnabled = false,
-                            UserName = "ghadeer@asdaf.com"
+                            UserName = "Ghadeer.Sec@Asdaf-aom.com"
                         },
                         new
                         {
@@ -236,23 +236,23 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 5,
                             Code = 5,
-                            ConcurrencyStamp = "01be1180-d3a9-4344-bb9c-881b62727203",
+                            ConcurrencyStamp = "18a7e417-02bf-4031-ba72-653238563f37",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e",
                             DepartmentId = "cf8ac5ac-ee3f-4cac-988d-v45ef0eed54c",
-                            Email = "turki@asdaf.com",
+                            Email = "Turki@Asdaf-aom.com",
                             EmailConfirmed = true,
                             FirstName = "تركي",
                             LastName = "العصلاني",
                             LockoutEnabled = false,
-                            NormalizedEmail = "TURKI@ASDAF.COM",
-                            NormalizedUserName = "TURKI@ASDAF.COM",
-                            PasswordHash = "ACBa42boTg5i2dlED/7CEyAGu3HMij8roatZex7zXVTY845EtLy1M8m7UTEzL4vvlg==",
+                            NormalizedEmail = "TURKI@ASDAF-AOM.COM",
+                            NormalizedUserName = "TURKI@ASDAF-AOM.COM",
+                            PasswordHash = "AHDJ0yYhq5yVW2SFpkVU88XYRYUwYF7zaIH7qTIeTMeF7Jb2flkY+jCzwKQeSyvLbg==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "424dc041-65d7-4859-b42e-cffd40d7863b",
+                            SecurityStamp = "1124f8aa-308b-486a-9be8-18a988a7d8e2",
                             TwoFactorEnabled = false,
-                            UserName = "turki@asdaf.com"
+                            UserName = "Turki@Asdaf-aom.com"
                         },
                         new
                         {
@@ -260,23 +260,23 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 5,
                             Code = 11,
-                            ConcurrencyStamp = "40e03862-5f56-44a3-80e1-cb84d62f7768",
+                            ConcurrencyStamp = "a2c42d3f-e2cf-4430-83cc-b6d4c46a0772",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e",
                             DepartmentId = "cf8ac5ac-ee3f-4cac-988d-v45ef0eed54c",
-                            Email = "amal@asdaf.com",
+                            Email = "Amal@Asdaf-aom.com",
                             EmailConfirmed = true,
                             FirstName = "أمل",
                             LastName = "الشريف",
                             LockoutEnabled = false,
-                            NormalizedEmail = "AMAL@ASDAF.COM",
-                            NormalizedUserName = "AMAL@ASDAF.COM",
-                            PasswordHash = "AMSz7qFhusQ4BzGWv7oxXLBWCokbyHifmEfwd8o0OMwFqEi0Y+i0yb/QPLUGPpM4BQ==",
+                            NormalizedEmail = "AMAL@ASDAF-AOM.COM",
+                            NormalizedUserName = "AMAL@ASDAF-AOM.COM",
+                            PasswordHash = "ABCr/AmPagi7aqYjs3nA4TlaVMCOv3WIrsCYZJ6JqMx9BwVtjqpf7e20dUKzSEuPuA==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "17738801-8d45-4a3e-91db-e8984ba1ad51",
+                            SecurityStamp = "7bbf403e-aeb1-456b-872b-9f62402341d5",
                             TwoFactorEnabled = false,
-                            UserName = "amal@asdaf.com"
+                            UserName = "Amal@Asdaf-aom.com"
                         },
                         new
                         {
@@ -284,23 +284,23 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 7,
                             Code = 7,
-                            ConcurrencyStamp = "f4b67b75-86ba-44d7-bf72-516d8a0b5eb2",
+                            ConcurrencyStamp = "cfab2d7f-a7e8-4152-bcee-8289cc0ce018",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e",
                             DepartmentId = "h3d0584e-fcd7-439c-8ae1-g5734664d6f4",
-                            Email = "hossam@asdaf.com",
+                            Email = "hossam@asdaf-aom.com",
                             EmailConfirmed = true,
                             FirstName = "حسام",
                             LastName = "الديني",
                             LockoutEnabled = false,
-                            NormalizedEmail = "HOSSAM@ASDAF.COM",
-                            NormalizedUserName = "HOSSAM@ASDAF.COM",
-                            PasswordHash = "AMeK1o+rsj8kmhRfQZZ5EG+CTb2EOPC3KsAJ004SeK/pqmJx7iFuyJJX704GYe7V3A==",
+                            NormalizedEmail = "HOSSAM@ASDAF-AOM.COM",
+                            NormalizedUserName = "HOSSAM@ASDAF-AOM.COM",
+                            PasswordHash = "AJLfZZgUFWnkfEsWkFcILxFTz56QM9gUMauef4N5vYeSXm4KC20HtSsog32lCjk1AQ==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "76751379-3972-4498-8d1d-6efc688d80c4",
+                            SecurityStamp = "f1db2c77-096a-4d1c-9890-f583ad796e66",
                             TwoFactorEnabled = false,
-                            UserName = "hossam@asdaf.com"
+                            UserName = "hossam@asdaf-aom.com"
                         },
                         new
                         {
@@ -308,23 +308,23 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 7,
                             Code = 12,
-                            ConcurrencyStamp = "39c3ce77-a8e4-4e6a-a600-6f06dedb63e0",
+                            ConcurrencyStamp = "23a5f5bd-d45f-45e0-89c7-a8b2f28c61d0",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e",
                             DepartmentId = "h3d0584e-fcd7-439c-8ae1-g5734664d6f4",
-                            Email = "mansor@asdaf.com",
+                            Email = "Eng.mansour@asdaf-aom.com",
                             EmailConfirmed = true,
                             FirstName = "منصور",
                             LastName = "الأحمدي",
                             LockoutEnabled = false,
-                            NormalizedEmail = "MANSOR@ASDAF.COM",
-                            NormalizedUserName = "MANSOR@ASDAF.COM",
-                            PasswordHash = "AJm3GL5xMO8CjcaWVuM/iTltLVyyhucVYm0SX/mirqjGWsMi5Ja0AMjm80o5IkC0CA==",
+                            NormalizedEmail = "ENG.MANSOUR@ASDAF-AOM.COM",
+                            NormalizedUserName = "ENG.MANSOUR@ASDAF-AOM.COM",
+                            PasswordHash = "AGz5I3B+BwPzXWDOzVX2OhRCT1n3FaQp3GG7ZbZg4TQ/spI84AhlCO1MN0mOujFBHg==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "4f884628-2390-4851-ba1c-05b22a0ecb4d",
+                            SecurityStamp = "d56776f8-69bc-43d2-8c86-b83b3a22f399",
                             TwoFactorEnabled = false,
-                            UserName = "mansor@asdaf.com"
+                            UserName = "Eng.mansour@asdaf-aom.com"
                         },
                         new
                         {
@@ -332,23 +332,23 @@ namespace AsdafObhurRealEstate.Migrations
                             AccessFailedCount = 0,
                             AccountType = 8,
                             Code = 8,
-                            ConcurrencyStamp = "27c59104-80d4-40ca-bfbf-f0cd9860cbcc",
+                            ConcurrencyStamp = "6a6c578f-a3ef-445c-8e18-3e89e15184e1",
                             CreatedAt = new DateTime(2022, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "5bf40edf-af65-4d9e-8e6d-5f40d683cc3e",
                             DepartmentId = "62fe29f0-c227-4a03-b2f6-z97279b2bc23",
-                            Email = "marwa@asdaf.com",
+                            Email = "Marwa@Asdaf-aom.com",
                             EmailConfirmed = true,
                             FirstName = "مروة",
                             LastName = "عبد العاطي",
                             LockoutEnabled = false,
-                            NormalizedEmail = "MARWA@ASDAF.COM",
-                            NormalizedUserName = "MARWA@ASDAF.COM",
-                            PasswordHash = "AFr+CN+xX6muV1Halsz4umt1+uOkeBItvMCNSD6J9w6y4Iu3YaU5nL6VyGDSjCnOzw==",
+                            NormalizedEmail = "MARWA@ASDAF-AOM.COM",
+                            NormalizedUserName = "MARWA@ASDAF-AOM.COM",
+                            PasswordHash = "ACZdoqytOSrKeluQwouZ7ZX6pL3OVneqvGzJR68go5+sHDU6TKFEf6q1ulr6NMw4bg==",
                             PhoneNumber = "01100811024",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "15cb7910-5c83-4212-8b20-388be79694d6",
+                            SecurityStamp = "ea154124-36d0-4af0-bd08-e938684caff1",
                             TwoFactorEnabled = false,
-                            UserName = "marwa@asdaf.com"
+                            UserName = "Marwa@Asdaf-aom.com"
                         });
                 });
 
@@ -772,7 +772,8 @@ namespace AsdafObhurRealEstate.Migrations
                 {
                     b.HasOne("AsdafObhurRealEstate.Models.Department", "Department")
                         .WithMany("Users")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Department");
                 });
@@ -781,11 +782,13 @@ namespace AsdafObhurRealEstate.Migrations
                 {
                     b.HasOne("AsdafObhurRealEstate.Models.BaseUser", "BaseUser")
                         .WithMany()
-                        .HasForeignKey("BaseUserId");
+                        .HasForeignKey("BaseUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("AsdafObhurRealEstate.Models.Department", "Department")
                         .WithMany()
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("BaseUser");
 
@@ -796,7 +799,8 @@ namespace AsdafObhurRealEstate.Migrations
                 {
                     b.HasOne("AsdafObhurRealEstate.Models.Client", "Client")
                         .WithMany("Multimedias")
-                        .HasForeignKey("ClientId");
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Client");
                 });

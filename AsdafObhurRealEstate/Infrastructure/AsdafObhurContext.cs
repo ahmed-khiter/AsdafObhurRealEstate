@@ -21,10 +21,10 @@ namespace AsdafObhurRealEstate.Infrastructure
         {
             base.OnModelCreating(builder);
 
-            //foreach (var foreignKey in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            //{
-            //    foreignKey.DeleteBehavior = DeleteBehavior.Cascade;
-            //}
+            foreach (var foreignKey in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Cascade;
+            }
 
             SeedData.SeedRoles(builder, _loggerFactory);
             SeedData.SeedUsers(builder, _loggerFactory);
