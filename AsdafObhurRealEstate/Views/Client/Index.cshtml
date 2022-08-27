@@ -9,6 +9,7 @@
 
     string messageError = ViewData["errorSendMessage"] as string;
 
+    int j = 0;
 }
 
 @if(!string.IsNullOrEmpty(messageError)){
@@ -109,12 +110,13 @@
                                 <i title="تفاصيل" class="material-icons-round opacity-10">info</i>
                             </span>
                         </a>
-
-                        <a class="del-record text-secondary font-weight-bold text-xs" data-id="@record.Id">
-                            <span class="material-symbols-outlined">
-                                <i title="مسح" class="material-icons-round opacity-10">delete</i>
-                            </span>
-                        </a>
+                        @if(isAccessToDisplay){
+                            <a class="del-record text-secondary font-weight-bold text-xs" data-id="@record.Id">
+                                <span class="material-symbols-outlined">
+                                    <i title="مسح" class="material-icons-round opacity-10">delete</i>
+                                </span>
+                            </a>
+                        }
                       </td>
                 </tr>
 
@@ -126,22 +128,20 @@
                 <ul  class="pagination mt-2">
                     @if (totalCount > 0)
                     {
-                        <li class="page-item disabled">
-                            <a class="page-link">
-                                <i class="fas fa-angle-double-right"></i>
-                            </a>
-                        </li>
+
                         @for (int i = 0; i < totalCount; i++)
                         {
+                            if(j>totalCount){
+                                break;
+                            }
+                            j += 10;
+
                             <li class="page-item btngan">
                                 <button id="paging-@i"  class="paganiation-js page-link @(i==0? "active-pagination":"")" data-idpage="@(i+1)" href="#">@(i + 1)</button>
                             </li>
+
+
                         }
-                        <li class="page-item">
-                            <a class="page-link" href="#">
-                                <i class="fas fa-angle-double-left"></i>
-                            </a>
-                        </li>
                    }
                 </ul>
             </td>
@@ -157,55 +157,10 @@
 
     <script>
          var isDeletDisplay = @(isAccessToDisplay.ToString().ToLower());
-
-        $(document).on("click", ".paganiation-js", function () {
-
-            let userId = `@(user.Id.ToString())`;
-
-            var pageNumber = $(this).data("idpage");
-
-            let data = {
-                        page:pageNumber,
-                        limit:2
-            
-            };
-
-            $.ajax({
-                url: '/client/PaginationClient?userId='+userId,
-                type: "POST",
-                contentType: 'application/x-www-form-urlencoded',
-                data: data,
-                success: (data) => {
-                    console.log(data)
-                },
-                error: function (eventFromParam) {
-                   
-                }
-            })
-
-        });
-
-        //console.log("text")
-        //var paginations = document.querySelectorAll(".btngan");
-        //console.log(paginations);
-    
-        //paginations.forEach(page => function() {
-        //    console.log(page);
-        //})
-
-        //let firePopUp = @messageError;
-
-        //var fire = documenmt.getElementById("fireModal");
-        //console.log(fire);
-        //if(firePopUp !== ''){
-        //    console.log("hello from the c# code");
-        //    fire.click();
-        //}
-
-       
-      
+         var userId = `@(user.Id.ToString())`;
     </script>
 
+    <script src="~/custom-javascript/client-index/pagination.js"></script>
 
     <script src="~/custom-javascript/client-index/index.js"></script>
 

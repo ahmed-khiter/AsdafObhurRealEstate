@@ -6,7 +6,7 @@
         contentType: 'application/x-www-form-urlencoded',
         data: clientId,
         success: (data) => {
-            document.location.reload();
+            location.replace(`${window.location.origin}/client/index`)
         },
         error: function (eventFromParam) {
             Swal.fire("حدث خطأ أثناء التحويل للماليه حاول مرة اخرى")
@@ -24,6 +24,8 @@ $(document).on("click", "#finishFile", function () {
         contentType: 'application/x-www-form-urlencoded',
         data: clientId,
         success: (data) => {
+            
+            location.replace(`${window.location.origin}/client/index`)
         },
         error: function (eventFromParam) {
             Swal.fire(eventFromParam.responseText);

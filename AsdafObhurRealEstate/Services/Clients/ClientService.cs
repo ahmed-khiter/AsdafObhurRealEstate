@@ -49,7 +49,7 @@ namespace AsdafObhurRealEstate.Services.Clients
             var clients = await _context.Clients
                         .Where(m => m.BaseUserId == userId)
                         .OrderByDescending(m => m.Code)
-                        .Take(2).
+                        .Take(10).
                         Select(m => new ListClientDTO
                         {
                             Id = m.Id,

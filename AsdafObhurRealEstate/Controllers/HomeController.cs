@@ -53,15 +53,7 @@ namespace AsdafObhurRealEstate.Controllers
 
             List<Client> clients = new List<Client>();
 
-            if (userIsGeneralManager)
-            {
-                clients.AddRange(await _context.Clients.ToListAsync());
-            }
-            else
-            {
-                clients.AddRange(await _context.Clients.Where(m => m.BaseUserId == user.Id).ToListAsync());
-
-            }
+            clients.AddRange(await _context.Clients.OrderByDescending(m => m.Code).Take(10).ToListAsync());
 
             var allTables = new TablesDTO()
             {
@@ -97,6 +89,8 @@ namespace AsdafObhurRealEstate.Controllers
                 });
                 
             }
+
+            ViewData["TotalCount"] = await _context.Clients.CountAsync();
 
             return View(allTables);
         }

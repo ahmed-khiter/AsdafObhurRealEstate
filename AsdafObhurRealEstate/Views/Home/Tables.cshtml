@@ -1,11 +1,21 @@
-﻿
-@model TablesDTO
-
+﻿@model TablesDTO
+@inject UserManager<BaseUser> userManager
 @{
     ViewData["Title"] = "جداول السيستم";
     var isUserManager = (bool)ViewData["isGeneralManager"];
 
+    var user = await userManager.GetUserAsync(User);
+
+    bool isAccessToDisplay = await userManager.IsInRoleAsync(user, "GeneralManager");
+
+    int totalCount = (int)ViewData["TotalCount"];
+
+    int j = 0;
+
 }
+
+
+
 
 @if(isUserManager)
 {
@@ -74,33 +84,7 @@
 
                     }
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td>
-                            <ul class="pagination mt-2">
-                                <li class="page-item disabled">
-                                    <a class="page-link">
-                                        <i class="fas fa-angle-double-right"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link active-pagination" href="#">1</a>
-                                </li>
-                                <li class="page-item" aria-current="page">
-                                    <a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">
-                                        <i class="fas fa-angle-double-left"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                </tfoot>
+                
             </table>
         </div>
     </div>
@@ -183,25 +167,23 @@
                 <tr>
                     <td>
                         <ul class="pagination mt-2">
-                            <li class="page-item disabled">
-                                <a class="page-link">
-                                    <i class="fas fa-angle-double-right"></i>
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link active-pagination" href="#">1</a>
-                            </li>
-                            <li class="page-item" aria-current="page">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">
-                                    <i class="fas fa-angle-double-left"></i>
-                                </a>
-                            </li>
+                            @if (totalCount > 0)
+                            {
+                                @for (int i = 0; i < totalCount; i++)
+                                {
+                                    if (j > totalCount)
+                                    {
+                                        break;
+                                    }
+
+                                    j += 10;
+                                    <li class="page-item btngan">
+                                        <button id="paging-@i" class="paganiation-js page-link @(i==0? "active-pagination":"")" data-idpage="@(i+1)" href="#">@(i + 1)</button>
+                                    </li>
+
+
+                                }
+                            }
                         </ul>
                     </td>
                 </tr>
@@ -215,6 +197,10 @@
 
 
     <script>
+
+        var isDeletDisplay = @(isAccessToDisplay.ToString().ToLower());
+         var userId = `@(user.Id.ToString())`;
+
 
         $(document).on('change', '.employee-search', function () {
             const inputEle = document.querySelector('[data-search="search-input"]')
@@ -382,6 +368,9 @@
 
 
     </script>
+
+    <script src="~/custom-javascript/client-index/paginationForadmin.js"></script>
+
 }
 
 

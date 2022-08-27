@@ -27,6 +27,15 @@
                         </a>
                     </li>
 
+                     <li class="nav-item">
+                    <a class="nav-link " asp-area="" asp-action="create" asp-controller="Department">
+                        <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons-round opacity-10">apartment</i>
+                        </div>
+                        <span class="nav-link-text me-1">إضافة  قسم</span>
+                        </a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-action="Index" asp-controller="Account">
                         <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
@@ -67,14 +76,16 @@
                     </a>
                 </li>
             }else{
-                <li class="nav-item">
-                    <a class="nav-link " asp-area="" asp-controller="client" asp-action="Index">
-                        <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons-round opacity-10">manage_accounts</i>
-                        </div>
-                        <span class="nav-link-text me-1">قائمة عملائي</span>
-                    </a>
-                </li>
+                @if (!isAccessToDisplay){
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="" asp-controller="client" asp-action="Index">
+                            <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons-round opacity-10">manage_accounts</i>
+                            </div>
+                            <span class="nav-link-text me-1">قائمة عملائي</span>
+                        </a>
+                    </li>
+                }
             }
             <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-action="logout" asp-controller="Account" >

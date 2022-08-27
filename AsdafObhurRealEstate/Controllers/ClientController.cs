@@ -42,7 +42,7 @@ namespace AsdafObhurRealEstate.Controllers
             var clients = await _clientService.GetClients(User);
 
             var userId = _userManager.GetUserId(User);
-            int totalCount = (await _context.Clients.Where(m => m.BaseUserId == userId).CountAsync()) / 2;
+            int totalCount = (await _context.Clients.CountAsync(m => m.BaseUserId == userId));
             ViewData["TotalCount"] = totalCount;
 
             if (isJson)
@@ -58,12 +58,16 @@ namespace AsdafObhurRealEstate.Controllers
             int code = 0;
             var isNumber = int.TryParse(userNameOrCode, out code);
             var userId = _userManager.GetUserId(User);
+            var user = await _userManager.FindByIdAsync(userId);
+
+            var isUserIsFin = await _userManager.IsInRoleAsync(user, Role.Financial);
+
+            List<ListClientDTO> clients = new List<ListClientDTO>();
 
             if (!string.IsNullOrEmpty(userNameOrCode))
             {
 
 
-                var user = await _userManager.FindByIdAsync(userId);
 
                 if (await _userManager.IsInRoleAsync(user, Role.GeneralManager))
                 {
@@ -80,7 +84,9 @@ namespace AsdafObhurRealEstate.Controllers
                         })
                         .ToListAsync());
                 }
-                List<ListClientDTO> clients = new List<ListClientDTO>();
+
+             
+
 
                 if (heCreated)
                 {
@@ -96,10 +102,24 @@ namespace AsdafObhurRealEstate.Controllers
                              })
                              .ToListAsync());
                 }
+                else if (isUserIsFin)
+                {
+                    clients.AddRange(await _context.Clients.Where(m => (m.Code == code || m.ClientName.Contains(userNameOrCode))
+                    && m.ClientStatus == Enums.StatusOfClient.FinancialTransformation)
+                            .Select(m => new ListClientDTO
+                            {
+                                Id = m.Id,
+                                ClientName = m.ClientName,
+                                PhoneNumber = m.PhoneNumber,
+                                Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
+                                Code = m.Code,
+                            })
+                             .ToListAsync());
+                }
                 else
                 {
-                    clients.AddRange(await _context.Clients.Where(m => (m.Code == code || m.ClientName
-                      .Contains(userNameOrCode)) && m.BaseUserId == userId)
+                    clients.AddRange(await _context.Clients.Where(m => (m.Code == code || m.ClientName.Contains(userNameOrCode)) 
+                    && m.BaseUserId == userId)
                             .Select(m => new ListClientDTO
                             {
                                 Id = m.Id,
@@ -112,6 +132,22 @@ namespace AsdafObhurRealEstate.Controllers
                 }
 
                 return Ok(clients);
+            }
+            else if(string.IsNullOrEmpty(userNameOrCode) && isUserIsFin)
+            {
+
+                clients.AddRange(await _context.Clients.Where(m => m.ClientStatus == Enums.StatusOfClient.FinancialTransformation)
+                             .Select(m => new ListClientDTO
+                             {
+                                 Id = m.Id,
+                                 ClientName = m.ClientName,
+                                 PhoneNumber = m.PhoneNumber,
+                                 Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
+                                 Code = m.Code,
+                             })
+                             .ToListAsync());
+                return Ok(clients);
+
             }
             else
             {
@@ -462,10 +498,11 @@ namespace AsdafObhurRealEstate.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllClientHasFinancial()
         {
-            ViewData["TotalCount"] = await _context.Clients.CountAsync();
+            int totalCount = await _context.Clients.CountAsync(m => m.ClientStatus == Enums.StatusOfClient.FinancialTransformation);
+            ViewData["TotalCount"] =totalCount ;
             var clients = await _context.Clients
                         .Where(m => m.ClientStatus == Enums.StatusOfClient.FinancialTransformation)
-                        .OrderBy(m => m.Code)
+                        .OrderByDescending(m => m.Code)
                         .Take(10)
                         .Select(m => new ListClientDTO()
                         {
@@ -510,10 +547,10 @@ namespace AsdafObhurRealEstate.Controllers
         public async Task<IActionResult> PaginationClient(QueryParameters param, [FromQuery] string userId)
         {
             // Get all clients as collection of queryable
-            var query = _context.Clients.OrderBy(m => m.Code).AsQueryable();
+            var query = _context.Clients.OrderByDescending(m => m.Code).AsQueryable();
             query = query.Where(m => m.BaseUserId == userId);
             var count = await query.CountAsync();
-            var items = await query.Skip((param.Page) * param.Limit).Take(param.Limit).ToListAsync();
+            var items = await query.Skip((param.Page-1) * param.Limit).Take(param.Limit).ToListAsync();
             var resultPageList = new PagedList<Client>(items, count, param.Page, param.Limit);
 
             var output = new PagedListModel<GenericListItemDTO>
@@ -527,6 +564,48 @@ namespace AsdafObhurRealEstate.Controllers
             return Ok(output);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> PaginationClientForFin(QueryParameters param)
+        {
+            // Get all clients as collection of queryable
+            var query = _context.Clients.OrderByDescending(m => m.Code).AsQueryable();
+            query = query.Where(m => m.ClientStatus == Enums.StatusOfClient.FinancialTransformation);
+            var count = await query.CountAsync();
+            var items = await query.Skip((param.Page - 1) * param.Limit).Take(param.Limit).ToListAsync();
+            var resultPageList = new PagedList<Client>(items, count, param.Page, param.Limit);
+
+            var output = new PagedListModel<GenericListItemDTO>
+            {
+                Data = resultPageList.Select(c => new GenericListItemDTO(c)).ToList(),
+                Page = param.Page,
+                Limit = param.Limit,
+                Length = resultPageList.TotalCount,
+                //Pages = pages.TotalPages
+            };
+            return Ok(output);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> PaginationClientForAdmin(QueryParameters param)
+        {
+            // Get all clients as collection of queryable
+            var query = _context.Clients.OrderByDescending(m => m.Code).AsQueryable();
+            
+            var count = await query.CountAsync();
+            var items = await query.Skip((param.Page - 1) * param.Limit).Take(param.Limit).ToListAsync();
+            var resultPageList = new PagedList<Client>(items, count, param.Page, param.Limit);
+
+            var output = new PagedListModel<GenericListItemDTO>
+            {
+                Data = resultPageList.Select(c => new GenericListItemDTO(c)).ToList(),
+                Page = param.Page,
+                Limit = param.Limit,
+                Length = resultPageList.TotalCount,
+                //Pages = pages.TotalPages
+            };
+            return Ok(output);
+        }
 
         private List<CountryPhoneNumber> ListOfPhoneNumber()
         {

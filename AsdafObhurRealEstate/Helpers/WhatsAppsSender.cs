@@ -86,7 +86,7 @@ namespace AsdafObhurRealEstate.Helpers
                 result.StatusCode == HttpStatusCode.Unauthorized)
             {
                 return false;
-               Console.WriteLine(responde);
+              
             }
 
             return true;
