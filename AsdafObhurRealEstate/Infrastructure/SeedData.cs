@@ -126,7 +126,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             NormalizedUserName = "ceo-foad@asdaf-aom.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
-                            PhoneNumber = "01100811024",
+                            PhoneNumber = "966565523432",
                             PhoneNumberConfirmed = true,
                         },
                         //مشرف مشاريع
@@ -146,7 +146,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             NormalizedUserName = "Muhannad@Asdaf-aom.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
-                            PhoneNumber = "01100811024",
+                            PhoneNumber = "966554331959",
                             PhoneNumberConfirmed = true,
                             DepartmentId = ConstantIDs.department[1]
                         },
@@ -165,7 +165,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             NormalizedUserName = "sadek@asdaf-aom.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
-                            PhoneNumber = "01100811024",
+                            PhoneNumber = "966556567826",
                             PhoneNumberConfirmed = true,
                             DepartmentId = ConstantIDs.department[1]
                         },
@@ -184,7 +184,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             NormalizedUserName = "khalil@asdaf-aom.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
-                            PhoneNumber = "01100811024",
+                            PhoneNumber = "966556986415",
                             PhoneNumberConfirmed = true,
                             DepartmentId = ConstantIDs.department[1]
                         },
@@ -205,7 +205,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             NormalizedUserName = "Ghadeer.Sec@Asdaf-aom.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
-                            PhoneNumber = "01100811024",
+                            PhoneNumber = "966544113770",
                             PhoneNumberConfirmed = true,
                         },
                         //تسويق
@@ -225,7 +225,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             NormalizedUserName = "Turki@Asdaf-aom.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
-                            PhoneNumber = "01100811024",
+                            PhoneNumber = "966506278000",
                             PhoneNumberConfirmed = true,
                             DepartmentId = ConstantIDs.department[3]
                         },
@@ -244,7 +244,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             NormalizedUserName = "Amal@Asdaf-aom.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
-                            PhoneNumber = "01100811024",
+                            PhoneNumber = "966505798800",
                             PhoneNumberConfirmed = true,
                             DepartmentId = ConstantIDs.department[3]
                         },
@@ -265,7 +265,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             NormalizedUserName = "hossam@asdaf-aom.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
-                            PhoneNumber = "01100811024",
+                            PhoneNumber = "966547027990",
                             PhoneNumberConfirmed = true,
                             DepartmentId = ConstantIDs.department[2]
                         },
@@ -284,7 +284,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             NormalizedUserName = "Eng.mansour@asdaf-aom.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
-                            PhoneNumber = "01100811024",
+                            PhoneNumber = "966549810302",
                             PhoneNumberConfirmed = true,
                             DepartmentId = ConstantIDs.department[2]
                         },
@@ -305,7 +305,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             NormalizedUserName = "Marwa@Asdaf-aom.com".ToUpper(),
                             EmailConfirmed = true,
                             PasswordHash = PasswordHash("qaz2wsxedc"),
-                            PhoneNumber = "01100811024",
+                            PhoneNumber = "966567791554",
                             PhoneNumberConfirmed = true,
                             DepartmentId = ConstantIDs.department[4]
                             
