@@ -194,7 +194,8 @@ namespace AsdafObhurRealEstate.Controllers
                 return View(ModelState);
             }
 
-            var code = await _context.Clients.MaxAsync(m => m.Code) + 1;
+            var maxCode = await _context.Clients.MaxAsync(m => (int?)m.Code)?? 0;
+            var code = maxCode + 1;
 
             var resultString = Regex.Match(model.CodePhoneNumber, @"\d+").Value;
             int codeNumber = 966; 

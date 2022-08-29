@@ -12,6 +12,7 @@ using AsdafObhurRealEstate.Services.AccountManagement;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Wkhtmltopdf.NetCore;
@@ -305,6 +306,50 @@ namespace AsdafObhurRealEstate.Controllers
             return Ok(output);
         }
 
+        [HttpGet]
+        public IActionResult ChangePassword() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePassword model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if (!model.NewPassword.Equals(model.ConfirmPassword))
+            {
+                ModelState.AddModelError("", "الرقم السري الجديد لا يطابق تاكيد الرقم السري");
+                return View();
+            }
+
+            var userId = userManager.GetUserId(User);
+            var user = await userManager.FindByIdAsync(userId);
+
+
+            var result = await userManager.RemovePasswordAsync(user);
+            if (result.Succeeded)
+            {
+                result = await userManager.AddPasswordAsync(user, model.NewPassword);
+
+                if (result.Succeeded)
+                {
+                    return Redirect("/");
+                }
+                else
+                {
+                    ModelState.AddModelError("", result.Errors.FirstOrDefault().Description);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", result.Errors.FirstOrDefault().Description);
+            }
+
+            return View(model);
+
+
+        }
 
     }
 }
