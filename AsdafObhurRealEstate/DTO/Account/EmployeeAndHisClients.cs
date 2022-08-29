@@ -11,9 +11,13 @@ namespace AsdafObhurRealEstate.DTO.Account
         public int EmployeeCode { get; set; }
 
         [Display(Name = "من")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime From { get; set; }
 
         [Display(Name="إلى")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime To { get; set; }
 
         [Display(Name="اسم الموظف")]
