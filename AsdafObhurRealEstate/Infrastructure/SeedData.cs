@@ -156,7 +156,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             Code = 9,
                             FirstName = "صادق",
                             LastName = "الأبيض",
-                            Email = "sadek@asdaf-aom.com",
+                            Email = "sadeq@asdaf-aom.com",
                             AccountType = Enums.AccountType.ProjectSupervisor,
                             CreatedAt = new DateTime(2022, 8, 14),
                             CreatedBy = ConstantIDs.users[0],
@@ -175,7 +175,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             Code = 10,
                             FirstName = "خليل",
                             LastName = "محمد",
-                            Email = "khalil@asdaf-aom.com",
+                            Email = "Khalil@asdaf-aom.com",
                             AccountType = Enums.AccountType.ProjectSupervisor,
                             CreatedAt = new DateTime(2022, 8, 14),
                             CreatedBy = ConstantIDs.users[0],
@@ -256,7 +256,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             Code = 7,
                             FirstName = "حسام",
                             LastName = "الديني",
-                            Email = "hossam@asdaf-aom.com",
+                            Email = "Husaam@asdaf-aom.com",
                             AccountType = Enums.AccountType.projectsEngineer,
                             CreatedAt = new DateTime(2022, 8, 14),
                             CreatedBy = ConstantIDs.users[0],
@@ -456,7 +456,7 @@ namespace AsdafObhurRealEstate.Infrastructure
         }
 
     
-        private static string PasswordHash(string password)
+        public static string PasswordHash(string password)
         {
 
             byte[] salt;

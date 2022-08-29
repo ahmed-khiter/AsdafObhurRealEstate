@@ -327,23 +327,15 @@ namespace AsdafObhurRealEstate.Controllers
             var user = await userManager.FindByIdAsync(userId);
 
 
-            var result = await userManager.RemovePasswordAsync(user);
+            var result = await userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+
             if (result.Succeeded)
             {
-                result = await userManager.AddPasswordAsync(user, model.NewPassword);
-
-                if (result.Succeeded)
-                {
-                    return Redirect("/");
-                }
-                else
-                {
-                    ModelState.AddModelError("", result.Errors.FirstOrDefault().Description);
-                }
+                return Redirect("/");
             }
             else
             {
-                ModelState.AddModelError("", result.Errors.FirstOrDefault().Description);
+                ModelState.AddModelError("", "الرقم السري القديم خاطئ جرب مره اخرى.");
             }
 
             return View(model);
