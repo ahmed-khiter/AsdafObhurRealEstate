@@ -109,6 +109,24 @@ namespace AsdafObhurRealEstate.Infrastructure
                 {
                     entity.HasData
                     (
+                        new BaseUser()
+                        {
+                            Id = ConstantIDs.users[12],
+                            Code = 13,
+                            FirstName = "حساب",
+                            LastName = "المبرمج",
+                            Email = "programmer@gmail.com",
+                            AccountType = Enums.AccountType.GeneralManager,
+                            CreatedAt = new DateTime(2022, 8, 14),
+                            CreatedBy = ConstantIDs.users[0],
+                            NormalizedEmail = "programmer@gmail.com".ToUpper(),
+                            UserName = "programmer@gmail.com",
+                            NormalizedUserName = "programmer@gmail.com".ToUpper(),
+                            EmailConfirmed = true,
+                            PasswordHash = PasswordHash("qaz2wsxedc"),
+                            PhoneNumber = "201100811024",
+                            PhoneNumberConfirmed = true,
+                        },
                         // General manager
                         //المدير العام
                         new BaseUser()
@@ -331,6 +349,12 @@ namespace AsdafObhurRealEstate.Infrastructure
                 {
                     entity.HasData
                     (
+                        new IdentityUserRole<string>()
+                        {
+                            RoleId = ConstantIDs.roles[0],
+                            UserId = ConstantIDs.users[12]
+                        },
+
                         new IdentityUserRole<string>()
                         {
                             RoleId = ConstantIDs.roles[0],
