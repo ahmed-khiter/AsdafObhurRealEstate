@@ -6,7 +6,7 @@
     bool isFinancialUser = await userManager.IsInRoleAsync(user, Role.Financial);
 }
 
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret  bg-gradient-dark" id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret  bg-primary" id="sidenav-main">
         <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href="/" target="_blank">
@@ -23,7 +23,7 @@
                         <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons-round opacity-10">apartment</i>
                         </div>
-                        <span class="nav-link-text me-1">الأقسام</span>
+                        <span class="nav-link-text me-1 fs-5">الأقسام</span>
                         </a>
                     </li>
 
@@ -32,7 +32,7 @@
                         <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons-round opacity-10">apartment</i>
                         </div>
-                        <span class="nav-link-text me-1">إضافة  قسم</span>
+                        <span class="nav-link-text me-1 fs-5">إضافة  قسم</span>
                         </a>
                     </li>
 
@@ -41,7 +41,7 @@
                         <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons-round opacity-10">badge</i>
                         </div>
-                        <span class="nav-link-text me-1">الموظفين</span>
+                        <span class="nav-link-text me-1 fs-5">الموظفين</span>
                         </a>
                     </li>
 
@@ -51,7 +51,7 @@
                 <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons-round opacity-10">person</i>
                 </div>
-                <span class="nav-link-text me-1">إضافة عميل</span>
+                <span class="nav-link-text me-1 fs-5">إضافة عميل</span>
                 </a>
             </li>
             @if(isAccessToDisplay)
@@ -61,7 +61,7 @@
                     <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons-round opacity-10">table_view</i>
                     </div>
-                    <span class="nav-link-text me-1">الجداول</span>
+                    <span class="nav-link-text me-1 fs-5">الجداول</span>
                     </a>
                 </li>
             }
@@ -72,7 +72,7 @@
                     <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons-round opacity-10">manage_accounts</i>
                     </div>
-                    <span class="nav-link-text me-1">قائمة عملائي</span>
+                    <span class="nav-link-text me-1 fs-5">قائمة عملائي</span>
                     </a>
                 </li>
             }else{
@@ -82,7 +82,7 @@
                             <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                                 <i class="material-icons-round opacity-10">manage_accounts</i>
                             </div>
-                            <span class="nav-link-text me-1">قائمة عملائي</span>
+                            <span class="nav-link-text me-1 fs-5">قائمة عملائي</span>
                         </a>
                     </li>
                 }
@@ -92,7 +92,7 @@
                 <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons-round opacity-10">password</i>
                 </div>
-                <span class="nav-link-text me-1">تغيير الرقم السري</span>
+                <span class="nav-link-text me-1 fs-5">تغيير الرقم السري</span>
                 </a>
             </li>
 
@@ -101,7 +101,7 @@
                 <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons-round opacity-10">logout</i>
                 </div>
-                <span class="nav-link-text me-1">تسجيل الخروج</span>
+                <span class="nav-link-text me-1 fs-5">تسجيل الخروج</span>
                 </a>
             </li>
             </ul>
