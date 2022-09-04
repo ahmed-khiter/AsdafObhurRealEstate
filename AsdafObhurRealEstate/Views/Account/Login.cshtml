@@ -1,34 +1,44 @@
 ﻿
+@inject SignInManager<BaseUser> signinManager
+@inject UserManager<BaseUser> userManager
+@{
+    var user = await userManager.GetUserAsync(User);
+    bool isLogged = signinManager.IsSignedIn(User);
+
+}
+
 @model LoginDTO
 @{
     ViewData["Title"] = "Login";
 }
 
-<div class="container d-flex justify-content-center p-4">
-    <form class="login-form card p-3" asp-controller="account" asp-action="login" method="post" >
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <div class="input-group input-group-outline my-3">
-            <input asp-for="Email"  type="email" class="form-control" placeholder="البريد الالكتروني">
-          </div>
-        </div>
+@if(!isLogged){
+    <div class="container d-flex justify-content-center p-4">
+        <form class="login-form card p-3" asp-controller="account" asp-action="login" method="post" >
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="input-group input-group-outline my-3">
+                <input asp-for="Email"  type="email" class="form-control" placeholder="البريد الالكتروني">
+              </div>
+            </div>
 
-        <div class="col-md-8">
-          <div class="input-group input-group-outline my-3">
-            <input asp-for="Password" type="password" class="form-control" placeholder="كلمة المرور">
-          </div>
-        </div>
+            <div class="col-md-8">
+              <div class="input-group input-group-outline my-3">
+                <input asp-for="Password" type="password" class="form-control" placeholder="كلمة المرور">
+              </div>
+            </div>
 
-        <div class="col-md-8">
-          <div class="input-group input-group-outline my-3">
-            <span dir="rtl"> <input asp-for="RememberMe"> ابقى على تسجيل الدخول </span>
-          </div>
-        </div>
+            <div class="col-md-8">
+              <div class="input-group input-group-outline my-3">
+                <span dir="rtl"> <input asp-for="RememberMe"> ابقى على تسجيل الدخول </span>
+              </div>
+            </div>
 
-        <div class="col-md-8 d-flex justify-content-center">
-            <button type="submit" class="btn btn-info">تسجيل الدخول</button>
-        </div>
-        <div asp-validation-summary="All" class="col-12 text-danger"></div>
-      </div>
-    </form>
-</div>
+            <div class="col-md-8 d-flex justify-content-center">
+                <button type="submit" class="btn btn-info">تسجيل الدخول</button>
+            </div>
+            <div asp-validation-summary="All" class="col-12 text-danger"></div>
+          </div>
+        </form>
+    </div>
+}
