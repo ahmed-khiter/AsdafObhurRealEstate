@@ -19,9 +19,9 @@ namespace AsdafObhurRealEstate.Helpers
         public async Task<bool> SendMessage(string userName, string phoneNumber, string templateName)
         {
 
-            string token = "EAAF9njwav2sBANGBy8C2NjUrziV0eI8qPt8CZAnqZBFUXMta95w09diK5YpY4Fboqv21ZCJm1ccZBdopsiAdvczohX5mRVCdZAq0iRPftyETZAtLDUf4SV9shWDm2ktaDApR462IcV55irLHVmRGl20JcSywznbDM8UYdm3lJ9hxZA2uCYTaZAv6";
+            string token = "EAAF9njwav2sBAEf0GoAiHTawZCHg5Xx4MfdhKRxixuzqb3r8TUbExXAaJsL2EXKqwnHb2EEs6HEr8lzY036esyvV7vnvnuGgqrBQzOiDe2wybUm2ZAacLZCyfrBUk9EpgVVsI93N4au2vbyWuZAQWqVSZB9VCKmilvZAMRv1ZCmJZBoGNSk3wPUf";
             //string token = "dc529569b1e8d06b9736cd90cc00655a";
-            string url = @"https://graph.facebook.com/v13.0/102815602578407/messages";
+            string url = @"https://graph.facebook.com/v13.0/100772389455123/messages";
 
             HttpRequestMessage httpRequestMessage = new();
 

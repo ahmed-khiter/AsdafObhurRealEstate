@@ -2,9 +2,9 @@
 {
     public static class WhatsAppTemplate
     {
-        public static readonly string EmployeeSendOpenFileToClient = "send_open";
+        public static readonly string EmployeeSendOpenFileToClient = "open_file";
 
-        public static readonly string FinancialSendBillFileToClient = "send_bill";
+        public static readonly string FinancialSendBillFileToClient = "close_file";
 
     }
 }
