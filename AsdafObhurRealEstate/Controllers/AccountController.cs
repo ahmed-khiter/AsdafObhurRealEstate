@@ -19,7 +19,6 @@ using Wkhtmltopdf.NetCore;
 
 namespace AsdafObhurRealEstate.Controllers
 {
-    [AllowAnonymous]
     public class AccountController : Controller
     {
         private readonly UserManager<BaseUser> userManager;
