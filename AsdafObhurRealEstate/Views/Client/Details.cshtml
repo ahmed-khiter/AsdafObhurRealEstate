@@ -1,7 +1,6 @@
 ﻿@model DetailsClientDTO
 @inject UserManager<BaseUser> userManager
 @{
-    ViewData["Title"] = "تفاصيل العميل";
     var user = await userManager.GetUserAsync(User);
     bool isFinancialUser = await userManager.IsInRoleAsync(user, Role.Financial);
     bool isGeneralManager = await userManager.IsInRoleAsync(user, Role.GeneralManager);

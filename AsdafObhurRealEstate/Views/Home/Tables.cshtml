@@ -1,7 +1,7 @@
 ﻿@model TablesDTO
 @inject UserManager<BaseUser> userManager
 @{
-    ViewData["Title"] = "جداول السيستم";
+
     var isUserManager = (bool)ViewData["isGeneralManager"];
 
     var user = await userManager.GetUserAsync(User);

@@ -4,7 +4,6 @@
     var user = await userManager.GetUserAsync(User);
 
     bool isAccessToDisplay = await userManager.IsInRoleAsync(user, "GeneralManager");
-    ViewData["Title"] = "العملاء";
     int totalCount = (int)ViewData["TotalCount"];
     int j = 0;
 }

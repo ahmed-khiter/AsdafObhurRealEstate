@@ -1,9 +1,6 @@
 ﻿@model EmployeeAndHisClients
 
 
-@{
-    ViewData["Title"] = "تفاصيل الموظف";
-}
 
 <form asp-area="" asp-controller="account" asp-action="report" asp-route-userId="@Model.UserId">
     <input type="hidden" asp-for="Email" />
