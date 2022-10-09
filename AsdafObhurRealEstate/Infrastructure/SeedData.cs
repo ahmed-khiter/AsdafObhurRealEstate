@@ -264,7 +264,7 @@ namespace AsdafObhurRealEstate.Infrastructure
                             PasswordHash = PasswordHash("qaz2wsxedc"),
                             PhoneNumber = "966505798800",
                             PhoneNumberConfirmed = true,
-                            DepartmentId = ConstantIDs.department[3]
+                            DepartmentId = ConstantIDs.department[0]
                         },
                         //مهندس المشاريع
                         //projects Engineer
