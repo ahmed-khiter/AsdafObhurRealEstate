@@ -54,6 +54,14 @@
                 <span class="nav-link-text me-1 fs-5">إضافة عميل</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-action="ClientsWhoAssignedToAnotherEmp" asp-controller="Client">
+                    <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons-round opacity-10">manage_accounts</i>
+                    </div>
+                    <span class="nav-link-text me-1 fs-5">عملاء بواسطتي</span>
+                </a>
+            </li>
             @if(isAccessToDisplay)
             {
                 <li class="nav-item">

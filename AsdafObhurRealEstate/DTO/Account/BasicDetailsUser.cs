@@ -9,5 +9,10 @@
         public string fullName { get; set; }
 
         public string phoneNumber { get; set; }
+
+
+        public int filesCreatedBy { get; set; }
+
+        public int filesAssignedTo { get; set; }
     }
 }

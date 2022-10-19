@@ -81,6 +81,7 @@ namespace AsdafObhurRealEstate.Controllers
                             PhoneNumber = m.PhoneNumber,
                             Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
                             Code = m.Code,
+                            CreateAt = m.CreatedAt
                         })
                         .ToListAsync());
                 }
@@ -99,6 +100,7 @@ namespace AsdafObhurRealEstate.Controllers
                                  PhoneNumber = m.PhoneNumber,
                                  Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
                                  Code = m.Code,
+                                 CreateAt = m.CreatedAt
                              })
                              .ToListAsync());
                 }
@@ -113,6 +115,7 @@ namespace AsdafObhurRealEstate.Controllers
                                 PhoneNumber = m.PhoneNumber,
                                 Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
                                 Code = m.Code,
+                                CreateAt = m.CreatedAt
                             })
                              .ToListAsync());
                 }
@@ -127,6 +130,7 @@ namespace AsdafObhurRealEstate.Controllers
                                 PhoneNumber = m.PhoneNumber,
                                 Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
                                 Code = m.Code,
+                                CreateAt = m.CreatedAt
                             })
                              .ToListAsync());
                 }
@@ -144,6 +148,7 @@ namespace AsdafObhurRealEstate.Controllers
                                  PhoneNumber = m.PhoneNumber,
                                  Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
                                  Code = m.Code,
+                                 CreateAt = m.CreatedAt
                              })
                              .ToListAsync());
                 return Ok(clients);
@@ -155,6 +160,87 @@ namespace AsdafObhurRealEstate.Controllers
 
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> SearchClientToKnowAssignOrCreate(string userNameOrCode, bool heCreated, string userId)
+        {
+            int code = 0;
+            var isNumber = int.TryParse(userNameOrCode, out code);
+            
+            var user = await _userManager.FindByIdAsync(userId);
+
+            List<ListClientDTO> clients = new List<ListClientDTO>();
+
+            if (string.IsNullOrEmpty(userNameOrCode))
+            {
+                if (heCreated)
+                {
+                    var users = await _context.Clients.Where(m => m.CreatedBy == userId)
+                       .Select(m => new ListClientDTO
+                       {
+                           Id = m.Id,
+                           ClientName = m.ClientName,
+                           PhoneNumber = m.PhoneNumber,
+                           Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
+                           Code = m.Code,
+                           CreateAt = m.CreatedAt
+                       }).ToListAsync();
+
+                    clients.AddRange(users);
+                }
+                else
+                {
+                    var users = await _context.Clients.Where(m => m.BaseUserId == userId)
+                 .Select(m => new ListClientDTO
+                 {
+                     Id = m.Id,
+                     ClientName = m.ClientName,
+                     PhoneNumber = m.PhoneNumber,
+                     Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
+                     Code = m.Code,
+                     CreateAt = m.CreatedAt
+                 }).ToListAsync();
+
+                    clients.AddRange(users);
+                }
+            }
+            else if (heCreated)
+            {
+                var users = await _context.Clients.Where(m => (m.Code == code || m.ClientName.Contains(userNameOrCode))
+                                                            && m.CreatedBy == userId)
+                    .Select(m => new ListClientDTO
+                    {
+                        Id = m.Id,
+                        ClientName = m.ClientName,
+                        PhoneNumber = m.PhoneNumber,
+                        Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
+                        Code = m.Code,
+                        CreateAt = m.CreatedAt
+                    }).ToListAsync();
+
+                clients.AddRange(users);
+            }
+            else
+            {
+                var clientsFrmDb = await _context.Clients.Where(m => (m.Code == code || m.ClientName.Contains(userNameOrCode))
+                                                        && m.BaseUserId == userId)
+                .Select(m => new ListClientDTO
+                {
+                    Id = m.Id,
+                    ClientName = m.ClientName,
+                    PhoneNumber = m.PhoneNumber,
+                    Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
+                    Code = m.Code,
+                    CreateAt = m.CreatedAt
+                })
+                .ToListAsync();
+
+                clients.AddRange(clientsFrmDb);
+            }
+
+            return Ok(clients);
+        }
+
 
         public async Task<IActionResult> Create()
         {
@@ -215,13 +301,45 @@ namespace AsdafObhurRealEstate.Controllers
                 CreatedAt = DateTime.Now,
                 CreatedBy = _userManager.GetUserId(User),
                 UpdatedAt = DateTime.Now,
+                CodeNumber = codeNumber,
                 ClientStatus = Enums.StatusOfClient.NewRequest,
                 CustomerNeeded = model.CustomerNeeded,
+                NotesBeforeWhileCreating = model.NotesBeforeWhileCreating
             };
 
             _context.Clients.Add(client);
 
             await _context.SaveChangesAsync();
+
+            if (model.NewOtherFiles.Count > 0 || model.NewOtherFiles != null )
+            {
+                var items = new List<Multimedia>();
+
+                foreach (var item in model.NewOtherFiles)
+                {
+                    if (item.NewFile != null && !string.IsNullOrEmpty(item.Description))
+                    {
+                        var description = item.Description;
+                        var file = _fileManager.Upload(item.NewFile);
+
+                        items.Add(new Multimedia
+                        {
+                            ClientId = client.Id,
+                            CreatedAt = DateTime.Now,
+                            Description = description,
+                            CreatedBy = _userManager.GetUserId(User),
+                            UpdatedAt = DateTime.Now,
+                            Path = file
+                        });
+                    }
+                }
+                _context.Multimedias.AddRange(items);
+
+                await _context.SaveChangesAsync();
+
+            }
+
+           
 
             return RedirectToAction(nameof(Index));
         }
@@ -306,6 +424,7 @@ namespace AsdafObhurRealEstate.Controllers
                 ClientName = client.ClientName,
                 CustomerNeeded = client.CustomerNeeded,
                 ClientCode = client.Code,
+                CreatedAt = client.CreatedAt.ToString("dd/MM/yyyy"),
                 HandledBy = $"{handledBy.FirstName} {handledBy.LastName}",
                 CreatedBy = $"{createdBy.FirstName} {createdBy.LastName}",
                 Notes = client.Notes,
@@ -385,7 +504,7 @@ namespace AsdafObhurRealEstate.Controllers
             {
                 foreach (var item in model.NewOtherFiles)
                 {
-                    if (item.NewFile != null || !string.IsNullOrEmpty(item.Description))
+                    if (item.NewFile != null && !string.IsNullOrEmpty(item.Description))
                     {
                         var description = item.Description;
                         var file = _fileManager.Upload(item.NewFile);
@@ -566,6 +685,32 @@ namespace AsdafObhurRealEstate.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> PaginationClient(QueryParameters param, [FromQuery] string userId, [FromQuery] bool isCreated)
+        {
+            // Get all clients as collection of queryable
+            var query = _context.Clients.OrderByDescending(m => m.Code).AsQueryable();
+            
+            if(isCreated)
+                query = query.Where(m => m.CreatedBy == userId);
+            else
+                query = query.Where(m => m.BaseUserId == userId);
+
+            var count = await query.CountAsync();
+            var items = await query.Skip((param.Page - 1) * param.Limit).Take(param.Limit).ToListAsync();
+            var resultPageList = new PagedList<Client>(items, count, param.Page, param.Limit);
+
+            var output = new PagedListModel<GenericListItemDTO>
+            {
+                Data = resultPageList.Select(c => new GenericListItemDTO(c)).ToList(),
+                Page = param.Page,
+                Limit = param.Limit,
+                Length = resultPageList.TotalCount,
+                //Pages = pages.TotalPages
+            };
+            return Ok(output);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> PaginationClientForFin(QueryParameters param)
         {
             // Get all clients as collection of queryable
@@ -606,6 +751,52 @@ namespace AsdafObhurRealEstate.Controllers
                 //Pages = pages.TotalPages
             };
             return Ok(output);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ClientsWhoAssignedToAnotherEmp(bool isJson)
+        {
+
+            var clients = await _clientService.GetClientsWhoAssigned(User);
+
+            var userId = _userManager.GetUserId(User);
+            int totalCount = (await _context.Clients.CountAsync(m => m.CreatedBy == userId));
+            ViewData["TotalCount"] = totalCount;
+
+            if (isJson)
+                return Ok(clients);
+
+            return View(clients);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ClientsCreatedOrAssignedTo(bool isCreatedBy, string id)
+        {
+            var output = new List<Client>();
+            int totalCount =0 ;
+
+            if (isCreatedBy)
+            {
+                totalCount = await _context.Clients.CountAsync(m => m.CreatedBy == id);
+
+                output.AddRange(await _context.Clients.OrderBy(m => m.Code).Take(10).Include(m => m.BaseUser)
+                        .Where(m => m.CreatedBy == id).ToListAsync());
+            }
+            else
+            {
+                totalCount = await _context.Clients.CountAsync(m => m.BaseUserId == id);
+
+                output.AddRange(await _context.Clients.OrderBy(m => m.Code).Take(10).Include(m => m.BaseUser)
+                    .Where(m => m.BaseUserId == id).ToListAsync());
+            }
+
+            ViewData["baseUserId"] = id;
+            ViewData["isCreated"] = isCreatedBy;
+            ViewData["TotalCount"] = totalCount;
+
+            return View(output);
+        
         }
 
         private List<CountryPhoneNumber> ListOfPhoneNumber()

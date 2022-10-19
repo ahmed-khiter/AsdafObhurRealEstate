@@ -17,17 +17,21 @@
         <h3 class="mb-3">المعلومات الرئيسية</h3>
         <div class="row client-info card p-3">
             <div class="row client-info-container">
-                <div class="client-info-box col-md-4">
+                <div class="client-info-box col-md-3">
                    <h5 class="m-0 info-header">اسم العميل</h5>
                    <h5 class="m-0 info">@Model.ClientName </h5>
                 </div>
-                <div class="client-info-box col-md-4">
+                <div class="client-info-box col-md-3">
                     <h5 class="m-0 info-header">رقم الهاتف</h5>
                     <h5 class="m-0 info">@Model.PhoneNumber</h5>
                 </div>
-                <div class="client-info-box col-md-4">
+                <div class="client-info-box col-md-3">
                     <h5 class="m-0 info-header">العنوان</h5>
                     <h5 class="m-0 info">@Model.Address</h5>
+                </div>
+                     <div class="client-info-box col-md-3">
+                    <h5 class="m-0 info-header">تاريخ الإنشاء</h5>
+                    <h5 class="m-0 info">@Model.CreatedAt</h5>
                 </div>
             </div>
 

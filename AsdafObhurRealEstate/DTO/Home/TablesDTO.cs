@@ -22,5 +22,8 @@ namespace AsdafObhurRealEstate.DTO.Home
 
         public string Status { get; set; }
 
+        public int FilesCreatedBy { get; set; }
+        public int FilesAssignedTo { get; set; }
+
     }
 }

@@ -18,6 +18,10 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
         [Display(Name = "الفاتوره القديمه")]
         public string BillsFileOld { get; set; }
 
+        [Display(Name ="تاريخ الانشاء")]
+        public string CreatedAt { get; set; }
+
+
         [Display(Name ="ملاحظات")]
         public string Notes { get; set; }
 

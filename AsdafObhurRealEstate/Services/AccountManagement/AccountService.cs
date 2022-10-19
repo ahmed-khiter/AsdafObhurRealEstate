@@ -46,29 +46,50 @@ namespace AsdafObhurRealEstate.Services.AccountManagement
                     .Include(m => m.Department)
                     .Where(m => m.Code == code ||
                     m.FirstName.Contains(userNameOrCode) || m.LastName.Contains(userNameOrCode))
-                    .Select(m => new BasicDetailsUser
-                    {
-                        id = m.Id,
-                        code = m.Code,
-                        fullName = $"{m.FirstName} {m.LastName}",
-                        phoneNumber = m.PhoneNumber,
-                    })
                     .ToListAsync();
 
-                return users;
+                var result = new List<BasicDetailsUser>();
+                foreach (var item in users)
+                {
+                    var FilesAssignedTo = await _context.Clients.CountAsync(m => m.BaseUserId == item.Id);
+                    var FilesCreatedBy = await _context.Clients.CountAsync(m => m.CreatedBy == item.Id);
+                    result.Add(new BasicDetailsUser()
+                    {
+                        id = item.Id,
+                        code =item.Code,
+                        fullName = $"{item.FirstName} {item.LastName}",
+                        phoneNumber = item.PhoneNumber,
+                        filesAssignedTo = FilesAssignedTo,
+                        filesCreatedBy = FilesCreatedBy
+                    });
+
+                }
+
+                return result;
             }
             else
             {
                 var users = await _userManager.Users
-                    .Select(m => new BasicDetailsUser
-                    {
-                        id = m.Id,
-                        code = m.Code,
-                        fullName = $"{m.FirstName} {m.LastName}",
-                        phoneNumber = m.PhoneNumber,
-                    }).ToListAsync();
+                    .ToListAsync();
 
-                return users;
+                var result = new List<BasicDetailsUser>();
+                foreach (var item in users)
+                {
+                    var FilesAssignedTo = await _context.Clients.CountAsync(m => m.BaseUserId == item.Id);
+                    var FilesCreatedBy = await _context.Clients.CountAsync(m => m.CreatedBy == item.Id);
+                    result.Add(new BasicDetailsUser()
+                    {
+                        id = item.Id,
+                        code = item.Code,
+                        fullName = $"{item.FirstName} {item.LastName}",
+                        phoneNumber = item.PhoneNumber,
+                        filesAssignedTo = FilesAssignedTo,
+                        filesCreatedBy = FilesCreatedBy
+                    });
+
+                }
+
+                return result;
 
             }
         }

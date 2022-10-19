@@ -39,6 +39,7 @@
                     <th class="text-dark fs-5 font-weight-bolder">كود العميل</th>
                     <th class="text-dark fs-5 font-weight-bolder">اسم العميل</th>
                     <th class="text-dark fs-5 font-weight-bolder">رقم تلفون العميل</th>
+                    <th class="text-dark fs-5 font-weight-bolder"> تاريخ إنشاء الملف</th>
                     <th class="text-dark fs-5 font-weight-bolder">حالة الإجراء</th>
                     <th class="text-dark fs-5 font-weight-bolder"></th>
 
@@ -59,6 +60,13 @@
                             <div class="d-flex px-2">
                                 <div class="my-auto">
                                     <h6 class="mb-0 fs-6">@record.ClientName</h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex px-2">
+                                <div class="my-auto">
+                                    <h6 class="mb-0 fs-6">@record.CreateAt.ToString("dd-MM-yyyy")</h6>
                                 </div>
                             </div>
                         </td>
@@ -157,6 +165,13 @@
                                                 </div>
                                             </td>
                                             <td>
+                                                <div class="d-flex px-2">
+                                                    <div class="my-auto">
+                                                        <h6 class="mb-0 fs-6">${element.createAt}</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
                                                 <h6 dir="rtl" class="fs-6 mb-0">${element.phoneNumber}</h6>
                                             </td>
                                                 <td>
@@ -195,6 +210,13 @@
                                                         <div class="d-flex px-2">
                                                             <div class="my-auto">
                                                                 <h6 class="mb-0 fs-6">${element.clientName}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-2">
+                                                            <div class="my-auto">
+                                                                <h6 class="mb-0 fs-6">${element.createAt}</h6>
                                                             </div>
                                                         </div>
                                                     </td>

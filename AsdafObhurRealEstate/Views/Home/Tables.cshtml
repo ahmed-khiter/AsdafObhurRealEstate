@@ -26,7 +26,7 @@
             <div class='col-xs-8 col-sm-7 col-md-4 col-lg-3 m-3'>
                 <div class='navbar-form'>
                     <div class='input-group tabel-search-box'>
-                        <input id="searchInput" class='form-control table-search' type='text' data-search="search-input" placeholder='إبحث بإسم القسم' />
+                        <input id="searchInput" class='form-control table-search employee-search' type='text' data-search="search-user-input" placeholder='إبحث' />
                         <button id="button-addon1" type='button' class='btn table-search d-flex'>
                             <i class="fas fa-search"></i>
                         </button>
@@ -42,6 +42,8 @@
                         <th class="text-dark fs-5 font-weight-bolder">كود الموظف</th>
                         <th class="text-dark fs-5 font-weight-bolder">اسم الموظف</th>
                         <th class="text-dark fs-5 font-weight-bolder">رقم تلفون</th>
+                        <th class="text-dark fs-5 font-weight-bolder">الملفات تم انشائهم</th>
+                        <th class="text-dark fs-5 font-weight-bolder">الملفات تم تعينهم</th>
                         <th class="text-dark fs-5 font-weight-bolder"></th>
 
                     </tr>
@@ -66,6 +68,12 @@
                             </td>
                             <td>
                                 <p dir="rtl" class="fs-6 font-weight-normal mb-0">@record.PhoneNumber</p>
+                            </td>
+                            <td>
+                                <a asp-area="" asp-action="ClientsCreatedOrAssignedTo" asp-controller="Client" asp-route-isCreatedBy="true" asp-route-id="@record.Id" class="fs-6 font-weight-normal mb-0">@record.FilesCreatedBy</a>
+                            </td>
+                            <td>
+                                <a asp-area="" asp-action="ClientsCreatedOrAssignedTo" asp-controller="Client" asp-route-isCreatedBy="false" asp-route-id="@record.Id" class="fs-6 font-weight-normal mb-0">@record.FilesAssignedTo</a>
                             </td>
                             <td class="align-middle">
                                 <a class="text-secondary font-weight-bold text-xs m-2" asp-area="" asp-action="detailsOfEmployee" asp-controller="Account" asp-route-userId="@record.Id">
@@ -97,7 +105,7 @@
         <div class='col-xs-8 col-sm-7 col-md-4 col-lg-3 m-3'>
             <div class='navbar-form'>
                 <div class='input-group tabel-search-box'>
-                    <input id="searchInput" class='form-control table-search' type='text' data-search="search-input" placeholder='إبحث بإسم القسم' />
+                    <input id="searchInput" class='form-control table-search client-search' type='text' data-client-search="search-client-input" placeholder='إبحث' />
                     <button id="button-addon1" type='button' class='btn table-search d-flex'>
                         <i class="fas fa-search"></i>
                     </button>
@@ -153,7 +161,7 @@
                                 </span>
                             </a>
 
-                            <a class="del-record text-secondary font-weight-bold text-xs m-2" data-id="@record.Id">
+                            <a class="del-client-record text-secondary font-weight-bold text-xs m-2" data-id="@record.Id">
                                 <span class="material-symbols-outlined">
                                     <i title="مسح" class="material-icons-round opacity-10">delete</i>
                                 </span>
@@ -203,7 +211,7 @@
 
 
         $(document).on('change', '.employee-search', function () {
-            const inputEle = document.querySelector('[data-search="search-input"]')
+            const inputEle = document.querySelector('[data-search="search-user-input"]')
             $.ajax({
                 url: `/account/SearchUser?userName=${inputEle.value}`,
                 type: "Get",
@@ -227,6 +235,12 @@
                                                 </td>
                                                 <td>
                                                 <p dir="rtl" class="text-xs font-weight-normal mb-0">${element.phoneNumber}</p>
+                                                </td>
+                                                <td>
+                                                    <h6 href="/Client/ClientsCreatedOrAssignedTo/${element.id}?isCreatedBy=true" class="fs-6 mb-0">${element.filesCreatedBy}</h6>
+                                                </td>
+                                                <td>
+                                                    <h6 href="/Client/ClientsCreatedOrAssignedTo/${element.id}?isCreatedBy=false" class="fs-6 mb-0">${element.filesAssignedTo}</h6>
                                                 </td>
                                                 <td class="align-middle">
                                                     <a class="text-secondary font-weight-bold text-xs" href="/account/detailsOfEmployee?userId=${element.id}" >
@@ -257,10 +271,10 @@
         });
 
 
-        
+
         $(document).on('change', '.client-search', function () {
 
-            const inputEle = document.querySelector('[data-searchClient="search-input"]')
+            const inputEle = document.querySelector('[data-client-search="search-client-input"]')
             $.ajax({
                 url: `/client/SearchClient?userNameOrCode=${inputEle.value}&heCreated=false`,
                 type: "Get",
@@ -300,7 +314,7 @@
                                             </span>
                                         </a>
 
-                                        <a class="del-record text-secondary font-weight-bold text-xs" data-id="${element.id}">
+                                        <a class="del-client-record text-secondary font-weight-bold text-xs" data-id="${element.id}">
                                             <span class="material-symbols-outlined">
                                                 <i title="مسح" class="material-icons-round opacity-10">delete</i>
                                             </span>
@@ -318,9 +332,6 @@
                 }
             })
         });
-
-
-
 
         $(document).on('click','.del-record',function(){
             var id = $(this).data("id");
@@ -366,6 +377,50 @@
             })
         });
 
+        $(document).on('click','.del-client-record',function(){
+            var id = $(this).data("id");
+            var data = { id };
+            Swal.fire({
+                title: 'هل أنت متأكد من أنك تريد المسح؟',
+                text: "أنت لا تستطيع ارجاع عن هذا الاجراء بعد ذلك",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'نعم !',
+                cancelButtonText: 'إالغاء !'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    debugger;
+                    $.ajax({
+                        url: '/client/delete',
+                        type: "POST",
+                        contentType: 'application/x-www-form-urlencoded',
+                        data: data,
+                        success: (data) => {
+                            $(this).parent().parent().remove();
+                            Swal.fire(
+                                'مسح!',
+                                'تم المسح بنجاح.',
+                                'تم'
+                            )
+                        },
+                        error: function (eventFromParam) {
+                            debugger;
+                            console.log(eventFromParam.responseText);
+                            console.log(eventFromParam.status);
+                            console.log(eventFromParam.responseJSON);
+                            console.log(eventFromParam.statusText);
+                            Swal.fire({
+                                title: 'خطأ اثناء المسح',
+                                text: "يجب مسح العملاء المرتبطتين بهذا الموظف"
+                            })
+                        }
+                    })
+                }
+            })
+
+        });
 
     </script>
 

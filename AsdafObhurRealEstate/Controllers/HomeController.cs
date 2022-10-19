@@ -48,7 +48,7 @@ namespace AsdafObhurRealEstate.Controllers
             ViewData["isGeneralManager"] = userIsGeneralManager;
 
             if(userIsGeneralManager)
-                 employees.AddRange(await _userManager.Users.ToListAsync());
+                 employees.AddRange(await _userManager.Users.OrderBy(m => m.Code).ToListAsync());
 
 
             List<Client> clients = new List<Client>();
@@ -71,7 +71,8 @@ namespace AsdafObhurRealEstate.Controllers
                         Name = $"{item.FirstName} {item.LastName}",
                         Code = item.Code,
                         PhoneNumber = item.PhoneNumber,
-                    
+                        FilesCreatedBy = _context.Clients.Count(m => m.CreatedBy == item.Id),
+                        FilesAssignedTo  = _context.Clients.Count(m => m.BaseUserId == item.Id),
                     });
                 }
             }

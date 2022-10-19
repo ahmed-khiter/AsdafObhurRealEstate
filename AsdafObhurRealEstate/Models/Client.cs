@@ -25,6 +25,9 @@ namespace AsdafObhurRealEstate.Models
 
         public int CodeNumber { get; set; }
 
+        public string NotesBeforeWhileCreating { get; set; }
+
+
 
         //تفاصيل احتياج العميل
         public string CustomerNeeded { get; set; }

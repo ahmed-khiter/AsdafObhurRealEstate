@@ -32,6 +32,12 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
         [Display(Name ="كود الدولة")]
         public string CodePhoneNumber { get; set; }
 
+        [Display(Name ="ملاحظات قبل الإنشاء")]
+        public string NotesBeforeWhileCreating { get; set; }
+
+        public List<NewOtherFile> NewOtherFiles { get; set; }
+
+
 
     }
 }

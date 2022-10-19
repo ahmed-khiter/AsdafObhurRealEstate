@@ -14,6 +14,10 @@ namespace AsdafObhurRealEstate.DTO.ClientsDataTransferObject
 
         public int TotalCount { get; set; }
 
+        public int FilesCreatedBy { get; set; }
+
+        public int FilesAssignedTo { get; set; }
+
 
     }
 
