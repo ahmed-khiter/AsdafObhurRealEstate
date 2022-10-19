@@ -1,6 +1,7 @@
 ﻿using AsdafObhurRealEstate.Constants;
 using AsdafObhurRealEstate.Core;
 using AsdafObhurRealEstate.DTO.ClientsDataTransferObject;
+using AsdafObhurRealEstate.Enums;
 using AsdafObhurRealEstate.Helpers;
 using AsdafObhurRealEstate.Infrastructure;
 using AsdafObhurRealEstate.Models;
@@ -162,82 +163,63 @@ namespace AsdafObhurRealEstate.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SearchClientToKnowAssignOrCreate(string userNameOrCode, bool heCreated, string userId)
+        public async Task<IActionResult> SearchClientToKnowAssignOrCreate(string userNameOrCode, RelationEmployeeWithClient heCreated, string userId)
         {
             int code = 0;
             var isNumber = int.TryParse(userNameOrCode, out code);
             
             var user = await _userManager.FindByIdAsync(userId);
-
+            var query = _context.Clients.Include(m => m.BaseUser).AsQueryable();
             List<ListClientDTO> clients = new List<ListClientDTO>();
+
+            if (heCreated == RelationEmployeeWithClient.CreatedByHim)
+            {
+                query = query.Where(m => m.CreatedBy == userId);
+            }
+            else if(heCreated == RelationEmployeeWithClient.AssignedToHim)
+            {
+                query = query.Where(m => m.BaseUserId == userId);
+            }
+            else if(heCreated != RelationEmployeeWithClient.AssignToHimButNotCreatedByHim)
+            {
+                query = query.Where(m => m.BaseUserId == userId && m.CreatedBy != userId);
+            }
+            else
+            {
+                query = query.Where(m => m.BaseUserId == userId && m.ClientStatus == StatusOfClient.Finished);
+
+            }
 
             if (string.IsNullOrEmpty(userNameOrCode))
             {
-                if (heCreated)
-                {
-                    var users = await _context.Clients.Where(m => m.CreatedBy == userId)
-                       .Select(m => new ListClientDTO
-                       {
-                           Id = m.Id,
-                           ClientName = m.ClientName,
-                           PhoneNumber = m.PhoneNumber,
-                           Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
-                           Code = m.Code,
-                           CreateAt = m.CreatedAt
-                       }).ToListAsync();
-
-                    clients.AddRange(users);
-                }
-                else
-                {
-                    var users = await _context.Clients.Where(m => m.BaseUserId == userId)
-                 .Select(m => new ListClientDTO
-                 {
-                     Id = m.Id,
-                     ClientName = m.ClientName,
-                     PhoneNumber = m.PhoneNumber,
-                     Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
-                     Code = m.Code,
-                     CreateAt = m.CreatedAt
-                 }).ToListAsync();
-
-                    clients.AddRange(users);
-                }
-            }
-            else if (heCreated)
-            {
-                var users = await _context.Clients.Where(m => (m.Code == code || m.ClientName.Contains(userNameOrCode))
-                                                            && m.CreatedBy == userId)
-                    .Select(m => new ListClientDTO
-                    {
-                        Id = m.Id,
-                        ClientName = m.ClientName,
-                        PhoneNumber = m.PhoneNumber,
-                        Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
-                        Code = m.Code,
-                        CreateAt = m.CreatedAt
-                    }).ToListAsync();
+                var users = await query.Where(m => m.Code == code || m.ClientName.Contains(userNameOrCode))
+                            .Select(m => new ListClientDTO
+                            {
+                                Id = m.Id,
+                                ClientName = m.ClientName,
+                                PhoneNumber = m.PhoneNumber,
+                                Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
+                                Code = m.Code,
+                                CreateAt = m.CreatedAt
+                            }).ToListAsync();
 
                 clients.AddRange(users);
             }
             else
             {
-                var clientsFrmDb = await _context.Clients.Where(m => (m.Code == code || m.ClientName.Contains(userNameOrCode))
-                                                        && m.BaseUserId == userId)
-                .Select(m => new ListClientDTO
-                {
-                    Id = m.Id,
-                    ClientName = m.ClientName,
-                    PhoneNumber = m.PhoneNumber,
-                    Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
-                    Code = m.Code,
-                    CreateAt = m.CreatedAt
-                })
-                .ToListAsync();
+                var users = await query.Select(m => new ListClientDTO
+                                {
+                                    Id = m.Id,
+                                    ClientName = m.ClientName,
+                                    PhoneNumber = m.PhoneNumber,
+                                    Status = m.ClientStatus.GetAttribute<DisplayAttribute>().Name,
+                                    Code = m.Code,
+                                    CreateAt = m.CreatedAt
+                                }).ToListAsync();
 
-                clients.AddRange(clientsFrmDb);
+                clients.AddRange(users);
             }
-
+           
             return Ok(clients);
         }
 
@@ -771,28 +753,42 @@ namespace AsdafObhurRealEstate.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ClientsCreatedOrAssignedTo(bool isCreatedBy, string id)
+        public async Task<IActionResult> ClientsCreatedOrAssignedTo(int relationWithClient, string id)
         {
             var output = new List<Client>();
             int totalCount =0 ;
 
-            if (isCreatedBy)
+            if (relationWithClient ==(int) RelationEmployeeWithClient.CreatedByHim)
             {
                 totalCount = await _context.Clients.CountAsync(m => m.CreatedBy == id);
 
                 output.AddRange(await _context.Clients.OrderBy(m => m.Code).Take(10).Include(m => m.BaseUser)
                         .Where(m => m.CreatedBy == id).ToListAsync());
             }
-            else
+            else if(relationWithClient == (int) RelationEmployeeWithClient.AssignedToHim)
             {
                 totalCount = await _context.Clients.CountAsync(m => m.BaseUserId == id);
 
                 output.AddRange(await _context.Clients.OrderBy(m => m.Code).Take(10).Include(m => m.BaseUser)
                     .Where(m => m.BaseUserId == id).ToListAsync());
             }
+            else if(relationWithClient == (int) RelationEmployeeWithClient.AssignToHimButNotCreatedByHim)
+            {
+                totalCount = await _context.Clients.CountAsync(m => m.BaseUserId == id && m.CreatedBy != id );
+
+                output.AddRange(await _context.Clients.OrderBy(m => m.Code).Take(10).Include(m => m.BaseUser)
+                    .Where(m => m.BaseUserId == id && m.CreatedBy != id).ToListAsync());
+            }
+            else
+            {
+                totalCount = await _context.Clients.CountAsync(m => m.BaseUserId == id && m.ClientStatus == StatusOfClient.Finished);
+
+                output.AddRange(await _context.Clients.OrderBy(m => m.Code).Take(10).Include(m => m.BaseUser)
+                    .Where(m => m.BaseUserId == id && m.ClientStatus== StatusOfClient.Finished).ToListAsync());
+            }
 
             ViewData["baseUserId"] = id;
-            ViewData["isCreated"] = isCreatedBy;
+            ViewData["isCreated"] = relationWithClient;
             ViewData["TotalCount"] = totalCount;
 
             return View(output);

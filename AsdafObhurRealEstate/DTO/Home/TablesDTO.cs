@@ -25,5 +25,10 @@ namespace AsdafObhurRealEstate.DTO.Home
         public int FilesCreatedBy { get; set; }
         public int FilesAssignedTo { get; set; }
 
+        public int AssignedToNotCreatedByYou { get; set; }
+
+        public int FinishedFile { get; set; }
+
+
     }
 }

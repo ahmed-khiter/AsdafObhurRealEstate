@@ -5,7 +5,7 @@
 
     var baseUserId = ViewData["baseUserId"] as string;
 
-    bool isCreated = (bool) ViewData["isCreated"];
+    var isCreated = (RelationEmployeeWithClient) ViewData["isCreated"] ;
 
 
     bool isAccessToDisplay = await userManager.IsInRoleAsync(user, "GeneralManager");
@@ -139,7 +139,7 @@
         var isDeletDisplay = @(isAccessToDisplay.ToString().ToLower());
         var userId = `@(baseUserId.ToString())`;
 
-        var isCreated = @(isCreated.ToString().ToLower());
+        var isCreated = @(isCreated.ToString());
 
         
 $(document).on('change', '.client-search', function () {

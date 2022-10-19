@@ -73,6 +73,8 @@ namespace AsdafObhurRealEstate.Controllers
                         PhoneNumber = item.PhoneNumber,
                         FilesCreatedBy = _context.Clients.Count(m => m.CreatedBy == item.Id),
                         FilesAssignedTo  = _context.Clients.Count(m => m.BaseUserId == item.Id),
+                        AssignedToNotCreatedByYou = _context.Clients.Count(m => m.BaseUserId == item.Id && m.CreatedBy != item.Id),
+                        FinishedFile = _context.Clients.Count(m => m.BaseUserId == item.Id && m.ClientStatus == StatusOfClient.Finished)
                     });
                 }
             }
