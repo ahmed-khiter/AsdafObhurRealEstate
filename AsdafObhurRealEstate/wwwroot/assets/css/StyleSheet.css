@@ -171,10 +171,23 @@ h1, h2, h3, h4, h5, h6, label, p
     border: 1px solid #dcdcdc !important;
 }
 
-.table
+.tf-header
 {
-    border-radius:10px;
+    font-size: 13px;
 }
+.th{
+    width:20px;
+}
+table td, .table th {
+    white-space: normal;
+}
+.tf-row {
+    font-size: 10px;
+}
+
+    .table {
+        border-radius: 10px;
+    }
 
 .table-add-btn {
     height: 35px;
